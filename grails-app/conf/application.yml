@@ -127,6 +127,7 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
-server: # Settings to change the port and the default URL
+# Settings to change the port and the default URL
+server:
     port: 8081
     contextPath: /tp

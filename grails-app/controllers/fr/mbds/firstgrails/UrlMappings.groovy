@@ -1,4 +1,4 @@
-package firstgrails
+package fr.mbds.firstgrails
 
 class UrlMappings {
 
@@ -9,7 +9,8 @@ class UrlMappings {
             }
         }
 
-        "/"(view:"/index")
+//        "/"(view:"/index")
+        "/"(controller:'User', action:'index')
         "500"(view:'/error')
         "404"(view:'/notFound')
     }
