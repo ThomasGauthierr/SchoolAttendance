@@ -6,6 +6,5 @@ class Player {
     Date dateCreated  //dateCreated --> Automatically created date
 
     static constraints = {
-        username blank: false, unique: true
     }
 }

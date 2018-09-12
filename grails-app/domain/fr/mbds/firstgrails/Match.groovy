@@ -2,13 +2,11 @@ package fr.mbds.firstgrails
 
 class Match {
 
-    Player playerOne
-    Player playerTwo
-    Integer score = 0
+    User winner
+    int winnerScore
+    User looser
+    int looserScore
 
     static constraints = {
-        playerOne nullable: false
-        playerTwo nullable: false
-        score nullable: false
     }
 }

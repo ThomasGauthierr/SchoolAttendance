@@ -3,10 +3,22 @@ package fr.mbds.firstgrails
 class User {
 
     String username
-    String password
+
+    static hasMany = [
+            matchWon:Match,
+            matchLost:Match,
+            messageSent: Message,
+            messageReceived: Message
+    ]
+
+    static mappedBy = [
+            matchWon: "winner",
+            matchLost: "looser",
+            messageSent: "author",
+            messageReceived: "target"
+    ]
 
     static constraints = {
-        username blank: false
-        password blank: false
+
     }
 }
