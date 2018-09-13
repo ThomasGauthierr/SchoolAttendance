@@ -127,9 +127,12 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+
 # Settings to change the port and the default URL
 server:
     port: 8081
     contextPath: /tp
+
+tpgrail:
     filePath: "/var/www/tpgrails"
     fileUrl: "http://127.0.0.1:8080"
