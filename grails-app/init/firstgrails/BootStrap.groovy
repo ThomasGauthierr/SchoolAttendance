@@ -19,8 +19,8 @@ class BootStrap {
 
         new Match(winner: playerUser, looser: playerTwoUser, winnerScore: 100, looserScore: 1).save(flush: true, failOnError: true)
 
-        new Message(author: playerUser, target: playerTwoUser, content: "hello").save(flush: true, failOnError: true)
-        new Message(author: playerTwoUser, target: playerUser, content: "hi").save(flush: true, failOnError: true)
+        def message1 = new Message(author: playerUser, target: playerTwoUser, content: "hello").save(flush: true, failOnError: true)
+        def message2 = new Message(author: playerTwoUser, target: playerUser, content: "hi", read: true).save(flush: true, failOnError: true)
 
     }
     def destroy = {
