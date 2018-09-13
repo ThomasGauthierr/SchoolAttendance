@@ -10,13 +10,15 @@ import grails.compiler.GrailsCompileStatic
 class User implements Serializable {
 
     private static final long serialVersionUID = 1
-
+    // Auto generated fields.
     String username
     String password
     boolean enabled = true
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
+
+    String imageName
 
     static hasMany = [
             matchWon: Match,

@@ -17,10 +17,10 @@ class BootStrap {
         UserRole.create(playerUser, gamingRole, true)
         UserRole.create(playerTwoUser, gamingRole, true)
 
-        new Match(winner: playerUser, looser: playerTwoUser, winnerScore: 100, looserScore: 1).save(flush: true, failOnError: true)
+        //new Match(winner: playerUser, looser: playerTwoUser, winnerScore: 100, looserScore: 1).save(flush: true, failOnError: true)
 
-        new Message(author: playerUser, target: playerTwoUser, content: "hello").save(flush: true, failOnError: true)
-        new Message(author: playerTwoUser, target: playerUser, content: "hi").save(flush: true, failOnError: true)
+        //new Message(author: playerUser, target: playerTwoUser, content: "hello").save(flush: true, failOnError: true)
+        //new Message(author: playerTwoUser, target: playerUser, content: "hi").save(flush: true, failOnError: true)
 
     }
     def destroy = {
