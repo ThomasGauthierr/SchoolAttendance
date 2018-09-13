@@ -8,5 +8,9 @@ class Match {
     int looserScore
 
     static constraints = {
+        winner nullable: false
+        looser nullable: false
+        winnerScore nullable: false
+        looserScore nullable: false
     }
 }
