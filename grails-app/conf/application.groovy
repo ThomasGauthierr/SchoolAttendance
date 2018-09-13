@@ -28,4 +28,3 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 
 //Enable logout through GET
 grails.plugin.springsecurity.logout.postOnly = false
-
