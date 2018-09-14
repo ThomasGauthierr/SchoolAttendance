@@ -27,7 +27,12 @@
             </g:hasErrors>
             <g:form resource="${this.user}" method="POST">
                 <fieldset class="form">
-                    <f:all bean="user"/>
+                        <f:field bean="user" property="username"/>
+                        <f:field bean="user" property="password"/>
+                        <f:field bean="user" property="imageName"/>
+                        <g:link action="editImage" resource="${this.user}">
+                            <g:message code="user.imageName.edit.label" default="Browse"></g:message>
+                        </g:link>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
