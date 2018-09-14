@@ -29,10 +29,15 @@
                 <fieldset class="form">
                         <f:field bean="user" property="username"/>
                         <f:field bean="user" property="password"/>
-                        <f:field bean="user" property="imageName"/>
-                        <g:link action="editImage" resource="${this.user}">
-                            <g:message code="user.imageName.edit.label" default="Browse"></g:message>
-                        </g:link>
+                        <input type="file" name="imageName"/>
+                        <fieldset class="buttons">
+                            <input class="save" type="submit" value="${message(code:'user.imageName.upload.label', default: 'Upload image')}"/>
+                        </fieldset>
+
+                        %{--<g:link action="editImage" resource="${this.user}">--}%
+                            %{--<g:message code="user.imageName.edit.label" default="Browse"></g:message>--}%
+                        %{--</g:link>--}%
+
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

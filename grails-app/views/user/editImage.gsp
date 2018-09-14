@@ -25,14 +25,11 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-    <g:uploadform resource="${this.user}" method="POST">
-        <f:hiddenField bean="user" property="username"/>
-        <f:hiddenField bean="user" property="password"/>
-        <input type="file" name="imageName"/>
-        <fieldset class="buttons">
-            <input class="save" type="submit" value="${message(code:'user.imageName.upload.label', default: 'Upload')}"/>
-        </fieldset>
-    </g:uploadform>
+    <g:uploadForm name="editImage" action="editImage">
+        <g:hiddenField name="username" value="${this.user.username}"/>
+        <g:hiddenField name="password" value="${this.user.password}"/>
+
+    </g:uploadForm>
 </div>
 </body>
 </html>
