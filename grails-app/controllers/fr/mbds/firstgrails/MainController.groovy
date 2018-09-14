@@ -9,10 +9,10 @@ class MainController {
     def index() {
         for(def authority : springSecurityService.getPrincipal().getAuthorities()) {
             if(authority.getAuthority() == 'ROLE_ADMIN') {
-                render "You are an admin"
+                render (view: '/index-admin', user: User.get(params.id))
                 return
             }
         }
-        render "You are not an admin"
+        render (view: '/index-player', user: User.get(params.id))
     }
 }
