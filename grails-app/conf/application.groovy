@@ -29,3 +29,12 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 //Enable logout through GET
 grails.plugin.springsecurity.logout.postOnly = false
 
+
+authenticationurl{
+	mappings{
+		ROLE_MANAGER.controller='users'
+		ROLE_MANAGER.action='search'
+		ROLE_PROVIDER.controller='invoices'
+		ROLE_PROVIDER.action='search'
+	}
+}
