@@ -6,6 +6,9 @@
 ## Courses
 [Click click](http://cours.tokidev.fr/mbds/grails/cours_grails.pdf).
 
+## Trello
+[Here](https://trello.com/b/ssAz0JX8/projet-grails).
+
 ## Images hosting
 1. Keep the image name in the user's attributes
 2. Save the file into the web server
