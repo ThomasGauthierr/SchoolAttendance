@@ -25,24 +25,24 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.user}" method="POST">
+            <g:form resource="${this.user}" method="POST" id="createForm"/>
+            <g:form id="uploadImage"/>
                 <fieldset class="form">
-                        <f:field bean="user" property="username"/>
-                        <f:field bean="user" property="password"/>
-                        <input type="file" name="imageName"/>
+                        <f:field bean="user" property="username" form="createForm"/>
+                        <f:field bean="user" property="password" form="uploadForm"/>
+                        <f:hiddenField bean="user" property="imageName" form="createForm" value="${new Random(System.currentTimeMillis())}"/>
+                        <input type="file" name="imageName" form="createForm"/>
                         <fieldset class="buttons">
-                            <input class="save" type="submit" value="${message(code:'user.imageName.upload.label', default: 'Upload image')}"/>
+                            <input class="save" type="submit" form="uploadImage" value="${message(code:'user.imageName.upload.label', default: 'Upload image')}"/>
                         </fieldset>
 
                         %{--<g:link action="editImage" resource="${this.user}">--}%
                             %{--<g:message code="user.imageName.edit.label" default="Browse"></g:message>--}%
                         %{--</g:link>--}%
-
                 </fieldset>
                 <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                    <g:submitButton name="create" class="save" form="createForm" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>
-            </g:form>
         </div>
     </body>
 </html>
