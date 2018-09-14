@@ -1,7 +1,5 @@
 package fr.mbds.firstgrails
 
-import grails.plugin.springsecurity.annotation.Secured
-
 class MainController {
 
     def springSecurityService
