@@ -8,39 +8,33 @@
 
 <body>
 <content tag="nav">
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user.username} <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            <li><g:link controller="logout">Logout</g:link></li>
-        </ul>
-    </li>
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            <li><a href="#">Environment: ${grails.util.Environment.current.name}</a></li>
-            <li><a href="#">App profile: ${grailsApplication.config.grails?.profile}</a></li>
-            <li><a href="#">App version:
-                <g:meta name="info.app.version"/></a>
-            </li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Grails version:
-                <g:meta name="info.app.grailsVersion"/></a>
-            </li>
-            <li><a href="#">Groovy version: ${GroovySystem.getVersion()}</a></li>
-            <li><a href="#">JVM version: ${System.getProperty('java.version')}</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</a></li>
-        </ul>
-    </li>
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Matches <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            <li><a href="#">Controllers: ${grailsApplication.controllerClasses.size()}</a></li>
-            <li><a href="#">Domains: ${grailsApplication.domainClasses.size()}</a></li>
-            <li><a href="#">Services: ${grailsApplication.serviceClasses.size()}</a></li>
-            <li><a href="#">Tag Libraries: ${grailsApplication.tagLibClasses.size()}</a></li>
-        </ul>
-    </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><g:link controller="user">View users</g:link></li>
+                <li><g:link controller="user" action="create">Create a user</g:link></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Matches<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><g:link controller="match">View matches</g:link></li>
+                <li><g:link controller="match" action="create">Add a match</g:link></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Messages<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">View messages</a></li>
+                <li><a href="#">Add a messsage</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user.username} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><g:link controller="logout">Logout</g:link></li>
+            </ul>
+        </li>
 </content>
 
 <div class="svg" role="presentation">
