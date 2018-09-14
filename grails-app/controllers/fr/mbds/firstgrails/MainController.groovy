@@ -1,18 +1,18 @@
 package fr.mbds.firstgrails
 
-import grails.plugin.springsecurity.annotation.Secured
-
 class MainController {
 
     def springSecurityService
 
     def index() {
+        def user = User.get(springSecurityService.currentUser.id)
+
         for(def authority : springSecurityService.getPrincipal().getAuthorities()) {
             if(authority.getAuthority() == 'ROLE_ADMIN') {
-                render (view: '/index-admin', user: User.get(params.id))
+                render (view: '/index-admin', model: [user: user])
                 return
             }
         }
-        render (view: '/index-player', user: User.get(params.id))
+        render (view: '/index-player', model: [user: user])
     }
 }
