@@ -12,6 +12,7 @@
             <li><g:link controller="logout">Logout</g:link></li>
         </ul>
     </li>
+
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My matches <span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -21,6 +22,7 @@
             <li><a href="#">Tag Libraries: ${grailsApplication.tagLibClasses.size()}</a></li>
         </ul>
     </li>
+
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Top oponents <span class="caret"></span></a>
         <ul class="dropdown-menu">
