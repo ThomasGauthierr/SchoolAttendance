@@ -96,4 +96,14 @@ class UserController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+    def editImage(Long id) {
+        println(id)
+        User user = userService.get(id)
+        if (!user) {
+            notFound()
+            return
+        }
+        [user: user]
+    }
 }
