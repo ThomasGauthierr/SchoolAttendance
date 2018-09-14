@@ -54,8 +54,20 @@
         <h1>Welcome Dear Admin</h1>
 
         <p>
-            This is you main page.
+            Last subscribed players
         </p>
+
+        <div id="list-user" class="content scaffold-list" role="main">
+            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
+            <g:if test="${flash.message}">
+                <div class="message" role="status">${flash.message}</div>
+            </g:if>
+            <f:table collection="${userList}" />
+
+            <div class="pagination">
+                <g:paginate total="${userCount ?: 0}" />
+            </div>
+        </div>
 
     </section>
 </div>
