@@ -38,10 +38,10 @@
         </fieldset>
     </g:form>
 
-    <g:uploadForm name="uploadFeaturedImage" action="uploadFeaturedImage">
-        <g:hiddenField name="id" value="${this.pointOfInterest?.id}" />
-        <g:hiddenField name="version" value="${this.pointOfInterest?.version}" />
-        <input type="file" name="featuredImageFile" />
+    <g:uploadForm name="uploadProfileImage" action="uploadProfileImage">
+        <g:hiddenField name="id" value="${this.user?.id}" />
+        <g:hiddenField name="version" value="${this.user?.version}" />
+        <input type="file" name="profileImageFile" />
         <fieldset class="buttons">
             <input class="save" type="submit" value="${message(code: 'user.profileImage.upload.label', default: 'Upload')}" />
         </fieldset>

@@ -133,6 +133,6 @@ server:
     port: 8081
     contextPath: /tp
 
-tpgrail:
+tpgrails:
     filePath: "/var/www/tpgrails"
     fileUrl: "http://127.0.0.1:8080"
