@@ -134,5 +134,5 @@ server:
     contextPath: /tp
 
 tpgrails:
-    filePath: "/var/www/tpgrails"
-    fileUrl: "http://127.0.0.1:8080"
+    filePath: "D:\\wamp64\\www\\tpgrails"
+    fileUrl: "http://127.0.0.1:80"

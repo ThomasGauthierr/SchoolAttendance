@@ -8,7 +8,7 @@ import groovy.transform.CompileStatic
 @CompileStatic
 class UploadUserProfileImageService implements GrailsConfigurationAware{
 
-    UserService userDataService
+    UserService userService
 
     String cdnFolder
     String cdnRootFolder
@@ -22,32 +22,33 @@ class UploadUserProfileImageService implements GrailsConfigurationAware{
     @SuppressWarnings('JavaToPackageAccess')
     User uploadProfileImage(ProfileImageCommand cmd) {
 
-        println System.getenv('tpgrails')
-        /*String filename = cmd.featuredImageFile.originalFilename
-        String folderPath = "${cdnFolder}/user/${cmd.id}"
-        File folder = new File(folderPath)
-
+        String filename = cmd.profileImageFile.originalFilename
+        String folderPath = "${cdnFolder}"
+        File folder = new File(folderPath + '\\' + filename)
+        folder.createNewFile()
+        println(folderPath + '\\' + filename)
+        /*
         if(!folder.exists()) {
             folder.mkdirs()
-        }
+        }*/
+        println "cmd id:  " + cmd.id + ". filename: " + filename
+        //String path = "${folderPath}/${filename}"
+        cmd.profileImageFile.transferTo(new File(folderPath + '\\' + filename))
 
-        String path = "${folderPath}/${filename}"
-        cmd.featuredImageFile.transferTo(new File(path))
+        String profileImageUrl = "${cdnRootFolder}/${filename}"
+        User user = userService.updateProfileImageUrl(cmd.id, cmd.version, profileImageUrl)
 
-        String profileImageUrl = "${cdnRootFolder}/user/${cmd.id}/${filename}"
-        User user = userDataService.updateProfileImageUrl(cmd.id, cmd.version, profileImageUrl)
-
-        if(!user || user.hasErrors()) {
+        /*if(!user || user.hasErrors()) {
             File f = new File(path)
             f.delete()
-        }
+        }*/
 
-        user*/
+        user
     }
 
-    def serviceMethod() {
+   /* def serviceMethod() {
 
-    }
+    }*/
 
 
 }
