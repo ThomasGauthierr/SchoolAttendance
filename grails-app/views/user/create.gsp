@@ -27,10 +27,10 @@
             </g:hasErrors>
             <g:form resource="${this.user}" method="POST" id="createForm"/>
             <g:form id="uploadImage"/>
-                <fieldset class="form">
+                <fieldset class="form">]
                         <f:field bean="user" property="username" form="createForm"/>
                         <f:field bean="user" property="password" form="uploadForm"/>
-                        <f:hiddenField bean="user" property="imageName" form="createForm" value="${new Random(System.currentTimeMillis())}"/>
+                        %{-- <f:hiddenField bean="user" property="imageName" form="createForm" value="${new Random(System.currentTimeMillis())}"/> --}%
                         <input type="file" name="imageName" form="createForm"/>
                         <fieldset class="buttons">
                             <input class="save" type="submit" form="uploadImage" value="${message(code:'user.imageName.upload.label', default: 'Upload image')}"/>
