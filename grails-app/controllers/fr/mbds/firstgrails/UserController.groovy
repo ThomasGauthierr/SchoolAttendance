@@ -93,17 +93,31 @@ class UserController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 
-    def editImage(Long id) {
-        println(id)
-        User user = userService.get(id)
-        if (!user) {
-            notFound()
-            return
-        }
-        [user: user]
-    }
+   def uploadProfileImage(ProfileImageCommand cmd) {
+       if(cmd.hasErrors()) {
+           println 'Error occured during image upload: ' + cmd
+           return
+       }
+
+       User user = uploadUserProfileImageService.uploadProfileImage(cmd)
+
+       if(user == null) {
+           notFound()
+           return
+       }
+
+       if(user.hasErrors()) {
+           println 'Error occured during image upload: ' + cmd
+           return
+       }
+
+       Locale locale = request.Local
+       flash.message = crudMessageService.message(CRUD.UPDATE, domainName(locale), user.id, locale);
+       redirect user;
+
+   }
 }
