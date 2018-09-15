@@ -21,7 +21,7 @@ class UploadUserProfileImageService implements GrailsConfigurationAware{
     }
 
     @SuppressWarnings('JavaToPackageAccess')
-    User uploadProfileImage(ProfileImageCommand cmd) {
+    String uploadProfileImage(ProfileImageCommand cmd) {
 
         def extention = FilenameUtils.getExtension(cmd.profileImageFile.originalFilename)
         String filename = UUID.randomUUID().toString() + '.' + extention
@@ -32,16 +32,12 @@ class UploadUserProfileImageService implements GrailsConfigurationAware{
 
         cmd.profileImageFile.transferTo(new File(cdnFolder + '/' + filename))
 
-        String profileImageUrl = "${cdnRootFolder}/${filename}"
-        User user = userService.updateProfileImageUrl(cmd.id, cmd.version, profileImageUrl)
+        //String profileImageUrl = "${cdnRootFolder}/${filename}"
+        /*User user = userService.updateProfileImageUrl(cmd.id, cmd.version, profileImageUrl)
+        user*/
 
-
-        user
+        filename
     }
-
-   /* def serviceMethod() {
-
-    }*/
 
 
 }
