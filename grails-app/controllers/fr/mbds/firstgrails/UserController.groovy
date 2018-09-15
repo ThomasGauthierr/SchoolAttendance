@@ -105,7 +105,8 @@ class UserController {
            return
        }*/
 
-       User user = uploadUserProfileImageService.uploadProfileImage(cmd)
+       String profileImageFilename = uploadUserProfileImageService.uploadProfileImage(cmd)
+
 
        /*if(user == null) {
            notFound()
