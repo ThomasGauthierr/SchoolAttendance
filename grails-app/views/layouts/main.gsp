@@ -30,7 +30,32 @@
             </div>
             <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
                 <ul class="nav navbar-nav navbar-right">
-                    <g:pageProperty name="page.nav" />
+                    <sec:ifAllGranted roles="ROLE_ADMIN">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><g:link controller="user">View users</g:link></li>
+                                <li><g:link controller="user" action="create">Create a user</g:link></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Matches<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><g:link controller="match">View matches</g:link></li>
+                                <li><g:link controller="match" action="create">Add a match</g:link></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Messages<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><g:link controller="message">View messages</g:link></li>
+                                <li><g:link controller="message" action="create">Add a messsage</g:link></li>
+                            </ul>
+                        </li>
+                    </sec:ifAllGranted>
+                    <sec:ifLoggedIn>
+                        <li><g:link controller="logout">Log out</g:link></li>
+                    </sec:ifLoggedIn>
                 </ul>
             </div>
         </div>
