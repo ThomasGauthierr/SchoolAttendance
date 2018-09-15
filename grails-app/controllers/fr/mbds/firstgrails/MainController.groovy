@@ -1,8 +1,10 @@
 package fr.mbds.firstgrails
 
+import grails.util.Holders
+
 class MainController {
 
-    def springSecurityService
+    def springSecurityService = Holders.applicationContext.springSecurityService
     def userService
 
     def index() {
