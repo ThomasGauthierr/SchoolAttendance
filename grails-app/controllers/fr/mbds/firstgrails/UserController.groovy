@@ -98,6 +98,7 @@ class UserController {
     }
 
    def uploadProfileImage(ProfileImageCommand cmd) {
+
        if(cmd.hasErrors()) {
            println 'Error occured during image upload: ' + cmd
            return
