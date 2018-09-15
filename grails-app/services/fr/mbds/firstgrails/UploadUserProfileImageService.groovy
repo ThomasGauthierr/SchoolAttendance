@@ -2,7 +2,6 @@ package fr.mbds.firstgrails
 
 import grails.config.Config
 import grails.core.support.GrailsConfigurationAware
-import grails.gorm.transactions.Transactional
 import groovy.transform.CompileStatic
 
 @SuppressWarnings('GrailsStatelessService')
@@ -16,14 +15,15 @@ class UploadUserProfileImageService implements GrailsConfigurationAware{
 
     @Override
     void setConfiguration(Config co) {
-        cdnFolder = co.getRequiredProperty('tpgrails.filePath')
-        cdnRootFolder = co.getRequiredProperty('tpgrails.fileUrl')
+        cdnFolder = co.getProperty('tpgrails.filePath')
+        cdnRootFolder = co.getProperty('tpgrails.fileUrl')
     }
 
     @SuppressWarnings('JavaToPackageAccess')
     User uploadProfileImage(ProfileImageCommand cmd) {
 
-        String filename = cmd.featuredImageFile.originalFilename
+        println System.getenv('tpgrails')
+        /*String filename = cmd.featuredImageFile.originalFilename
         String folderPath = "${cdnFolder}/user/${cmd.id}"
         File folder = new File(folderPath)
 
@@ -42,7 +42,7 @@ class UploadUserProfileImageService implements GrailsConfigurationAware{
             f.delete()
         }
 
-        user
+        user*/
     }
 
     def serviceMethod() {

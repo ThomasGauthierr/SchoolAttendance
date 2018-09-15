@@ -6,6 +6,7 @@ import static org.springframework.http.HttpStatus.*
 class UserController {
 
     UserService userService
+    UploadUserProfileImageService uploadUserProfileImageService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -99,14 +100,16 @@ class UserController {
 
    def uploadProfileImage(ProfileImageCommand cmd) {
 
-       if(cmd.hasErrors()) {
+       println 'I was here'
+
+       /*if(cmd.hasErrors()) {
            println 'Error occured during image upload: ' + cmd
            return
-       }
+       }*/
 
        User user = uploadUserProfileImageService.uploadProfileImage(cmd)
 
-       if(user == null) {
+       /*if(user == null) {
            notFound()
            return
        }
@@ -114,11 +117,12 @@ class UserController {
        if(user.hasErrors()) {
            println 'Error occured during image upload: ' + cmd
            return
-       }
+       }*/
 
        Locale locale = request.Local
-       flash.message = crudMessageService.message(CRUD.UPDATE, domainName(locale), user.id, locale);
-       redirect user;
+       //flash.message = crudMessageService.message(CRUD.UPDATE, domainName(locale), user.id, locale);
+       //redirect user;
 
+       render 'amine'
    }
 }
