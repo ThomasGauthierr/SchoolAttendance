@@ -38,29 +38,21 @@
                 </fieldset>
             </g:form>
 
-            <g:uploadForm name="uploadProfileImage" action="uploadProfileImage">
+            <iframe width="0" height="0" border="0" name="dummyframe" id="dummyframe"></iframe>
+            <g:uploadForm name="uploadProfileImage" action="uploadProfileImage" target="dummyframe">
                 <input type="file" name="profileImageFile" />
-                <input class="save" type="submit" value="${message(code: 'user.profileImage.upload.label', default: 'Upload')}" />
+                <input id="submit-upload" class="save" type="submit" value="${message(code: 'user.profileImage.upload.label', default: 'Upload')}" />
             </g:uploadForm>
 
         </div>
 
     <asset:javascript src="application.js"/>
 
-    <g:javascript>
-            $('#uploadProfileImage').submit(doubleSubmit);
+    <g:javascript>        
 
-            function doubleSubmit(e1) {
-                console.log("ok submitted the form")
-                e1.preventDefault();
-                e1.stopPropagation();
-                var post_form1 = $.post($(this).action, $(this).serialize());
-
-                post_form1.done(function(result) {
-                    // would be nice to show some feedback about the first result here
-                    $('#form2').submit();
-                });
-            };
+            $('#submit-upload').click(function() {
+                console.log("Submitted the form successfully.")
+            })
 
         </g:javascript>
 
