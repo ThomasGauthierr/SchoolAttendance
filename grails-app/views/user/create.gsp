@@ -30,49 +30,27 @@
             </g:hasErrors>
 
             <g:form resource="${this.user}" method="POST" enctype="multipart/form-data">
-                <input type="file" name="profileImageFile" />
+
+                <div class="fieldcontain">
+                    <label> Profile image </label>
+                    <input type="file" name="profileImageFile" />
+                </div>
+
                 <fieldset class="form">
                     <f:all bean="user"/>
                 </fieldset>
+
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>
             </g:form>
-
-            <iframe width="0" height="0" border="0" name="dummyframe" id="dummyframe"></iframe>
-            <g:uploadForm name="uploadProfileImage" action="uploadProfileImage" target="dummyframe">
-                <input type="file" name="profileImageFile" />
-                <input id="submit-upload" class="save" type="submit" value="${message(code: 'user.profileImage.upload.label', default: 'Upload')}" />
-            </g:uploadForm>
-
         </div>
 
     <asset:javascript src="application.js"/>
 
     <g:javascript>
-
-            /*$('#submit-upload').click(function() {
-                $.ajaxForm({
-                        type:'POST',
-                        url:'/tp/user/uploadProfileImage',
-                    success: function(data)
-                    {
-                        console.log(data)
-                    }
-                });
-            })*/
-
-            /*$('#uploadProfileImage')
-                    .ajaxForm({
-                url : '/tp/user/uploadProfileImage', // or whatever
-                dataType : 'json',
-                success : function (response) {
-                    alert("The server says: " + response);
-                }
-            })
-            ;*/
-
-        </g:javascript>
+        // Javascript and JQuerry goes here !!
+    </g:javascript>
 
     </body>
 </html>
