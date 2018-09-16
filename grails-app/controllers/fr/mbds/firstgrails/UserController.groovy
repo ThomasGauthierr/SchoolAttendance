@@ -52,6 +52,10 @@ class UserController {
         }
     }
 
+    def updateProfileImage() {
+        println params.profileImage.getClass()
+    }
+
     def edit(Long id) {
         respond userService.get(id)
     }
@@ -95,6 +99,9 @@ class UserController {
         }
     }
 
+    def save2() {
+
+    }
     protected void notFound() {
         request.withFormat {
             form multipartForm {
