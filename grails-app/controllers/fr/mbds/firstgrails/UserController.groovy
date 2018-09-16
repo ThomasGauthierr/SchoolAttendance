@@ -26,13 +26,15 @@ class UserController {
 
     def save(User user) {
 
-        String profileImageFilename = uploadUserProfileImageService.uploadProfileImage(params.profileImageFile)
-        user.profileImageName = profileImageFilename
-
         if (user == null) {
             notFound()
             return
         }
+
+        // Upload the image provided in the input and update the "profileImageName" field in the user to be saved.
+        // "profileImageName" contains the name of the image that has just been uploaded.
+        String profileImageFilename = uploadUserProfileImageService.uploadProfileImage(params.profileImageFile)
+        user.profileImageName = profileImageFilename
 
         try {
             userService.save(user)
@@ -102,31 +104,4 @@ class UserController {
             '*' { render status: NOT_FOUND }
         }
     }
-
-   def uploadProfileImage(ProfileImageCommand cmd) {
-
-       /*if(cmd.hasErrors()) {
-           println 'Error occured during image upload: ' + cmd
-           return
-       }*/
-
-       String profileImageFilename = uploadUserProfileImageService.uploadProfileImage(cmd)
-
-
-       /*if(user == null) {
-           notFound()
-           return
-       }
-
-       if(user.hasErrors()) {
-           println 'Error occured during image upload: ' + cmd
-           return
-       }*/
-
-       //Locale locale = request.Local
-       //flash.message = crudMessageService.message(CRUD.UPDATE, domainName(locale), user.id, locale);
-       //redirect user;
-
-       render contentType: "text/json", text: '{"name":"Afghanistan"}'
-   }
 }
