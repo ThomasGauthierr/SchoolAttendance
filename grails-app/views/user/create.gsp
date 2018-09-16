@@ -16,7 +16,9 @@
         </div>
 
         <div id="create-user" class="content scaffold-create" role="main">
+
             <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -35,6 +37,8 @@
                     <label> Profile image </label>
                     <input type="file" name="profileImageFile" />
                 </div>
+
+                <div id="dd-box"> Drop the the profile image from you computer</div>
 
                 <fieldset class="form">
                     <f:all bean="user"/>
