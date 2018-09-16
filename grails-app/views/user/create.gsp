@@ -62,16 +62,16 @@
                     <label>Password</label>
                     <input id="user-form-password" type="text" name="password" />
                 </div>
-
             </form>
 
-            <button class="save" id="submit-second">Submit</button>
+            <button type="submit" class="save" id="submit-second">Create</button>
 
         </div>
 
         <asset:javascript src="application.js"/>
 
         <g:javascript>
+            let formData = new FormData();
 
             // Javascript and JQuerry goes here !!
 
@@ -108,13 +108,8 @@
                 if(e.originalEvent.dataTransfer) {
                     if(e.originalEvent.dataTransfer.files.length) {
                         $(this).css('border', '3px dashed green');
-                        let formData = new FormData();
-                        formData.append('username', $('#user-form-username').val());
-                        formData.append('password', $('#user-form-password').val());
                         formData.append('profileImage', e.originalEvent.dataTransfer.files[0]);
-                        var request = new XMLHttpRequest();
-                        request.open("POST", "/tp/user/updateProfileImage");
-                        request.send(formData);
+                        $(this).text(e.originalEvent.dataTransfer.files[0].name);
                     }
                 }
                 else {
@@ -125,9 +120,21 @@
             })
 
             $('#submit-second').on('click', function (e) {
-                console.log('Clicked on the button')
-                let formData = new FormData($("#user-form-1"));
-                console.log($("#user-form-1").serialize());
+
+                formData.append('username', $('#user-form-username').val());
+                formData.append('password', $('#user-form-password').val());
+                let request = new XMLHttpRequest();
+
+                request.onreadystatechange = function() {
+                    if (request.readyState === 4) {
+                        console.log(request.response);
+                        console.log(JSON.parse(request.response).name);
+                        window.location = 'show/' + JSON.parse(request.response).name;
+                    }
+                }
+
+                request.open("POST", "/tp/user/save2");
+                request.send(formData);
             })
 
         </g:javascript>

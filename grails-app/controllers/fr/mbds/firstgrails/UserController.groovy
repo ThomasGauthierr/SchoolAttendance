@@ -101,7 +101,25 @@ class UserController {
     }
 
     def save2() {
+        def user = new User()
+        user.username = params.username
+        user.password = params.password
+        user.profileImageName = uploadUserProfileImageService.uploadProfileImage(params.profileImage)
 
+        try {
+            userService.save(user)
+        } catch (ValidationException e) {
+            respond user.errors, view:'create'
+            return
+        }
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
+                render contentType: "text/json", text: '{"name": "' + user.id + '"}'
+            }
+            '*' { render contentType: "text/json", text: '{"name": "' + user.id + '"}' }
+        }
     }
     protected void notFound() {
         request.withFormat {
