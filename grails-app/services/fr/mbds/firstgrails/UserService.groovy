@@ -15,7 +15,7 @@ interface UserService {
 
     User save(User user)
 
-    User updateProfileImageUrl(Serializable id, Long version, String profileImageUrl)
+    User updateProfileImageUrl(Serializable id, Long version, String profileImageName)
 
 
 }

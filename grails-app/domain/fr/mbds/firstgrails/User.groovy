@@ -18,7 +18,7 @@ class User implements Serializable {
     boolean accountLocked
     boolean passwordExpired
 
-    String profileImageUrl
+    String profileImageName
 
     static hasMany = [
             matchWon: Match,
@@ -41,7 +41,7 @@ class User implements Serializable {
     static constraints = {
         password nullable: false, blank: false, password: true
         username nullable: false, blank: false, unique: true
-        profileImageUrl nullable: true, blank: false
+        profileImageName nullable: true, blank: false
     }
 
     static mapping = {
