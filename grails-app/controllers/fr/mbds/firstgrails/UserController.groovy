@@ -1,6 +1,8 @@
 package fr.mbds.firstgrails
 
 import grails.validation.ValidationException
+import org.springframework.web.multipart.MultipartFile
+
 import static org.springframework.http.HttpStatus.*
 
 class UserController {
@@ -24,6 +26,13 @@ class UserController {
     }
 
     def save(User user) {
+        //println cmd
+        //if(cmd) {
+            //println 'Yes the file'
+            //println params.profileImageFile
+            //String profileImageFilename = uploadUserProfileImageService.uploadProfileImage(params.profileImageFile)
+        //}
+
         if (user == null) {
             notFound()
             return
@@ -118,10 +127,10 @@ class UserController {
            return
        }*/
 
-       Locale locale = request.Local
+       //Locale locale = request.Local
        //flash.message = crudMessageService.message(CRUD.UPDATE, domainName(locale), user.id, locale);
        //redirect user;
 
-       render 'amine'
+       //render 'amine'
    }
 }
