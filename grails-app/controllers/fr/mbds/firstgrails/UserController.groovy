@@ -54,6 +54,7 @@ class UserController {
 
     def updateProfileImage() {
         println params.profileImage.getClass()
+        render contentType: "text/json", text: '{"name":"amine"}'
     }
 
     def edit(Long id) {

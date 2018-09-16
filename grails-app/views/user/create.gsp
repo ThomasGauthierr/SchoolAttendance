@@ -37,7 +37,7 @@
                         <label> Profile image </label>
                         <input type="file" name="profileImageFile" />
                     </div>
-                    
+
                     <fieldset class="form">
                         <f:all bean="user"/>
                     </fieldset>
