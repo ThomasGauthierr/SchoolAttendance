@@ -33,6 +33,8 @@ class UserController {
             //String profileImageFilename = uploadUserProfileImageService.uploadProfileImage(params.profileImageFile)
         //}
 
+        println params.profileImageFile.getClass()
+
         if (user == null) {
             notFound()
             return
@@ -131,6 +133,6 @@ class UserController {
        //flash.message = crudMessageService.message(CRUD.UPDATE, domainName(locale), user.id, locale);
        //redirect user;
 
-       //render 'amine'
+       render contentType: "text/json", text: '{"name":"Afghanistan"}'
    }
 }

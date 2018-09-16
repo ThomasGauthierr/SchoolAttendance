@@ -3,7 +3,7 @@
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-        <tit    le><g:message code="default.create.label" args="[entityName]" /></title>
+        <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
         <a href="#create-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -29,7 +29,8 @@
                 </ul>
             </g:hasErrors>
 
-            <g:form resource="${this.user}" method="POST">
+            <g:form resource="${this.user}" method="POST" enctype="multipart/form-data">
+                <input type="file" name="profileImageFile" />
                 <fieldset class="form">
                     <f:all bean="user"/>
                 </fieldset>
@@ -48,11 +49,28 @@
 
     <asset:javascript src="application.js"/>
 
-    <g:javascript>        
+    <g:javascript>
 
-            $('#submit-upload').click(function() {
-                console.log("Submitted the form successfully.")
+            /*$('#submit-upload').click(function() {
+                $.ajaxForm({
+                        type:'POST',
+                        url:'/tp/user/uploadProfileImage',
+                    success: function(data)
+                    {
+                        console.log(data)
+                    }
+                });
+            })*/
+
+            /*$('#uploadProfileImage')
+                    .ajaxForm({
+                url : '/tp/user/uploadProfileImage', // or whatever
+                dataType : 'json',
+                success : function (response) {
+                    alert("The server says: " + response);
+                }
             })
+            ;*/
 
         </g:javascript>
 
