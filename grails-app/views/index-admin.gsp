@@ -18,7 +18,12 @@
     <section class="row colset-2-its">
         <h1>Welcome Dear Admin</h1>
         <div align="center">
-            Last connection : <g:cookie name="lastConnection" />
+            <g:if test="${user.previousConnection == null}">
+                It's seems like you just joined us, hello ! o/
+            </g:if>
+            <g:else>
+                Last connection : <f:display bean="user" property="previousConnection"/>
+            </g:else>
         </div>
 
         <p>
