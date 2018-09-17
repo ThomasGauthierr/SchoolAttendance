@@ -1,9 +1,12 @@
 package fr.mbds.firstgrails
 
+import grails.util.Holders
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
 class MessageController {
+
+    def springSecurityService = Holders.applicationContext.springSecurityService
 
     MessageService messageService
 
@@ -95,5 +98,17 @@ class MessageController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    //ToDo : separate sent and received messages
+    def display() {
+        def user = User.get(springSecurityService.currentUser.id)
+
+        def query = Message.where {
+            author == user || target == user
+        }
+        def results = query.list()
+
+        respond results
     }
 }

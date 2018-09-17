@@ -25,12 +25,19 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div>
-                    <sec:ifLoggedIn>
-                        Hello <sec:username class="username-nav"/> :)
-                    </sec:ifLoggedIn>
+
                 </div>
             </div>
             <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
+                <ul class="nav navbar-nav navbar-left">
+                    <sec:ifLoggedIn>
+                        <li>
+                            <p class="navbar-text">
+                                Hello <sec:username/> :)
+                            </p>
+                        </li>
+                    </sec:ifLoggedIn>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <sec:ifAllGranted roles="ROLE_ADMIN">
                         <li class="dropdown">
@@ -59,7 +66,8 @@
                         <sec:ifAllGranted roles="ROLE_USER">
                             <li><g:link controller="match" action="display">My matches</g:link></li>
                             <li><g:link controller="message" action="display">My messages</g:link></li>
-                            <li><g:link controller="#">My profile</g:link></li>
+                            <li><g:link controller="user" action="display">My profile</g:link></li>
+
                         </sec:ifAllGranted>
                     </sec:ifNotGranted>
                     <sec:ifLoggedIn>
