@@ -55,6 +55,13 @@
                             </ul>
                         </li>
                     </sec:ifAllGranted>
+                    <sec:ifNotGranted roles="ROLE_ADMIN">
+                        <sec:ifAllGranted roles="ROLE_USER">
+                            <li><g:link controller="match" action="display">My matches</g:link></li>
+                            <li><g:link controller="message" action="display">My messages</g:link></li>
+                            <li><g:link controller="#">My profile</g:link></li>
+                        </sec:ifAllGranted>
+                    </sec:ifNotGranted>
                     <sec:ifLoggedIn>
                         <li><g:link controller="logout">Log out</g:link></li>
                     </sec:ifLoggedIn>

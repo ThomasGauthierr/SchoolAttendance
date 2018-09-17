@@ -96,4 +96,18 @@ class MatchController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+    def display() {
+        def user = User.get(springSecurityService.currentUser.id)
+
+        def query = Match.where {
+            winner.username == user.username || looser.username == user.username
+        }
+        def results = query.list()
+
+        println results.size()
+        println username
+
+        respond results
+    }
 }
