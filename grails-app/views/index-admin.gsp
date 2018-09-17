@@ -17,6 +17,9 @@
 <div id="content" role="main">
     <section class="row colset-2-its">
         <h1>Welcome Dear Admin</h1>
+        <div align="center">
+            Last connection : <g:cookie name="lastConnection" />
+        </div>
 
         <p>
             Last subscribed players

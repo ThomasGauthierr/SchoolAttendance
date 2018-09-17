@@ -19,6 +19,7 @@ class User implements Serializable {
     boolean passwordExpired
 
     String profileImageName
+    Date lastConnection
 
     static hasMany = [
             matchWon: Match,
@@ -42,6 +43,7 @@ class User implements Serializable {
         password nullable: false, blank: false, password: true
         username nullable: false, blank: false, unique: true
         profileImageName nullable: true, blank: false
+        lastConnection nullable: true
     }
 
     static mapping = {
