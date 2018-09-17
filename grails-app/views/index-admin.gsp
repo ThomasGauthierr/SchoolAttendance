@@ -65,13 +65,13 @@
 
             <table >
                 <tr>
-                    <th>Username</th>
-                    <th>Last connection date</th>
+                    <th>Winnder</th>
+                    <th>Looser</th>
                 </tr>
-                <g:each in="${userList}">
+                <g:each in="${matches}">
                     <tr>
-                        <td>${it.username}</td>
-                        <td>${it.previousConnection}</td>
+                        <td>${it.winner}</td>
+                        <td>${it.looser}</td>
                     </tr>
                 </g:each>
             </table>
