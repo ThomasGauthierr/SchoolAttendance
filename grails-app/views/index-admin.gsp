@@ -26,16 +26,28 @@
             </g:else>
         </div>
 
-        <p>
-            Last subscribed players
-        </p>
+        <div id="list-user" class="content scaffold-list index-table" role="main">
 
-        <div id="list-user" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-                <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:table collection="${userList}" />
+            %{-- <f:table collection="${userList}" />--}%
+            <p>
+                Last subscribed players
+            </p>
+
+            <br>
+
+            <table >
+                <tr>
+                    <th>Username</th>
+                    <th>Last connection date</th>
+                </tr>
+                <g:each in="${userList}">
+                    <tr>
+                        <td>${it.username}</td>
+                        <td>${it.previousConnection}</td>
+                    </tr>
+                </g:each>
+            </table>
+
 
             <div class="pagination">
                 <g:paginate total="${userCount ?: 0}" />
