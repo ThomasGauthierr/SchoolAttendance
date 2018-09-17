@@ -27,7 +27,10 @@
             </g:hasErrors>
             <g:form resource="${this.message}" method="POST">
                 <fieldset class="form">
-                    <f:all bean="message"/>
+                    %{--ToDo : Prevent author = target --}%
+                    <f:field bean="message" property="author" label="From"/>
+                    <f:field bean="message" property="target" label="To"/>
+                    <f:field bean="message" property="content" label="Message"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
