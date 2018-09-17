@@ -1,9 +1,12 @@
 package fr.mbds.firstgrails
 
+import grails.util.Holders
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
 class MatchController {
+
+    def springSecurityService = Holders.applicationContext.springSecurityService
 
     MatchService matchService
 
@@ -97,16 +100,14 @@ class MatchController {
         }
     }
 
+    //ToDo : Separate win and lost matches
     def display() {
         def user = User.get(springSecurityService.currentUser.id)
 
         def query = Match.where {
-            winner.username == user.username || looser.username == user.username
+            winner == user || looser == user
         }
         def results = query.list()
-
-        println results.size()
-        println username
 
         respond results
     }

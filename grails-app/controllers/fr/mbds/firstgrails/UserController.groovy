@@ -1,10 +1,13 @@
 package fr.mbds.firstgrails
 
+import grails.util.Holders
 import grails.validation.ValidationException
 
 import static org.springframework.http.HttpStatus.*
 
 class UserController {
+
+    def springSecurityService = Holders.applicationContext.springSecurityService
 
     UserService userService
     UploadUserProfileImageService uploadUserProfileImageService
@@ -129,5 +132,11 @@ class UserController {
             }
             '*' { render status: NOT_FOUND }
         }
+    }
+
+    def display() {
+        def user = User.get(springSecurityService.currentUser.id)
+
+        redirect action: "show", params:[id: user.id]
     }
 }
