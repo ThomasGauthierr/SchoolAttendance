@@ -12,10 +12,7 @@ class BootStrap {
         def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true, failOnError: true)
         def gamingRole = new Role(authority: 'ROLE_USER').save(flush: true, failOnError: true)
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
-        Date date = new Date()
-
-        def adminUser = new User(username: 'admin', password: 'password', lastConnection: date).save(flush: true, failOnError: true)
+        def adminUser = new User(username: 'admin', password: 'password').save(flush: true, failOnError: true)
         def playerUser = new User(username: 'player', password: 'password').save(flush: true, failOnError: true)
         def playerTwoUser = new User(username: 'playerTwo', password: 'password').save(flush: true, failOnError: true)
 

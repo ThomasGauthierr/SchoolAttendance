@@ -27,15 +27,12 @@ class MainController {
         render (view: '/index-player', model: [user: user])
     }
 
+    //ToDo : Only POST
     def connection() {
         def user = User.get(springSecurityService.currentUser.id)
 
-        def lastConnection = user.lastConnection.toString().replace(" ","_")
-        def lastConnectionCookie = new Cookie('lastConnection', lastConnection)
-        response.addCookie(lastConnectionCookie)
-
-        Date date = new Date()
-        user.lastConnection = date
+        user.previousConnection = user.lastConnection
+        user.lastConnection = new Date()
         user.save(flush: true)
 
         redirect(controllerName:"main", method: "POST")
