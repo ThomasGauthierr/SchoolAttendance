@@ -26,7 +26,7 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 	[pattern: '/**',             filters: 'JOINED_FILTERS']
 ]
 
-grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/main'
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/main/connection'
 
 //Enable logout through GET
 grails.plugin.springsecurity.logout.postOnly = false

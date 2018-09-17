@@ -26,7 +26,7 @@
                 </button>
                 <div>
                     <sec:ifLoggedIn>
-                        Hello, <sec:username/>
+                        Hello <sec:username class="username-nav"/> :)
                     </sec:ifLoggedIn>
                 </div>
             </div>
