@@ -48,10 +48,38 @@
                 </g:each>
             </table>
 
+            <div class="pagination">
+                <g:paginate total="${userCount ?: 0}" />
+            </div>
+
+        </div>
+
+        <div id="list-matches" class="content scaffold-list index-table" role="main">
+
+            %{-- <f:table collection="${userList}" />--}%
+            <p>
+                Last played matches
+            </p>
+
+            <br>
+
+            <table >
+                <tr>
+                    <th>Username</th>
+                    <th>Last connection date</th>
+                </tr>
+                <g:each in="${userList}">
+                    <tr>
+                        <td>${it.username}</td>
+                        <td>${it.previousConnection}</td>
+                    </tr>
+                </g:each>
+            </table>
 
             <div class="pagination">
                 <g:paginate total="${userCount ?: 0}" />
             </div>
+
         </div>
 
     </section>
