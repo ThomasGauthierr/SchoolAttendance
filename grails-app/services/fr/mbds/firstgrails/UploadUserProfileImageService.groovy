@@ -23,14 +23,11 @@ class UploadUserProfileImageService implements GrailsConfigurationAware{
 
     @SuppressWarnings('JavaToPackageAccess')
     String uploadProfileImage(MultipartFile file) {
-
         def extention = FilenameUtils.getExtension(file.originalFilename)
         String filename = UUID.randomUUID().toString() + '.' + extention
+
         File folder = new File(cdnFolder + '/' + filename)
         folder.createNewFile()
-
-
-
         file.transferTo(new File(cdnFolder + '/' + filename))
 
         filename
