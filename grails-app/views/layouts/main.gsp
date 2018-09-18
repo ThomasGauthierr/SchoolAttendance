@@ -58,7 +58,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Messages<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><g:link controller="message">View messages</g:link></li>
-                                <li><g:link controller="message" action="create">Add a messsage</g:link></li>
+                                <li><g:link controller="message" action="create">Send a message</g:link></li>
                             </ul>
                         </li>
                     </sec:ifAllGranted>
