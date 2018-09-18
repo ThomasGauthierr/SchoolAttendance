@@ -29,7 +29,10 @@
             <img style="height: 120px;width: 102px;"src="${"http://localhost/img/" + this.user.profileImageName}" />
         </g:if>
 
-        <f:display bean="user" />
+        <fieldset>
+            Username : <f:display bean="user" property="username"/><br/>
+            Last connection : <f:display bean="user" property="lastConnection"/>
+        </fieldset>
 
         <g:form resource="${this.user}" method="DELETE">
             <fieldset class="buttons">

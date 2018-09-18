@@ -18,7 +18,22 @@
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${userList}" />
+            %{--<f:table collection="${userList}" />--}%
+
+            <table >
+                <tr>
+                    <th/>
+                    <th>Username</th>
+                    <th>Last connection date</th>
+                </tr>
+                <g:each in="${userList}">
+                    <tr>
+                        <td><!--ToDo : Add user pictures here--></td>
+                        <td><g:link action="show" params="${[id: it.id]}">${it.username}</g:link></td>
+                        <td>${it.previousConnection}</td>
+                    </tr>
+                </g:each>
+            </table>
 
             <div class="pagination">
                 <g:paginate total="${userCount ?: 0}" />
