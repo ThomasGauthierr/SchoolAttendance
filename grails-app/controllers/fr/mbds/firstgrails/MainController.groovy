@@ -18,7 +18,7 @@ class MainController {
 
         for(def authority : springSecurityService.getPrincipal().getAuthorities()) {
             if(authority.getAuthority() == 'ROLE_ADMIN') {
-                params.max = Math.min(10 ?: 10, 100)
+                params.max = Math.min(4 ?: 10, 100)
                 respond userService.list(params), view: '/index-admin', model:[user: user, userCount: userService.count(), matches: matchService.list(params)]
                 return
             }

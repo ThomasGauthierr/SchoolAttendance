@@ -33,26 +33,21 @@ class ApiController {
                 }
                 break
 
-            case "POS":
+            case "POST":
+                def bodyJson =  JSON.parse(request.reader.text)
+                def createdUser = new User(bodyJson.user);
 
-                def user = new User();
-                user.username = params.user.username;
-                user.password = params.user.password
-
-                userService.save(user)
+                render createdUser as JSON
 
         }
     }
 
+    // Pas la peine de mettre des switches pour "allow" dans une requette GET car dans tout les cas impossible de transmetre ni du json ni de l'xml car body vide.
     def messages(Long id) {
-//        println request.getMethod()
-//        println request.getHeader(name: 'Allow')
         switch (request.getMethod()) {
             case ("GET") :
-                switch (request.getHeader(name: 'Allow')) {
-                    case "text/json":
                         if (id) {
-                            def message = messageService.get(id: id)
+                            def message = messageService.get(id)
                             if (message == null) {
                                 render(status: 400, "No message with id $id")
                             } else {
@@ -61,11 +56,6 @@ class ApiController {
                         } else {
                             render messageService.list() as JSON
                         }
-                        break
-                    default:
-                        response.status = 400
-                        break
-                }
                 break
 
             case "POST":
