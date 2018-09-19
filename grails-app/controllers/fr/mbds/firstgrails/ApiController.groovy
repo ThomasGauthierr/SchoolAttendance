@@ -27,18 +27,43 @@ class ApiController {
         switch (request.getMethod()) {
             case "GET" :
                 if(id != 0) {
-                    render userService.get(id) as JSON
+                    def user = userService.get(id)
+                    if(user)
+                        render user as JSON
+                    else
+                        response.status = 400
+                    render 
                 } else {
                     render userService.list() as JSON
                 }
-                break
+            break
 
+        /**
+         * Exemple: Try posting this object to the route "api/users"
+         *
+         * {
+         * 	"user":
+         * 	{
+         * 		"username": "m6",
+         * 		"password": "123"* 	}
+         * }
+         *
+         */
             case "POST":
                 def bodyJson =  JSON.parse(request.reader.text)
-                def createdUser = new User(bodyJson.user);
+                def createdUser = new User(bodyJson.user)
+                if(createdUser.save(flush: true)) {
+                    response.status = 201
+                    response.contentType = 'text/json'
+                    render createdUser as JSON
+                } else {
+                    response.status = 400
+                }
+            break
 
-                render createdUser as JSON
-
+            default:
+                response.status = 405
+            break;
         }
     }
 
