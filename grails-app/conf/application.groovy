@@ -19,7 +19,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
 grails.plugin.springsecurity.filterChain.chainMap = [
 	[pattern: '/assets/**',      filters: 'none'],
-		[pattern: '/**/js/**',       filters: 'none'],
+	[pattern: '/**/js/**',       filters: 'none'],
 	[pattern: '/**/css/**',      filters: 'none'],
 	[pattern: '/**/images/**',   filters: 'none'],
 	[pattern: '/**/favicon.ico', filters: 'none'],
@@ -30,3 +30,6 @@ grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/main/connection
 
 //Enable logout through GET
 grails.plugin.springsecurity.logout.postOnly = false
+
+grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*', '/fonts/*']
+grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/plugins/**', '/fonts/**']

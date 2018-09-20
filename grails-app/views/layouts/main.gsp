@@ -29,22 +29,25 @@
                 </div>
             </div>
             <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
-                <ul class="nav navbar-nav navbar-left">
+                <ul class="nav navbar-nav navbar-right">
+
+                    %{-- User info + logout section --}%
                     <sec:ifLoggedIn>
-                        <li>
-                            <p class="navbar-text">
-                                Hello <sec:username/> :)
-                            </p>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> <sec:username/><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><g:link controller="user" action="show" id="${curUsr.info(id: true)}">My profile</g:link></li>
+                                <li><g:link controller="logout">Logout</g:link></li>
+                            </ul>
                         </li>
                     </sec:ifLoggedIn>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
+
                     <sec:ifAllGranted roles="ROLE_ADMIN">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><g:link controller="user">View users</g:link></li>
-                                <li><g:link controller="user" action="create">Create a user</g:link></li>
+                                <li><g:link controller="user" aciton="create">Create a user</g:link></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -62,17 +65,15 @@
                             </ul>
                         </li>
                     </sec:ifAllGranted>
+
                     <sec:ifNotGranted roles="ROLE_ADMIN">
                         <sec:ifAllGranted roles="ROLE_USER">
                             <li><g:link controller="match" action="display">My matches</g:link></li>
                             <li><g:link controller="message" action="display">My messages</g:link></li>
                             <li><g:link controller="user" action="display">My profile</g:link></li>
-
                         </sec:ifAllGranted>
                     </sec:ifNotGranted>
-                    <sec:ifLoggedIn>
-                        <li><g:link controller="logout">Log out</g:link></li>
-                    </sec:ifLoggedIn>
+
                 </ul>
             </div>
         </div>
