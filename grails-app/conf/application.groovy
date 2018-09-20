@@ -30,3 +30,6 @@ grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/main/connection
 
 //Enable logout through GET
 grails.plugin.springsecurity.logout.postOnly = false
+
+grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*', '/fonts/*']
+grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/plugins/**', '/fonts/**']
