@@ -21,6 +21,7 @@ class User implements Serializable {
     String profileImageName
     Date lastConnection
     Date previousConnection
+    boolean isDeleted = false
 
     static hasMany = [
             matchWon: Match,
@@ -46,6 +47,7 @@ class User implements Serializable {
         profileImageName nullable: true, blank: false
         lastConnection nullable: true
         previousConnection nullable: true
+        isDeleted nullable: false
     }
 
     static mapping = {

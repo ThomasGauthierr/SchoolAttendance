@@ -93,6 +93,10 @@ class UserController {
         }
 
         userService.delete(id)
+//        def user = userService.get(id)
+//
+//        user.isDeleted = true
+//        user.save(flush: true)
 
         request.withFormat {
             form multipartForm {

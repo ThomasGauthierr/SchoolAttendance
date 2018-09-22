@@ -29,7 +29,8 @@
             <g:form resource="${this.user}" method="PUT">
                 <g:hiddenField name="version" value="${this.user?.version}" />
                 <fieldset class="form">
-                    <f:all bean="user"/>
+                    <f:field bean="user" property="username" label="Username"/>
+                    <f:field bean="user" property="password" type="password" label="Password"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

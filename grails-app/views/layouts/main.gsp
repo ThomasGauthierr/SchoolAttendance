@@ -41,7 +41,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><g:link controller="user">View users <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
-                                <li><g:link controller="user" aciton="create">Create a user <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
+                                <li><g:link controller="user" action="create">Create a user <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
                             </ul>
                         </li>
                         <li class="dropdown">
