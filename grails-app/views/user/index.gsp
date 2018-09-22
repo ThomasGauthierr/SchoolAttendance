@@ -25,12 +25,22 @@
                     <th/>
                     <th>Username</th>
                     <th>Last connection date</th>
+                    <th/>
+                    <th/>
                 </tr>
                 <g:each in="${userList}">
                     <tr>
                         <td><!--ToDo : Add user pictures here--></td>
                         <td><g:link action="show" params="${[id: it.id]}">${it.username}</g:link></td>
                         <td>${it.previousConnection}</td>
+                        <td>
+                            <g:link action="edit" params="${[id: it.id]}">
+                                <button type="button" class="btn btn-warning">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                            </g:link></td>
+                        <td>
+                            <g:link action="delete" params="${[id: it.id]}">
+                                <button type="button" class="btn btn-danger">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </g:link></td>
                     </tr>
                 </g:each>
             </table>
