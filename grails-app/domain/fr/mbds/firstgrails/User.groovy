@@ -21,6 +21,7 @@ class User implements Serializable {
     String profileImageName = "default-user.jpg"
     Date lastConnection
     Date previousConnection
+    Date dateCreated
     boolean isDeleted = false
 
     static hasMany = [
