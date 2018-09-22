@@ -30,7 +30,11 @@
                     %{--ToDo : Prevent author = target --}%
                     <f:field bean="message" property="author" label="From"/>
                     <f:field bean="message" property="target" label="To"/>
-                    <f:field bean="message" property="content" label="Message"/>
+                    <f:field bean="message" property="content" label="Message">
+                        <g:textArea name="content" rows="5" cols="40"
+                                    maxlength="40" value="Write your message here...">
+                        </g:textArea>
+                    </f:field>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
