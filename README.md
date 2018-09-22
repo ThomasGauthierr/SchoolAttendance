@@ -1,5 +1,9 @@
 # FirstGrails (due date : 30 sept)
 
+## Before you run
+Be sure to adapt your application.yml to your configuration and to add a file "default-user.jpg" in the web server folder where the images of this project will be stored.<br/>
+You can find one in the folder "grails-app/assets/images".
+
 ## TP Link
 [Here](http://cours.tokidev.fr/mbds/grails/tp_grails.pdf).
 

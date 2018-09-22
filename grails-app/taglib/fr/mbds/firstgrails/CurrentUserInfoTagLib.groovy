@@ -15,6 +15,9 @@ class CurrentUserInfoTagLib {
             if(attrs.id) {
                 out << user.id
             }
+            if(attrs.imageName) {
+                out << user.profileImageName
+            }
         }
     }
 }

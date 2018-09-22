@@ -26,7 +26,7 @@
 
         %{-- If the user has a profile image field, then we display that image by using its url --}%
         <g:if test="${this.user.profileImageName}">
-            <img style="height: 120px;width: 102px;"src="${"http://localhost/img/" + this.user.profileImageName}" />
+            <img class="avatar" src="${"http://localhost:8079/img/" + this.user.profileImageName}" />
         </g:if>
 
         <fieldset>

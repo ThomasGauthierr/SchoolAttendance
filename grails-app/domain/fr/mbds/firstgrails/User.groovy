@@ -18,7 +18,7 @@ class User implements Serializable {
     boolean accountLocked
     boolean passwordExpired
 
-    String profileImageName
+    String profileImageName = "default-user.jpg"
     Date lastConnection
     Date previousConnection
     boolean isDeleted = false
