@@ -67,8 +67,6 @@
 
         </div>
 
-        <asset:javascript src="application.js"/>
-
         <g:javascript>
             let formData = new FormData();
 

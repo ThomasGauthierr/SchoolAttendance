@@ -25,6 +25,10 @@ class UserController {
         respond userService.get(id)
     }
 
+    def editImage(Long id) {
+        respond userService.get(id)
+    }
+
     def create() {
         respond new User(params)
     }
