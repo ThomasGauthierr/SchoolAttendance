@@ -7,12 +7,6 @@
     </head>
     <body>
         <a href="#list-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/main')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
         <div id="list-user" class="content scaffold-list" role="main">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
@@ -25,16 +19,24 @@
                     <th/>
                     <th>Username</th>
                     <th>Last connection date</th>
+                    <th>Creation date</th>
                     <th/>
                 </tr>
                 <g:each in="${userList}">
                     <tr>
                         <td class="td-index-avatar"><img class="avatar index-avatar" src="${appProperties.getFileUrl() + it.profileImageName}" /></td>
-                        <td><g:link action="show" params="${[id: it.id]}">${it.username}</g:link></td>
-                        <td>${it.previousConnection}</td>
+                        <td>${it.username}</td>
+                        <td>${it.lastConnection}</td>
+                        <td>${it.dateCreated}</td>
                         <td>
+                            <g:link action="show" params="${[id: it.id]}">
+                                <button type="button" class="btn btn-success">Show <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            </g:link>
                             <g:link action="edit" params="${[id: it.id]}">
-                                <button type="button" class="btn btn-warning">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-primary">Edit informations <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                            </g:link>
+                            <g:link action="editImage" params="${[id: it.id]}">
+                                <button type="button" class="btn btn-warning">Edit picture <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></button>
                             </g:link>
                             <g:link action="delete" params="${[id: it.id]}">
                                 <button type="button" class="btn btn-danger">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>

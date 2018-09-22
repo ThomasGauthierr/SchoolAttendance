@@ -7,39 +7,35 @@
     </head>
     <body>
         <a href="#show-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <sec:ifAllGranted roles="ROLE_ADMIN">
-                    <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                    <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                    <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-                </sec:ifAllGranted>
-            </ul>
-        </div>
 
-    <div id="show-user" class="content scaffold-show" role="main">
-        <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+        <div id="show-user" class="content scaffold-show" role="main">
 
-        <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
-        </g:if>
+            <g:if test="${flash.message}">
+            <div class="message" role="status">${flash.message}</div>
+            </g:if>
 
-        %{-- If the user has a profile image field, then we display that image by using its url --}%
-        <g:if test="${this.user.profileImageName}">
-            <img class="avatar" src="${"http://localhost:8079/img/" + this.user.profileImageName}" />
-        </g:if>
+            %{-- If the user has a profile image field, then we display that image by using its url --}%
+            <g:if test="${this.user.profileImageName}">
+                <img class="avatar profile-avatar" src="${appProperties.getFileUrl() + this.user.profileImageName}" />
+            </g:if>
 
-        <fieldset>
-            Username : <f:display bean="user" property="username"/><br/>
-            Last connection : <f:display bean="user" property="lastConnection"/>
-        </fieldset>
-
-        <g:form resource="${this.user}" method="DELETE">
-            <fieldset class="buttons">
-                <g:link class="edit" action="edit" resource="${this.user}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+            <fieldset>
+                <b>Username</b> : <f:display bean="user" property="username"/><br/>
+                <b>Last connection</b> : <f:display bean="user" property="lastConnection"/><br/>
+                <b>Creation date</b> : <f:display bean="user" property="dateCreated"/>
             </fieldset>
-        </g:form>
+
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+                <g:link action="edit" params="${[id: this.user.id]}">
+                    <button type="button" class="btn btn-primary btn-profile">Edit informations <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                </g:link><br/>
+                <g:link action="editImage" params="${[id: this.user.id]}">
+                    <button type="button" class="btn btn-warning btn-profile">Edit picture <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></button>
+                </g:link><br/>
+                <g:link action="delete" params="${[id: this.user.id]}">
+                    <button type="button" class="btn btn-danger btn-profile">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                </g:link><br/>
+            </sec:ifAllGranted>
 
         </div>
     </body>

@@ -10,6 +10,8 @@ class UserController {
     def springSecurityService = Holders.applicationContext.springSecurityService
 
     UserService userService
+    UserRoleService userRoleService
+
     UploadUserProfileImageService uploadUserProfileImageService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -113,8 +115,11 @@ class UserController {
         user.password = params.password
         user.profileImageName = uploadUserProfileImageService.uploadProfileImage(params.profileImage)
 
+        def gamingRole = Role.findByAuthority('ROLE_USER')
+
         try {
             userService.save(user)
+            UserRole.create(user, gamingRole, true)
         } catch (ValidationException e) {
             respond user.errors, view:'create'
             return
