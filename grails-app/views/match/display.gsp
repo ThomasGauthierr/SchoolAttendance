@@ -12,7 +12,24 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
-    <f:table collection="${matchList}" />
+    <table >
+        <tr>
+            <th>Winner / score</th>
+            <th>Looser / score</th>
+            <th/>
+        </tr>
+        <g:each in="${matchList}">
+            <tr>
+                <td><g:link action="show" controller="user" params="${[id: it.winner.id]}">${it.winner.username}</g:link> / ${it.winnerScore}</td>
+                <td><g:link action="show" controller="user" params="${[id: it.looser.id]}">${it.looser.username}</g:link> / ${it.looserScore}</td>
+                <td>
+                    <g:link action="show" params="${[id: it.id]}">
+                        <button type="button" class="btn btn-success">Show <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </g:link>
+                </td>
+            </tr>
+        </g:each>
+    </table>
 
     <div class="pagination">
         <g:paginate total="${matchCount ?: 0}" />

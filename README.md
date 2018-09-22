@@ -4,14 +4,13 @@
 Be sure to adapt your application.yml to your configuration and to add a file "default-user.jpg" in the web server folder where the images of this project will be stored.<br/>
 You can find one in the folder "grails-app/assets/images".
 
-## TP Link
-[Here](http://cours.tokidev.fr/mbds/grails/tp_grails.pdf).
+## Known bugs
+- Nav dropdowns not working in the create user page
 
-## Courses
-[Click click](http://cours.tokidev.fr/mbds/grails/cours_grails.pdf).
-
-## Trello
-[Here](https://trello.com/b/ssAz0JX8/projet-grails).
+## Links
+[TP](http://cours.tokidev.fr/mbds/grails/tp_grails.pdf)  
+[Courses](http://cours.tokidev.fr/mbds/grails/cours_grails.pdf)  
+[Trello](https://trello.com/b/ssAz0JX8/projet-grails)
 
 ## Images hosting
 1. Keep the image name in the user's attributes
