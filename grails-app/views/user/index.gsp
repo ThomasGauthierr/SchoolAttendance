@@ -29,7 +29,7 @@
                 </tr>
                 <g:each in="${userList}">
                     <tr>
-                        <td><!--ToDo : Add user pictures here--></td>
+                        <td class="td-index-avatar"><img class="avatar index-avatar" src="${appProperties.getFileUrl() + it.profileImageName}" /></td>
                         <td><g:link action="show" params="${[id: it.id]}">${it.username}</g:link></td>
                         <td>${it.previousConnection}</td>
                         <td>
