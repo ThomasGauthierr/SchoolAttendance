@@ -1,4 +1,4 @@
-let formData2 = new FormData();
+let formData = new FormData();
 
 // Javascript and JQuerry goes here !!
 
@@ -7,21 +7,21 @@ let formData2 = new FormData();
 $(document).on('dragenter', '#dd-box', function() {
     $(this).css('border', '3px dashed red');
     return false;
-});
+})
 
 $(document).on('dragover', '#dd-box', function(e) {
     e.preventDefault();
     e.stopPropagation();
     $(this).css('border', '3px dashed red');
     return false;
-});
+})
 
 $(document).on('dragleave', '#dd-box', function(e) {
     e.preventDefault();
     e.stopPropagation();
     $(this).css('border', '3px dashed #BBBBBB');
     return false;
-});
+})
 
 $(document).on('dragstart', '#dd-box', function(e) {
     console.log('dragstart');
@@ -35,7 +35,7 @@ $(document).on('drop', '#dd-box', function(e) {
     if(e.originalEvent.dataTransfer) {
         if(e.originalEvent.dataTransfer.files.length) {
             $(this).css('border', '3px dashed green');
-            formData2.append('profileImage', e.originalEvent.dataTransfer.files[0]);
+            formData.append('profileImage', e.originalEvent.dataTransfer.files[0]);
             $(this).text(e.originalEvent.dataTransfer.files[0].name);
         }
     }
@@ -44,26 +44,22 @@ $(document).on('drop', '#dd-box', function(e) {
     }
 
     return false
-});
+})
 
-$('#submit').on('click', function (e) {
-    console.log("ok sumbitting")
+$('#submit-second').on('click', function (e) {
 
-    let userId = $('#user-id').val();
-
-    formData2.append('userId', userId);
-
-
+    formData.append('username', $('#user-form-username').val());
+    formData.append('password', $('#user-form-password').val());
     let request = new XMLHttpRequest();
 
     request.onreadystatechange = function() {
         if (request.readyState === 4) {
             console.log(request.response);
             console.log(JSON.parse(request.response).name);
-            window.location = '../show/' + userId;
+            window.location = 'show/' + JSON.parse(request.response).name;
         }
-    };
+    }
 
-    request.open("POST", "/tp/user/updateProfileImage");
-    request.send(formData2);
-});
+    request.open("POST", "/tp/user/save2");
+    request.send(formData);
+})
