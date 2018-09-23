@@ -16,7 +16,7 @@
 
             %{-- If the user has a profile image field, then we display that image by using its url --}%
             <g:if test="${this.user.profileImageName}">
-                <img class="avatar profile-avatar" src="${appProperties.getFileUrl() + this.user.profileImageName}" />
+                <img class="avatar profile-avatar" src="${appProperties.getFileUrl() + this.user.profileImageName}" onerror="arguments[0].currentTarget.style.display='none'"/>
             </g:if>
 
             <fieldset>

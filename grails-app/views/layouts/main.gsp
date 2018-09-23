@@ -74,7 +74,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <sec:username/>
                                 %{--<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>--}%
-                                <img class="avatar navbar-avatar" src="${appProperties.getFileUrl() + curUsr.info(imageName: true)}" />
+                                <img class="avatar navbar-avatar" src="${appProperties.getFileUrl() + curUsr.info(imageName: true)}" onerror="arguments[0].currentTarget.style.display='none'"/>
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">

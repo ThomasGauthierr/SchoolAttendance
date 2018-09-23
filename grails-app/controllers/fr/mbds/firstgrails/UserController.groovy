@@ -30,16 +30,9 @@ class UserController {
     }
 
     def updateProfileImage() {
-        println 'The user whose profile image will be updated is: '
-        println params.userId
-        //params.userImage.userId
-        //println params.userImage =
-
-
 
         def user = userService.get(params.userId)
 
-        //String profileImageFilename = uploadUserProfileImageService.uploadProfileImage(params.profileImageFile)
         user.profileImageName = uploadUserProfileImageService.uploadProfileImage(params.profileImage)
 
         try {

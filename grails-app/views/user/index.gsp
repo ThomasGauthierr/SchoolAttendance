@@ -24,7 +24,7 @@
                 </tr>
                 <g:each in="${userList}">
                     <tr>
-                        <td class="td-index-avatar"><img class="avatar index-avatar" src="${appProperties.getFileUrl() + it.profileImageName}" /></td>
+                        <td class="td-index-avatar"><img class="avatar index-avatar" src="${appProperties.getFileUrl() + it.profileImageName}" onerror="arguments[0].currentTarget.style.display='none'"/></td>
                         <td>${it.username}</td>
                         <td>${it.lastConnection}</td>
                         <td>${it.dateCreated}</td>
