@@ -59,7 +59,7 @@
 
     <div class="fieldcontain">
         <label>Password</label>
-        <input id="user-form-password" type="text" name="password" />
+        <input id="user-form-password" type="password" name="password" />
     </div>
 </form>
 
