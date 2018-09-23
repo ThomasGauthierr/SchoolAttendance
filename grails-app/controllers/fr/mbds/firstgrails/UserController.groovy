@@ -29,6 +29,30 @@ class UserController {
         respond userService.get(id)
     }
 
+    def updateProfileImage() {
+        println 'The user whose profile image will be updated is: '
+        println params.userId
+        //params.userImage.userId
+        //println params.userImage =
+
+
+
+        def user = userService.get(params.userId)
+
+        //String profileImageFilename = uploadUserProfileImageService.uploadProfileImage(params.profileImageFile)
+        user.profileImageName = uploadUserProfileImageService.uploadProfileImage(params.profileImage)
+
+        try {
+            userService.save(user)
+//            UserRole.create(user, gamingRole, true)
+        } catch (ValidationException e) {
+            respond user.errors, view:'create'
+            return
+        }
+
+        render contentType: "text/json", text: '{"userId": "' + params.userid + '"}'
+    }
+
     def create() {
         respond new User(params)
     }
@@ -61,10 +85,6 @@ class UserController {
         }
     }
 
-    def updateProfileImage() {
-        println params.profileImage.getClass()
-        render contentType: "text/json", text: '{"name":"amine"}'
-    }
 
     def edit(Long id) {
         respond userService.get(id)
