@@ -60,6 +60,14 @@
     text-align: center;
 }
 
+#edit-user {
+    text-align: center;
+}
+
+#edit-user fieldset label {
+    width: auto;
+}
+
 td, th {
     text-align: center;
 }
@@ -67,3 +75,8 @@ td, th {
 .btn-profile {
     margin-bottom: 5px;
 }
+
+a.no-underline {
+    text-decoration: none;
+}
+
