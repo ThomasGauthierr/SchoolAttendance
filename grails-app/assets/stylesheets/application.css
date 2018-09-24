@@ -56,15 +56,11 @@
     margin-top: 20px;
 }
 
-#show-user {
+#edit-user, #show-user, #create-user, #show-message {
     text-align: center;
 }
 
-#edit-user {
-    text-align: center;
-}
-
-#edit-user fieldset label {
+#edit-user fieldset label, #create-user label {
     width: auto;
 }
 
@@ -79,4 +75,32 @@ td, th {
 a.no-underline {
     text-decoration: none;
 }
+
+#show-message-infos {
+    text-align: center;
+    min-width: 300px;
+    position: relative;
+    left: 40%;
+    width: 20%;
+}
+
+li.fieldcontain .property-label {
+    width: auto;
+}
+li.fieldcontain .property-value {
+     margin-left: 0px;
+ }
+
+#create-message, #edit-message {
+    margin-left : 27%;
+}
+
+#show-match {
+    margin-left: 20px;
+}
+
+#create-match {
+    margin-left: 27%;
+}
+
 
