@@ -7,7 +7,7 @@
     </head>
     <body>
         <a href="#edit-message" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div id="edit-message" class="content scaffold-edit" role="main">
+        <div class="content scaffold-edit" role="main">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
@@ -22,11 +22,25 @@
             <g:form resource="${this.message}" method="PUT">
                 <g:hiddenField name="version" value="${this.message?.version}" />
                 <fieldset class="form">
-                    <f:all bean="message"/>
+                    %{--ToDo : Prevent author = target --}%
+                    <f:field bean="message" property="author" label="From"/>
+                    <f:field bean="message" property="target" label="To"/>
+                    <f:field bean="message" property="content" label="Message">
+                        <g:textArea name="content" rows="5" cols="40"
+                                    maxlength="40" value="Write your message here...">
+                        </g:textArea>
+                    </f:field>
                 </fieldset>
-                <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-                </fieldset>
+
+                <div id="edit-message">
+                    <button type="submit" class="save btn btn-primary" id="submit-second">
+                        Create <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                    </button>
+
+                    <g:link action="index" class="no-underline">
+                        <button type="button" class="btn btn-danger">Cancel <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    </g:link>
+                </div>
             </g:form>
         </div>
     </body>

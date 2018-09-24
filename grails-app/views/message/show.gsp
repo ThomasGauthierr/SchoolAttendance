@@ -7,19 +7,24 @@
     </head>
     <body>
         <a href="#show-message" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div id="show-message" class="content scaffold-show" role="main">
+        <div class="content scaffold-show" role="main">
             <h1><g:message code="default.show.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:display bean="message" />
+            <div id="show-message-infos">
+                <f:display bean="message"/>
+            </div>
+
             <sec:ifAllGranted roles="ROLE_ADMIN">
-                <g:form resource="${this.message}" method="DELETE">
-                    <fieldset class="buttons">
-                        <g:link class="edit" action="edit" resource="${this.message}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                        <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                    </fieldset>
-                </g:form>
+                <div id="show-message">
+                    <g:link action="edit" params="${[id: this.message.id]}" class=" no-underline">
+                        <button type="button" class="btn btn-primary btn-profile">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                    </g:link>
+                    <g:link action="delete" params="${[id: this.message.id]}" class=" no-underline">
+                        <button type="button" class="btn btn-danger btn-profile">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                    </g:link>
+                </div>
             </sec:ifAllGranted>
         </div>
     </body>

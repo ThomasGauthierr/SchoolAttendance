@@ -7,7 +7,7 @@
     </head>
     <body>
         <a href="#create-match" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div id="create-match" class="content scaffold-create" role="main">
+        <div class="content scaffold-create" role="main">
             <h1><g:message code="default.create.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
@@ -23,9 +23,17 @@
                 <fieldset class="form">
                     <f:all bean="match"/>
                 </fieldset>
-                <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                </fieldset>
+                <div id="create-match">
+                    <button type="submit" class="save btn btn-primary" id="submit-second">
+                        Create <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                    </button>
+
+                    <g:link action="index" class="no-underline">
+                        <button type="button" class="btn btn-danger">
+                            Cancel <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                    </g:link>
+                </div>
             </g:form>
         </div>
     </body>
