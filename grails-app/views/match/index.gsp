@@ -23,13 +23,13 @@
                         <td><g:link action="show" controller="user" params="${[id: it.winner.id]}">${it.winner.username}</g:link> / ${it.winnerScore}</td>
                         <td><g:link action="show" controller="user" params="${[id: it.looser.id]}">${it.looser.username}</g:link> / ${it.looserScore}</td>
                         <td>
-                            <g:link action="show" params="${[id: it.id]}">
+                            <g:link action="show" params="${[id: it.id]}" class=" no-underline">
                                 <button type="button" class="btn btn-success">Show <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                             </g:link>
-                            <g:link action="edit" params="${[id: it.id]}">
+                            <g:link action="edit" params="${[id: it.id]}" class=" no-underline">
                                 <button type="button" class="btn btn-primary">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
                             </g:link>
-                            <g:link action="delete" params="${[id: it.id]}">
+                            <g:link action="delete" params="${[id: it.id]}" class="no-underline">
                                 <button type="button" class="btn btn-danger">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                             </g:link>
                         </td>

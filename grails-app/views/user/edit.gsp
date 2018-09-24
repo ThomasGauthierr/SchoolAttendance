@@ -25,9 +25,14 @@
                     <f:field bean="user" property="username" label="Username"/>
                     <f:field bean="user" property="password" type="password" label="Password"/>
                 </fieldset>
-                <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-                </fieldset>
+                <g:link action="edit" params="${[id: this.user.id]}" class=" no-underline">
+                    <button type="submit" class="btn btn-primary btn-profile">Update <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                </g:link>
+                <g:link action="show" params="${[id: this.user.id]}" class=" no-underline">
+                    <button type="button" class="btn btn-danger btn-profile">
+                        Cancel <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                </g:link><br/>
             </g:form>
         </div>
     </body>

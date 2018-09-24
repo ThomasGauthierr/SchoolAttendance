@@ -9,7 +9,7 @@
 
     <body>
 
-        <div id="create-user" class="content scaffold-create" role="main">
+        <div id="edit-user" class="content scaffold-create" role="main">
             <h1><g:message code="default.editImage.label" args="[entityName]" /></h1>
 
             <g:if test="${flash.message}">
@@ -31,7 +31,16 @@
             </g:uploadForm>
 
             <div id="dd-box"> Drop the the profile image from you computer </div>
-            <button type="submit" class="save" id="submit"> Submit </button>
+
+            <button type="submit" class="btn btn-primary btn-profile" id="submit">
+                Submit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>
+
+            <g:link action="show" params="${[id: this.user.id]}" class=" no-underline">
+                <button type="button" class="btn btn-danger btn-profile">
+                    Cancel <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </g:link><br/>
 
             <input id="user-id" type="hidden" value="${this.user.id}"/>
 

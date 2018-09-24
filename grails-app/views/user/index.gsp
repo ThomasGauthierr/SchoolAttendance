@@ -29,16 +29,16 @@
                         <td>${it.lastConnection}</td>
                         <td>${it.dateCreated}</td>
                         <td>
-                            <g:link action="show" params="${[id: it.id]}">
+                            <g:link action="show" params="${[id: it.id]}" class=" no-underline">
                                 <button type="button" class="btn btn-success">Show <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                             </g:link>
-                            <g:link action="edit" params="${[id: it.id]}">
+                            <g:link action="edit" params="${[id: it.id]}" class=" no-underline">
                                 <button type="button" class="btn btn-primary">Edit informations <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
                             </g:link>
-                            <g:link action="editImage" params="${[id: it.id]}">
+                            <g:link action="editImage" params="${[id: it.id]}" class=" no-underline">
                                 <button type="button" class="btn btn-warning">Edit picture <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></button>
                             </g:link>
-                            <g:link action="delete" params="${[id: it.id]}">
+                            <g:link action="delete" params="${[id: it.id]}" class=" no-underline">
                                 <button type="button" class="btn btn-danger">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                             </g:link>
                         </td>
