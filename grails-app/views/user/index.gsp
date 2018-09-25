@@ -29,25 +29,22 @@
                         <td>${it.lastConnection}</td>
                         <td>${it.dateCreated}</td>
                         <td>
-                            <g:link action="show" params="${[id: it.id]}" class=" no-underline">
-                                <button type="button" class="btn btn-success">Show <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                            </g:link>
-                            <g:link action="edit" params="${[id: it.id]}" class=" no-underline">
-                                <button type="button" class="btn btn-primary">Edit informations <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
-                            </g:link>
-                            <g:link action="editImage" params="${[id: it.id]}" class=" no-underline">
-                                <button type="button" class="btn btn-warning">Edit picture <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></button>
-                            </g:link>
-                            <g:link action="delete" params="${[id: it.id]}" class=" no-underline">
-                                <button type="button" class="btn btn-danger">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                            </g:link>
-
                             <g:form resource="${it}" method="DELETE">
-                                <fieldset>
-                                    <input class="btn btn-primary" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/>
+                                <fieldset class="buttons-container">
+                                    <g:link action="show" params="${[id: it.id]}" class=" no-underline">
+                                        <button type="button" class="btn btn-success">Show <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    </g:link>
+                                    <g:link action="edit" params="${[id: it.id]}" class=" no-underline">
+                                        <button type="button" class="btn btn-primary">Edit informations <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                                    </g:link>
+                                    <g:link action="editImage" params="${[id: it.id]}" class=" no-underline">
+                                        <button type="button" class="btn btn-warning">Edit picture <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></button>
+                                    </g:link>
+                                    <button class="btn btn-danger" type="submit">
+                                        Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </button>
                                 </fieldset>
                             </g:form>
-
                         </td>
                     </tr>
                 </g:each>
