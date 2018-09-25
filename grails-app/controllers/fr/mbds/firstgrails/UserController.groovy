@@ -10,7 +10,7 @@ class UserController {
     def springSecurityService = Holders.applicationContext.springSecurityService
 
     UserService userService
-    UserRoleService userRoleService
+    UserCustomService userCustomService
 
     UploadUserProfileImageService uploadUserProfileImageService
 
@@ -18,7 +18,7 @@ class UserController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond userService.list(params), model:[userCount: userService.count()]
+        respond userCustomService.list(params), model:[userCount: userService.count()]
     }
 
     def show(Long id) {
@@ -111,11 +111,7 @@ class UserController {
             return
         }
 
-        userService.delete(id)
-//        def user = userService.get(id)
-//
-//        user.isDeleted = true
-//        user.save(flush: true)
+        userCustomService.delete(id)
 
         request.withFormat {
             form multipartForm {

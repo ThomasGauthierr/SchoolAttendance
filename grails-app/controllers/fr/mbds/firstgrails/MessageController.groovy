@@ -9,6 +9,7 @@ class MessageController {
     def springSecurityService = Holders.applicationContext.springSecurityService
 
     MessageService messageService
+    MessageCustomService messageCustomService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -103,11 +104,7 @@ class MessageController {
     //ToDo : separate sent and received messages
     def display() {
         def user = User.get(springSecurityService.currentUser.id)
-
-        def query = Message.where {
-            author == user || target == user
-        }
-        def results = query.list()
+        def results = messageCustomService.getAllUserMessages(user)
 
         respond results
     }
