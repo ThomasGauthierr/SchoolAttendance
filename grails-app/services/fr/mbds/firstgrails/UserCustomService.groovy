@@ -8,4 +8,8 @@ class UserCustomService {
     def delete(Serializable id) {
 
     }
+
+    def findByName(String name) {
+        return User.findByUsername(name)
+    }
 }

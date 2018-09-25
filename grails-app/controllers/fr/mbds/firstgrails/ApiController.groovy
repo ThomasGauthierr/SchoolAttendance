@@ -4,9 +4,12 @@ import grails.converters.JSON
 
 class ApiController {
 
+    static responseFormats = ['json']
+
     def userService
     def messageService
     def matchService
+    def userCustomService
 
     def index() {
         switch (request.getMethod()) {
@@ -23,19 +26,34 @@ class ApiController {
         }
     }
 
-    def users(long id) {
+    def users(long id, String name, Integer max) {
         switch (request.getMethod()) {
             case "GET" :
-                if(id != 0) {
+
+                if(!max) {
+                    max = 10
+                }
+
+                if(id) {
                     def user = userService.get(id)
+                    if (user)
+                        render user as JSON
+
+                }
+
+                if(name) {
+                    def user = userCustomService.findByName(name)
                     if(user)
                         render user as JSON
-                    else
-                        response.status = 400
-                    render 
-                } else {
-                    render userService.list() as JSON
                 }
+
+                if(id || name) {
+                    response.status = 400
+                    render ([error: "No user found for the provided parameters"] as JSON)
+                }
+
+                render userService.list(max: max) as JSON
+
             break
 
         /**
