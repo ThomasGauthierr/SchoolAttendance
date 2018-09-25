@@ -22,7 +22,7 @@ class UserController {
     }
 
     def show(Long id) {
-        respond userService.get(id)
+        respond userCustomService.get(id)
     }
 
     def editImage(Long id) {

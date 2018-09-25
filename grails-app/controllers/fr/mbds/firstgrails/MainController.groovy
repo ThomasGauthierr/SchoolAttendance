@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat
 
 class MainController {
 
-    def springSecurityService = Holders.applicationContext.springSecurityService
+    def springSecurityService
     def userService
     def matchService
 
@@ -28,7 +28,6 @@ class MainController {
         render (view: '/index-player', model: [user: user])
     }
 
-    //ToDo : Only POST
     def connection() {
         def user = User.get(springSecurityService.currentUser.id)
 
@@ -36,6 +35,6 @@ class MainController {
         user.lastConnection = new Date()
         user.save(flush: true)
 
-        redirect(controllerName:"main", method: "POST")
+        redirect(controllerName:"main")
     }
 }

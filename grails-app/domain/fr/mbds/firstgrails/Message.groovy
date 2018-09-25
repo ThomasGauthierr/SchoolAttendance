@@ -8,5 +8,6 @@ class Message {
     boolean read = false
 
     static constraints = {
+        read nullable: false
     }
 }

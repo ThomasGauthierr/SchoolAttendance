@@ -19,6 +19,8 @@ class MessageController {
     }
 
     def show(Long id) {
+        messageCustomService.checkRead(springSecurityService.currentUser.id, id)
+
         respond messageService.get(id)
     }
 

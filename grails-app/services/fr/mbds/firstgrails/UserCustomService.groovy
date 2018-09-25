@@ -22,4 +22,9 @@ class UserCustomService {
     def findByName(String name) {
         return User.findByUsername(name)
     }
+
+    def get(Serializable id) {
+        def user = User.get(id)
+        return user ? (user.isDeleted ? null : user) : null
+    }
 }

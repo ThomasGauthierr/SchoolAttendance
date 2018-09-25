@@ -107,3 +107,7 @@ li.fieldcontain .property-value {
     padding: 0px;
     margin: 0px;
 }
+
+.not-read {
+    background-color: #949299;
+}
