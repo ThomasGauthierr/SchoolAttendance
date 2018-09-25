@@ -15,6 +15,7 @@
 
             <table >
                 <tr>
+                    <th/>
                     <th>Author</th>
                     <th>Target</th>
                     <th>Content</th>
@@ -22,6 +23,7 @@
                 </tr>
                 <g:each in="${messageList}">
                     <tr>
+                        <td><g:if test="${!it.read}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></g:if></td>
                         <td><g:link action="show" controller="user" params="${[id: it.author.id]}">${it.author.username}</g:link></td>
                         <td><g:link action="show" controller="user" params="${[id: it.target.id]}">${it.target.username}</g:link></td>
                         <td>${it.content}</td>
