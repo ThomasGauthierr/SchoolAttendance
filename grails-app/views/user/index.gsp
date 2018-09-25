@@ -41,6 +41,13 @@
                             <g:link action="delete" params="${[id: it.id]}" class=" no-underline">
                                 <button type="button" class="btn btn-danger">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                             </g:link>
+
+                            <g:form resource="${it}" method="DELETE">
+                                <fieldset>
+                                    <input class="btn btn-primary" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/>
+                                </fieldset>
+                            </g:form>
+
                         </td>
                     </tr>
                 </g:each>
