@@ -103,4 +103,7 @@ li.fieldcontain .property-value {
     margin-left: 27%;
 }
 
-
+.buttons-container {
+    padding: 0px;
+    margin: 0px;
+}

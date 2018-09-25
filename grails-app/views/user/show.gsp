@@ -26,15 +26,17 @@
             </fieldset>
 
             <sec:ifAllGranted roles="ROLE_ADMIN">
-                <g:link action="edit" params="${[id: this.user.id]}" class=" no-underline">
-                    <button type="button" class="btn btn-primary btn-profile">Edit informations <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
-                </g:link><br/>
-                <g:link action="editImage" params="${[id: this.user.id]}" class=" no-underline">
-                    <button type="button" class="btn btn-warning btn-profile">Edit picture <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></button>
-                </g:link><br/>
-                <g:link action="delete" params="${[id: this.user.id]}" class=" no-underline">
-                    <button type="button" class="btn btn-danger btn-profile">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                </g:link><br/>
+                <g:form resource="${this.user}" method="DELETE">
+                    <fieldset class="buttons-container">
+                        <g:link action="edit" params="${[id: this.user.id]}" class=" no-underline">
+                            <button type="button" class="btn btn-primary btn-profile">Edit informations <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                        </g:link><br/>
+                        <g:link action="editImage" params="${[id: this.user.id]}" class=" no-underline">
+                            <button type="button" class="btn btn-warning btn-profile">Edit picture <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></button>
+                        </g:link><br/>
+                        <button type="submit" class="btn btn-danger btn-profile">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                    </fieldset>
+                </g:form>
             </sec:ifAllGranted>
 
         </div>

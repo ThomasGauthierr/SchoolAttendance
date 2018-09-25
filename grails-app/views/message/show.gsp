@@ -18,12 +18,14 @@
 
             <sec:ifAllGranted roles="ROLE_ADMIN">
                 <div id="show-message">
-                    <g:link action="edit" params="${[id: this.message.id]}" class=" no-underline">
-                        <button type="button" class="btn btn-primary btn-profile">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
-                    </g:link>
-                    <g:link action="delete" params="${[id: this.message.id]}" class=" no-underline">
-                        <button type="button" class="btn btn-danger btn-profile">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                    </g:link>
+                    <g:form resource="${this.message}" method="DELETE">
+                        <fieldset class="buttons-container">
+                            <g:link action="edit" params="${[id: this.message.id]}" class=" no-underline">
+                                <button type="button" class="btn btn-primary btn-profile">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                            </g:link>
+                            <button type="submit" class="btn btn-danger btn-profile">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                        </fieldset>
+                    </g:form>
                 </div>
             </sec:ifAllGranted>
         </div>
