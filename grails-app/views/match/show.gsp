@@ -16,15 +16,15 @@
 
             <sec:ifAllGranted roles="ROLE_ADMIN">
                 <g:form resource="${this.match}" method="DELETE">
-                    <div id="show-match">
-                        <g:link action="edit" params="${[id: this.match.id]}" class="no-underline">
-                            <button type="button" class="btn btn-primary btn-profile">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
-                        </g:link>
+                    <fieldset class="buttons-container">
+                        <div id="show-match">
+                            <g:link action="edit" params="${[id: this.match.id]}" class="no-underline">
+                                <button type="button" class="btn btn-primary btn-profile">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                            </g:link>
 
-                        <g:link action="delete" params="${[id: this.match.id]}" class="no-underline">
-                            <button type="button" class="btn btn-danger btn-profile">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                        </g:link>
-                    </div>
+                            <button type="submit" class="btn btn-danger btn-profile">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                        </div>
+                    </fieldset>
                 </g:form>
             </sec:ifAllGranted>
         </div>

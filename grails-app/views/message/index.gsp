@@ -26,15 +26,17 @@
                         <td><g:link action="show" controller="user" params="${[id: it.target.id]}">${it.target.username}</g:link></td>
                         <td>${it.content}</td>
                         <td>
-                            <g:link action="show" params="${[id: it.id]}" class=" no-underline">
-                                <button type="button" class="btn btn-success">Show <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                            </g:link>
-                            <g:link action="edit" params="${[id: it.id]}" class=" no-underline">
-                                <button type="button" class="btn btn-primary">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
-                            </g:link>
-                            <g:link action="delete" params="${[id: it.id]}" class="no-underline">
-                                <button type="button" class="btn btn-danger">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                            </g:link>
+                            <g:form resource="${it}" method="DELETE">
+                                <fieldset class="buttons-container">
+                                    <g:link action="show" params="${[id: it.id]}" class=" no-underline">
+                                        <button type="button" class="btn btn-success">Show <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    </g:link>
+                                    <g:link action="edit" params="${[id: it.id]}" class=" no-underline">
+                                        <button type="button" class="btn btn-primary">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                                    </g:link>
+                                    <button type="submit" class="btn btn-danger">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                </fieldset>
+                            </g:form>
                         </td>
                     </tr>
                 </g:each>
