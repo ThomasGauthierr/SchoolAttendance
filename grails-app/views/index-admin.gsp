@@ -37,13 +37,15 @@
 
             <table >
                 <tr>
-                    <th>Username</th>
-                    <th>Last connection date</th>
+                    <th> Username </th>
+                    <th> Last connected on </th>
+                    <th> Last joined on </th>
                 </tr>
                 <g:each in="${userList}">
                     <tr>
                         <td>${it.username}</td>
                         <td>${it.previousConnection}</td>
+                        <td>${it.dateCreated}</td>
                     </tr>
                 </g:each>
             </table>
