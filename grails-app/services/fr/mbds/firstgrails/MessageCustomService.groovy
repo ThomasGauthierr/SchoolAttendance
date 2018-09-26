@@ -34,9 +34,6 @@ class MessageCustomService {
 
     //Used by MessageJob
     def deleteReadMessages() {
-        for (def message : messageService.list()) {
-            if (message.read)
-                message.delete(flush: true)
-        }
+        Message.where { read == true }.deleteAll()
     }
 }
