@@ -24,9 +24,25 @@
         <g:each in="${messageList}">
             <g:if test="${!it.read}"><tr class="not-read"></g:if>
             <g:else><tr></g:else>
-                <td><g:if test="${!it.read}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></g:if></td>
-                <td><g:link action="show" controller="user" params="${[id: it.author.id]}">${it.author.username}</g:link></td>
-                <td><g:link action="show" controller="user" params="${[id: it.target.id]}">${it.target.username}</g:link></td>
+            <td>
+                <g:if test="${!it.read}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></g:if>
+            </td>
+            <td>
+                <g:if test="${!it.author.isDeleted}">
+                    <g:link action="show" controller="user" params="${[id: it.author.id]}">${it.author.username}</g:link>
+                </g:if>
+                <g:else>
+                    ${it.author.username}
+                </g:else>
+            </td>
+            <td>
+                <g:if test="${!it.target.isDeleted}">
+                    <g:link action="show" controller="user" params="${[id: it.target.id]}">${it.target.username}</g:link>
+                </g:if>
+                <g:else>
+                    ${it.target.username}
+                </g:else>
+            </td>
                 <td>${it.content}</td>
                 <td>
                     <g:link action="show" params="${[id: it.id]}" class=" no-underline">

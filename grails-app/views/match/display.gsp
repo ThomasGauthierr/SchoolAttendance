@@ -20,8 +20,22 @@
         </tr>
         <g:each in="${matchList}">
             <tr>
-                <td><g:link action="show" controller="user" params="${[id: it.winner.id]}">${it.winner.username}</g:link> / ${it.winnerScore}</td>
-                <td><g:link action="show" controller="user" params="${[id: it.looser.id]}">${it.looser.username}</g:link> / ${it.looserScore}</td>
+                <td>
+                    <g:if test="${!it.winner.isDeleted}">
+                        <g:link action="show" controller="user" params="${[id: it.winner.id]}">${it.winner.username}</g:link> / ${it.winnerScore}
+                    </g:if>
+                    <g:else>
+                        ${it.winner.username} / ${it.winnerScore}
+                    </g:else>
+                </td>
+                <td>
+                    <g:if test="${!it.looser.isDeleted}">
+                        <g:link action="show" controller="user" params="${[id: it.looser.id]}">${it.looser.username} / ${it.looserScore}</g:link>
+                    </g:if>
+                    <g:else>
+                        ${it.looser.username} / ${it.looserScore}
+                    </g:else>
+                </td>
                 <td>
                     <g:link action="show" params="${[id: it.id]}">
                         <button type="button" class="btn btn-success">Show <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>

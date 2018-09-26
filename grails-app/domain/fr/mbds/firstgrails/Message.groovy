@@ -6,6 +6,7 @@ class Message {
     User target
     String content
     boolean read = false
+    Date dateCreated
 
     static constraints = {
         read nullable: false

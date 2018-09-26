@@ -6,6 +6,7 @@ class Match {
     int winnerScore
     User looser
     int looserScore
+    Date dateCreated
 
     static constraints = {
         winner nullable: true
