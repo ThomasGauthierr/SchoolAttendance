@@ -15,7 +15,6 @@ class MessageCustomService {
 
     def readMessage(Serializable id) {
         def message = messageService.get(id)
-
         if (message) message.read = true
     }
 
@@ -30,6 +29,14 @@ class MessageCustomService {
         } catch (NoSuchElementException e) {
             //Error is only thrown when the query returns no results,
             //meaning the user reading it isn't the target.
+        }
+    }
+
+    //Used by MessageJob
+    def deleteReadMessages() {
+        for (def message : messageService.list()) {
+            if (message.read)
+                message.delete(flush: true)
         }
     }
 }
