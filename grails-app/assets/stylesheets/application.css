@@ -109,5 +109,9 @@ li.fieldcontain .property-value {
 }
 
 .not-read {
-    background-color: #949299;
+    background-color: #cbcccd;
+}
+
+.not-read:hover {
+    background-color: #cbcccd;
 }
