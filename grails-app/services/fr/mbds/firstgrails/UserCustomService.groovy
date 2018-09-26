@@ -7,10 +7,7 @@ class UserCustomService {
     def userService
 
     def list(params) {
-        def query = User.where {
-            isDeleted == false
-        }
-        return query.list(params)
+        return User.where { isDeleted == false }.list(params)
     }
 
     def delete(Serializable id) {
