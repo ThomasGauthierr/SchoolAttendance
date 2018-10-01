@@ -126,7 +126,9 @@ class UserController {
         def user = new User()
         user.username = params.username
         user.password = params.password
-        user.profileImageName = uploadUserProfileImageService.uploadProfileImage(params.profileImage)
+        if(params.profileImage) {
+            user.profileImageName = uploadUserProfileImageService.uploadProfileImage(params.profileImage)
+        }
 
         def gamingRole = Role.findByAuthority('ROLE_USER')
 
