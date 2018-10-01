@@ -14,4 +14,6 @@ class Match {
         winnerScore nullable: true
         looserScore nullable: true
     }
+
+
 }

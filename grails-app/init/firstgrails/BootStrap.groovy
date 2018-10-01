@@ -1,6 +1,7 @@
 package firstgrails
 
 import fr.mbds.firstgrails.*
+import grails.converters.JSON
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -8,6 +9,8 @@ import java.text.SimpleDateFormat
 class BootStrap {
 
     def init = { servletContext ->
+
+        customizeJSONMarshaller()
 
         def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true, failOnError: true)
         def gamingRole = new Role(authority: 'ROLE_USER').save(flush: true, failOnError: true)
@@ -28,4 +31,46 @@ class BootStrap {
     }
     def destroy = {
     }
+
+    /**
+     * Customize JSON Object marshaller
+     */
+    def customizeJSONMarshaller() {
+
+        /* Custom JSON Object marshaller for the 'User' domain.*/
+        JSON.registerObjectMarshaller(User) {
+            def output = [:]
+            output['id'] = it.id
+            output['username'] = it.username
+            output['dateCreated'] = it.dateCreated
+            output['lastConnection'] = it.lastConnection
+
+            output
+        }
+
+        JSON.registerObjectMarshaller(Message) {
+            def output = [:]
+            output['id'] = it.id
+            output['author'] = it.author.username
+            output['target'] = it.target.username
+            output['content'] = it.content
+            output['read'] = it.read
+            output['dateCreated'] = it.dateCreated
+
+            output
+        }
+
+        JSON.registerObjectMarshaller(Match) {
+            def output = [:]
+            output['id'] = it.id
+            output['winner'] = it.winner.username
+            output['looser'] = it.looser.username
+            output['winnerScore'] = it.winnerScore
+            output['looserScore'] = it.looserScore
+
+            output
+        }
+    }
+
+
 }
