@@ -12,7 +12,24 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:display bean="match" />
+
+            <table style="width:100%">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+                <tr>
+                    <td>Winner</td>
+                    <td>${this.match.winner.username}</td>
+                    <td>${this.match.winnerScore}</td>
+                </tr>
+                <tr>
+                    <td>Looser</td>
+                    <td>${this.match.looser.username}</td>
+                    <td>${this.match.looserScore}</td>
+                </tr>
+            </table>
 
             <sec:ifAllGranted roles="ROLE_ADMIN">
                 <g:form resource="${this.match}" method="DELETE">

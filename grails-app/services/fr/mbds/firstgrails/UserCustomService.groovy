@@ -14,6 +14,7 @@ class UserCustomService {
         def user = userService.get(id)
         user.isDeleted = true
         user.save(flush: true)
+        UserRole.where { user == user }.deleteAll()
     }
 
     def findByName(String name) {

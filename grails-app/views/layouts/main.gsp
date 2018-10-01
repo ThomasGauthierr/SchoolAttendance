@@ -70,18 +70,20 @@
 
                 %{-- User info + logout section --}%
                     <sec:ifLoggedIn>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <sec:username/>
-                                %{--<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>--}%
-                                <img class="avatar navbar-avatar" src="${appProperties.getFileUrl() + curUsr.info(imageName: true)}" onerror="arguments[0].currentTarget.style.display='none'"/>
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><g:link controller="user" action="show" id="${curUsr.info(id: true)}">My profile <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
-                                <li><g:link controller="logout">Logout <span class="glyphicon glyphicon-off" aria-hidden="true"></span></g:link></li>
-                            </ul>
-                        </li>
+                        <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_USER">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <sec:username/>
+                                    %{--<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>--}%
+                                    <img class="avatar navbar-avatar" src="${appProperties.getFileUrl() + curUsr.info(imageName: true)}" onerror="arguments[0].currentTarget.style.display='none'"/>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><g:link controller="user" action="show" id="${curUsr.info(id: true)}">My profile <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
+                                    <li><g:link controller="logout">Logout <span class="glyphicon glyphicon-off" aria-hidden="true"></span></g:link></li>
+                                </ul>
+                            </li>
+                        </sec:ifAnyGranted>
                     </sec:ifLoggedIn>
 
                 </ul>
