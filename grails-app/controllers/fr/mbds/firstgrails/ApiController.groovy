@@ -1,6 +1,7 @@
 package fr.mbds.firstgrails
 
 import grails.converters.JSON
+import groovy.json.JsonSlurper
 
 class ApiController {
 
@@ -120,6 +121,24 @@ class ApiController {
                 } else {
                     response.status = 400
                 }
+            break
+
+            case "PUT":
+                //def bodyJson = JSON.parse(request.reader.text)
+                def user = userCustomService.get(params.id)
+
+                def map = new JsonSlurper().parseText(request.reader.text)
+                //println map
+                if(user) {
+                    map.each { key, value ->
+                        user."${key}" = value
+                    }
+
+                    if(userService.save(user)) {
+                        render user as JSON
+                    }
+                }
+
             break
 
             default:
