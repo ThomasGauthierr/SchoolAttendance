@@ -12,9 +12,13 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <div id="show-message-infos">
-                <f:display bean="message"/>
-            </div>
+
+            <fieldset>
+                <b>From</b> : ${this.message.author.username}<hr/>
+                <b>To</b> : ${this.message.target.username}<hr/>
+                <b>Date</b> : <f:display bean="message" property="dateCreated"/><hr/>
+                <b>Content</b> : <f:display bean="message" property="content"/>
+            </fieldset>
 
             <sec:ifAllGranted roles="ROLE_ADMIN">
                 <div id="show-message">

@@ -1,12 +1,5 @@
 package fr.mbds.firstgrails
 
-import grails.util.Holders
-
-import javax.servlet.http.Cookie
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-
-
 class MainController {
 
     def springSecurityService
@@ -31,10 +24,14 @@ class MainController {
     def connection() {
         def user = User.get(springSecurityService.currentUser.id)
 
-        user.previousConnection = user.lastConnection
-        user.lastConnection = new Date()
-        user.save(flush: true)
+        if (user.isDeleted) {
+            render (view: "/index-ban")
+        } else {
+            user.previousConnection = user.lastConnection
+            user.lastConnection = new Date()
+            user.save(flush: true)
 
-        redirect(controllerName:"main")
+            redirect(controllerName:"main")
+        }
     }
 }
