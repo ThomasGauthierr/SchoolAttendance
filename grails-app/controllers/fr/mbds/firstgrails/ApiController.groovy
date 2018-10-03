@@ -28,7 +28,7 @@ class ApiController {
         }
     }
 
-    def match(long id, String username, Integer max) {
+    def matches(long id, String username, Integer max) {
 
         switch(request.getMethod()) {
             case 'GET' :
@@ -60,6 +60,21 @@ class ApiController {
                     render createdMatch as JSON
                 } else {
                     response.status = 400
+                }
+            break
+
+            case 'PUT':
+                def match = matchService.get(params.id)
+
+                def map = new JsonSlurper().parseText(request.reader.text)
+                if(match) {
+                    map.each { key, value ->
+                        match."${key}" = value
+                    }
+
+                    if(matchService.save(match)) {
+                        render match as JSON
+                    }
                 }
             break
 
@@ -113,7 +128,7 @@ class ApiController {
          */
             case "POST":
                 def bodyJson =  JSON.parse(request.reader.text)
-                def createdUser = new User(bodyJson.user)
+                def createdUser = new User(bodyJson)
                 if(createdUser.save(flush: true)) {
                     response.status = 201
                     response.contentType = 'text/json'
@@ -148,7 +163,7 @@ class ApiController {
     }
 
     // Pas la peine de mettre des switches pour "allow" dans une requette GET car dans tout les cas impossible de transmetre ni du json ni de l'xml car body vide.
-    def message(Long id, String username) {
+    def messages(Long id, String username) {
         switch (request.getMethod()) {
             case ("GET") :
                 if (id) {
@@ -175,15 +190,13 @@ class ApiController {
             break
 
             case "POST":
-                switch (request.getHeader(name: 'Allow'))  {
-                    case "text/json" :
-                        if (!userService.get(params.author.id) && !userService.get(params.target.id)) {
+/*                        if (!userService.get(params.author.id) && !userService.get(params.target.id)) {
                             render(status: 400, text: "Author and target do not exist")
                             return
                         } else if (!userService.get(params.author.id)) {
                             render(status: 400, text: "Author does not exist")
                             return
-                        } else if (!userService.get(params.target.id)) {
+                        } else if (!userService.get(params.target.id)) {Ò
                             render(status: 400, text: "Target does not exist")
                             return
                         } else {
@@ -194,12 +207,24 @@ class ApiController {
                                 response.status = 400
                             }
                         }
-                        break
-                    default:
-                        response.status = 405
-                        break
-                    }
+                        break */
                 break
+
+            case 'PUT':
+                def message = messageService.get(params.id)
+
+                def map = new JsonSlurper().parseText(request.reader.text)
+                if(message) {
+                    map.each { key, value ->
+                        message."${key}" = value
+                    }
+
+                    if(messageService.save(message)) {
+                        render message as JSON
+                    }
+                }
+            break
+
             default:
                 response.status = 405
                 break
