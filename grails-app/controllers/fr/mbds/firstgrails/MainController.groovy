@@ -9,16 +9,15 @@ class MainController {
     def index() {
         def user = User.get(springSecurityService.currentUser.id)
 
-        for(def authority : springSecurityService.getPrincipal().getAuthorities()) {
-            if(authority.getAuthority() == 'ROLE_ADMIN') {
+        for (def authority : springSecurityService.getPrincipal().getAuthorities()) {
+            if (authority.getAuthority() == 'ROLE_ADMIN') {
                 params.max = Math.min(4 ?: 10, 100)
-                respond userService.list(params), view: '/index-admin', model:[user: user, userCount: userService.count(), matches: matchService.list(params)]
+                respond userService.list(params), view: '/index-admin', model: [user: user, userCount: userService.count(), matches: matchService.list(params)]
                 return
             }
         }
 
-
-        render (view: '/index-player', model: [user: user])
+        render(view: '/index-player', model: [user: user])
     }
 
     def connection() {
@@ -31,7 +30,7 @@ class MainController {
             user.lastConnection = new Date()
             user.save(flush: true)
 
-            redirect(controllerName:"main")
+            redirect(controllerName:"main", actionName:"index")
         }
     }
 }

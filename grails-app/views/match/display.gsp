@@ -30,7 +30,7 @@
                 </td>
                 <td>
                     <g:if test="${!it.looser.isDeleted}">
-                        <g:link action="show" controller="user" params="${[id: it.looser.id]}">${it.looser.username} / ${it.looserScore}</g:link>
+                        <g:link action="show" controller="user" params="${[id: it.looser.id]}">${it.looser.username}</g:link> / ${it.looserScore}
                     </g:if>
                     <g:else>
                         ${it.looser.username} / ${it.looserScore}

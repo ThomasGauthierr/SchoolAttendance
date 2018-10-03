@@ -46,7 +46,7 @@ $(document).on('drop', '#dd-box', function(e) {
     return false
 });
 
-$('#submit').on('click', function (e) {
+$('#submit22').on('click', function (e) {
     console.log("ok sumbitting")
 
     let userId = $('#user-id').val();
@@ -63,6 +63,8 @@ $('#submit').on('click', function (e) {
             window.location = '../show/' + userId;
         }
     };
+
+    console.log("test")
 
     request.open("POST", "/tp/user/updateProfileImage");
     request.send(formData2);

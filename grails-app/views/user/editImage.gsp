@@ -32,7 +32,7 @@
 
             <div id="dd-box"> Drop the the profile image from you computer </div>
 
-            <button type="submit" class="btn btn-primary btn-profile" id="submit">
+            <button type="submit" class="btn btn-primary btn-profile" id="submit22">
                 Submit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             </button>
 
