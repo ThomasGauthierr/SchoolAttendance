@@ -1,5 +1,6 @@
 package fr.mbds.firstgrails
 
+import fr.mbds.firstgrails.exceptions.UserNotFoundException
 import grails.converters.JSON
 import groovy.json.JsonSlurper
 
@@ -78,6 +79,18 @@ class ApiController {
                 }
             break
 
+            case "DELETE":
+                def match = matchService.get(params.id);
+
+                if(!match) {
+                    response.status = 400
+                    render (['error': 'No match found for the provided id.'] as JSON)
+                }
+
+                matchService.delete(params.id)
+                render (['message': 'The match has been deleted successfully.'] as JSON)
+            break
+
             default :
                 response.status = 405
             break
@@ -88,7 +101,6 @@ class ApiController {
     def users(long id, String name, Integer max) {
         switch (request.getMethod()) {
             case "GET" :
-
                 if(!max) {
                     max = 10
                 }
@@ -111,21 +123,9 @@ class ApiController {
                     render ([error: "No user found for the provided parameters"] as JSON)
                 }
 
-                render userService.list(max: max) as JSON
-
+                render userCustomService.list(max: max) as JSON
             break
 
-        /**
-         * Exemple: Try posting this object to the route "api/users"
-         *
-         * {
-         * 	"user":
-         * 	{
-         * 		"username": "m6",
-         * 		"password": "123"* 	}
-         * }
-         *
-         */
             case "POST":
                 def bodyJson =  JSON.parse(request.reader.text)
                 def createdUser = new User(bodyJson)
@@ -153,7 +153,16 @@ class ApiController {
                         render user as JSON
                     }
                 }
+            break
 
+            case "DELETE":
+                try {
+                    userCustomService.delete(params.id)
+                    render (['message': 'The user has been deleted successfully.'] as JSON)
+                } catch (UserNotFoundException unf) {
+                    response.status = 400
+                    render (['error': 'No user found for the provided id.'] as JSON)
+                }
             break
 
             default:
@@ -223,6 +232,18 @@ class ApiController {
                         render message as JSON
                     }
                 }
+            break
+
+            case "DELETE":
+                def message = messageService.get(params.id);
+
+                if(!message) {
+                    response.status = 400
+                    render (['error': 'No message found for the provided id.'] as JSON)
+                }
+
+                messageService.delete(params.id)
+                render (['message': 'The message has been deleted successfully.'] as JSON)
             break
 
             default:
