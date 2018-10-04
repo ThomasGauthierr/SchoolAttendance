@@ -171,53 +171,55 @@ class ApiController {
         }
     }
 
-    // Pas la peine de mettre des switches pour "allow" dans une requette GET car dans tout les cas impossible de transmetre ni du json ni de l'xml car body vide.
-    def messages(Long id, String username) {
+    def messages(Long id, Long user, Boolean read) {
         switch (request.getMethod()) {
+
             case ("GET") :
-                if (id) {
-                    def message = messageService.get(id)
-                    if (message == null) {
-                        render(status: 400, "No message with id $id")
+                def messages = []
+
+                if(id) {
+                    messages.push(messageService.get(id))
+                } else {
+                    if(user && read != null) {
+                        if(read) {
+                            messageCustomService.findReadMessageByUserId(user).each {elem -> messages.push(elem)}
+                        } else {
+                            messageCustomService.findNonReadMessagesByUserId(user).each {elem -> messages.push(elem)}
+                        }
                     } else {
-                        render message as JSON
+                        if(read != null) {
+                            if(read) {
+                                messageCustomService.findReadMessages().each {elem -> messages.push(elem)}
+                            } else {
+                                messageCustomService.findNonReadMessages().each {elem -> messages.push(elem)}
+                            }
+                        }
+                        if(user) {
+                            messageCustomService.findMessagesByUser(user).each {elem -> messages.push(elem)}
+                        }
                     }
+
                 }
 
-                if(username) {
-                    def messages = messageCustomService.findMessagesByUsername(username)
-                    render messages as JSON
+                if(!id && !user && read == null) {
+                    messageService.list().each {elem -> messages.push(elem)}
                 }
 
-                if(id || username) {
-                    response.status = 400
-                    render ([error: "No user found for the provided parameters"] as JSON)
-                }
-
-                render messageService.list() as JSON
-
+                render messages as JSON
             break
 
             case "POST":
-/*                        if (!userService.get(params.author.id) && !userService.get(params.target.id)) {
-                            render(status: 400, text: "Author and target do not exist")
-                            return
-                        } else if (!userService.get(params.author.id)) {
-                            render(status: 400, text: "Author does not exist")
-                            return
-                        } else if (!userService.get(params.target.id)) {Ò
-                            render(status: 400, text: "Target does not exist")
-                            return
-                        } else {
-                            def message = new Message(params)
-                            if (message.save(flush: true)) {
-                                response.status = 201
-                            } else {
-                                response.status = 400
-                            }
-                        }
-                        break */
-                break
+                def bodyJson =  JSON.parse(request.reader.text)
+                def createdMessage = new Message(bodyJson)
+                if(createdMessage.save(flush: true)) {
+                    response.status = 201
+                    response.contentType = 'text/json'
+                    render createdMessage as JSON
+                } else {
+                    response.status = 400
+                    render (['error': 'Couldn\'t create the message'] as JSON)
+                }
+            break
 
             case 'PUT':
                 def message = messageService.get(params.id)
@@ -235,15 +237,24 @@ class ApiController {
             break
 
             case "DELETE":
-                def message = messageService.get(params.id);
+                def messages = []
 
-                if(!message) {
-                    response.status = 400
-                    render (['error': 'No message found for the provided id.'] as JSON)
+                if(params.id)
+                    messages.push(messageService.get(params.id))
+                else if(params.read) {
+
                 }
 
-                messageService.delete(params.id)
-                render (['message': 'The message has been deleted successfully.'] as JSON)
+                if(messages.size() == 0) {
+                    response.status = 400
+                    render (['error': 'No message found for the provided parameters.'] as JSON)
+                }
+
+                // Deleting all the selected messages.
+                for(def message in messages) {
+                    messageService.delete(message)
+                }
+                render (['message': 'The messages has been deleted successfully.'] as JSON)
             break
 
             default:

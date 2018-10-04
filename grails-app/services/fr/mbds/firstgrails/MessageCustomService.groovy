@@ -37,8 +37,20 @@ class MessageCustomService {
         Message.where { read == true }.deleteAll()
     }
 
-    def findReadMessage() {
+    def findReadMessages() {
+        Message.where {read == true}
+    }
 
+    def findNonReadMessages() {
+        Message.where {read == false}
+    }
+
+    def findReadMessageByUserId(long userId) {
+        Message.where {read == true && (author.id == userId || target.id == userId)}
+    }
+
+    def findNonReadMessagesByUserId(long userId) {
+        Message.where {read == false && (author.id == userId || target.id == userId)}
     }
 
     def findMessagesByUsername(String username) {
@@ -46,5 +58,9 @@ class MessageCustomService {
             author.username == username || target.username == username
         }
         return query.list()
+    }
+
+    def findMessagesByUser(long userId) {
+        Message.where {author.id == userId || target.id == userId}
     }
 }
