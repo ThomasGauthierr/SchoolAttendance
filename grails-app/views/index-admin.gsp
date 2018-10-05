@@ -3,7 +3,7 @@
 
 <head>
     <meta name="layout" content="main"/>
-    <title>Welcome Dear Admin</title>
+    <title>Welcome dear Admin</title>
 </head>
 
 <body>
@@ -16,13 +16,13 @@
 
 <div id="content" role="main">
     <section class="row colset-2-its">
-        <h1>Welcome Dear Admin</h1>
+        <h1>Welcome dear Admin</h1>
         <div align="center">
             <g:if test="${user.previousConnection == null}">
-                It's seems like you just joined us, hello ! o/
+                <h3>It's seems like you just joined us, hello ! o/</h3><br/>
             </g:if>
             <g:else>
-                Last connection : <f:display bean="user" property="previousConnection"/>
+                <h3>Previous connection : <f:display bean="user" property="previousConnection"/></h3><br/>
             </g:else>
         </div>
 
@@ -30,30 +30,21 @@
 
             %{-- <f:table collection="${userList}" />--}%
             <p>
-                Last subscribed players
+                Last connected players
             </p>
-
-            <br>
 
             <table >
                 <tr>
                     <th> Username </th>
-                    <th> Last connected on </th>
-                    <th> Last joined on </th>
+                    <th> Last connection </th>
                 </tr>
                 <g:each in="${userList}">
                     <tr>
                         <td>${it.username}</td>
-                        <td>${it.previousConnection}</td>
-                        <td>${it.dateCreated}</td>
+                        <td>${it.lastConnection}</td>
                     </tr>
                 </g:each>
             </table>
-
-            <div class="pagination">
-                <g:paginate total="${userCount ?: 0}" />
-            </div>
-
         </div>
 
         <div id="list-matches" class="content scaffold-list index-table" role="main">
@@ -63,11 +54,9 @@
                 Last played matches
             </p>
 
-            <br>
-
             <table >
                 <tr>
-                    <th>Winnder</th>
+                    <th>Winner</th>
                     <th>Looser</th>
                 </tr>
                 <g:each in="${matches}">
@@ -77,10 +66,6 @@
                     </tr>
                 </g:each>
             </table>
-
-            <div class="pagination">
-                <g:paginate total="${userCount ?: 0}" />
-            </div>
 
         </div>
 
