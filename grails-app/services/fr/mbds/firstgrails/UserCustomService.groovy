@@ -37,4 +37,20 @@ class UserCustomService {
         //logException exception
         render view: 'notFound',  model: [id: params.id, exception: exception]
     }
+
+    def getUsersWithConnection() {
+        def query = User.where {
+            lastConnection != null
+        }
+
+        def listUsers = query.list().sort { it.lastConnection }
+
+        print "\n" + listUsers.size() + "\n"
+
+        if (listUsers.size() > 3) {
+            return listUsers([max:3])
+        }
+
+        return listUsers
+    }
 }
