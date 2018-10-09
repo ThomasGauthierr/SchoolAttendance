@@ -16,10 +16,10 @@
 
 <div id="content" role="main">
     <section class="row colset-2-its">
-        <h1>Welcome dear Admin</h1>
+        <h1>Welcome <sec:username/> !</h1>
         <div align="center">
             <g:if test="${user.previousConnection == null}">
-                <h3>It's seems like you just joined us, hello ! o/</h3><br/>
+                <h3>It's seems like it's your first connection, hello ! o/</h3><br/>
             </g:if>
             <g:else>
                 <h3>Previous connection : <f:display bean="user" property="previousConnection"/></h3><br/>

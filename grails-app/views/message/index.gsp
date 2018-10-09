@@ -60,9 +60,9 @@
                 </g:each>
             </table>
 
-            <div class="pagination">
-                <g:paginate total="${messageCount ?: 0}" />
-            </div>
+            %{--<div class="pagination">--}%
+                %{--<g:paginate total="${messageCount ?: 0}" />--}%
+            %{--</div>--}%
         </div>
     </body>
 </html>

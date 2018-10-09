@@ -49,10 +49,6 @@
                     </tr>
                 </g:each>
             </table>
-
-            <div class="pagination">
-                <g:paginate total="${userCount ?: 0}" />
-            </div>
         </div>
     </body>
 </html>
