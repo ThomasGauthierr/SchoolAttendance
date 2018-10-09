@@ -20,9 +20,9 @@
             </g:if>
             <f:table collection="${roleList}" />
 
-            <div class="pagination">
-                <g:paginate total="${roleCount ?: 0}" />
-            </div>
+            %{--<div class="pagination">--}%
+                %{--<g:paginate total="${roleCount ?: 0}" />--}%
+            %{--</div>--}%
         </div>
     </body>
 </html>

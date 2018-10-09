@@ -41,11 +41,15 @@
 
 <div id="content" role="main">
     <section class="row colset-2-its">
-        <h1>Welcome Dear Player</h1>
-
-        <p>
-            This is your main page.
-        </p>
+        <h1>Welcome <sec:username/> !</h1>
+        <div align="center">
+            <g:if test="${user.previousConnection == null}">
+                <h3>It's seems like it's your first connection, hello ! o/</h3><br/>
+            </g:if>
+            <g:else>
+                <h3>Previous connection : <f:display bean="user" property="previousConnection"/></h3><br/>
+            </g:else>
+        </div>
 
     </section>
 </div>
