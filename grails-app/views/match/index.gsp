@@ -22,20 +22,30 @@
                 <g:each in="${matchList}">
                     <tr>
                         <td>
-                            <g:if test="${!it.winner.isDeleted}">
-                                <g:link action="show" controller="user" params="${[id: it.winner.id]}">${it.winner.username}</g:link> / ${it.winnerScore}
-                            </g:if>
-                            <g:else>
-                                ${it.winner.username} / ${it.winnerScore}
-                            </g:else>
+                            <% try{ %>
+                                <g:if test="${!it.winner.isDeleted}">
+                                    <g:link action="show" controller="user" params="${[id: it.winner.id]}">${it.winner.username}</g:link> / ${it.winnerScore}
+                                </g:if>
+
+                                <g:else>
+                                    ${it.winner.username} / ${it.winnerScore}
+                                </g:else>
+                            <%} catch(Exception e){%>
+                            <%}
+                            %>
                         </td>
                         <td>
-                            <g:if test="${!it.looser.isDeleted}">
-                                <g:link action="show" controller="user" params="${[id: it.looser.id]}">${it.looser.username}</g:link> / ${it.looserScore}
-                            </g:if>
-                            <g:else>
-                                ${it.looser.username} / ${it.looserScore}
-                            </g:else>
+                            <% try{ %>
+                                <g:if test="${!it.looser.isDeleted}">
+                                    <g:link action="show" controller="user" params="${[id: it.looser.id]}">${it.looser.username}</g:link> / ${it.looserScore}
+                                </g:if>
+
+                                <g:else>
+                                    ${it.looser.username} / ${it.looserScore}
+                                </g:else>
+                            <%} catch(Exception e){%>
+                            <%}
+                            %>
                         </td>
                         <td>${it.dateCreated}</td>
                         <td>
