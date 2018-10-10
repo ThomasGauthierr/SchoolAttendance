@@ -21,13 +21,29 @@
                 </tr>
                 <tr>
                     <td>Winner</td>
-                    <td>${this.match.winner.username}</td>
-                    <td>${this.match.winnerScore}</td>
+                    <% try{ %>
+                        <td>${this.match.winner.username}</td>
+                    <%} catch(Exception e){%>
+                    <%}
+                    %>
+                    <% try{ %>
+                        <td>${this.match.winnerScore}</td>
+                    <%} catch(Exception e){%>
+                    <%}
+                    %>
                 </tr>
                 <tr>
                     <td>Looser</td>
+                    <% try{ %>
                     <td>${this.match.looser.username}</td>
+                    <%} catch(Exception e){%>
+                    <%}
+                    %>
+                    <% try{ %>
                     <td>${this.match.looserScore}</td>
+                    <%} catch(Exception e){%>
+                    <%}
+                    %>
                 </tr>
             </table>
 

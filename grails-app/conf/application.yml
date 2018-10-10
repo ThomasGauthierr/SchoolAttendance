@@ -137,8 +137,13 @@ server:
     contextPath: /tp
 
 tpgrails:
+    # Config Amine #
     filePath: "D:/wamp64/www/img"
     fileUrl: "http://localhost/img/"
+
+    # Config Thomas #
+#    filePath: "E:/Apache24/htdocs/img"
+#    fileUrl: "http://localhost:8079/img/"
 
 filterChain:
     chainMap:
