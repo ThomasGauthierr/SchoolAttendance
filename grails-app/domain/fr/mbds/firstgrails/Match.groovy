@@ -3,9 +3,9 @@ package fr.mbds.firstgrails
 class Match {
 
     User winner
-    int winnerScore
+    Integer winnerScore
     User looser
-    int looserScore
+    Integer looserScore
     Date dateCreated
 
     static constraints = {
@@ -13,6 +13,7 @@ class Match {
         looser nullable: true
         winnerScore nullable: true
         looserScore nullable: true
+
     }
 
 

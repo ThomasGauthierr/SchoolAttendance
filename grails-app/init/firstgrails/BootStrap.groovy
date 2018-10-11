@@ -18,12 +18,15 @@ class BootStrap {
         def adminUser = new User(username: 'admin', password: 'password').save(flush: true, failOnError: true)
         def playerUser = new User(username: 'player', password: 'password').save(flush: true, failOnError: true)
         def playerTwoUser = new User(username: 'playerTwo', password: 'password').save(flush: true, failOnError: true)
+        def bannedUser = new User(username: 'ban', password: 'password', isDeleted: 'true').save(flush: true, failOnError: true)
 
         UserRole.create(adminUser, adminRole,true)
         UserRole.create(playerUser, gamingRole, true)
         UserRole.create(playerTwoUser, gamingRole, true)
 
         new Match(winner: playerUser, looser: playerTwoUser, winnerScore: 100, looserScore: 1).save(flush: true, failOnError: true)
+        new Match(winner: playerTwoUser, looser: playerUser, winnerScore: 50, looserScore: 45).save(flush: true, failOnError: true)
+        new Match(winner: bannedUser, looser: playerUser, winnerScore: 150, looserScore: 100).save(flush: true, failOnError: true)
 
         def message1 = new Message(author: playerUser, target: playerTwoUser, content: "hello").save(flush: true, failOnError: true)
         def message2 = new Message(author: playerTwoUser, target: playerUser, content: "hi", read: true).save(flush: true, failOnError: true)
