@@ -7,6 +7,9 @@ class MainController {
     def matchService
     def userCustomService
 
+    // Called after the connection function below.
+    // If the user is an admin, display the "index-admin" view, where there are details about last connection and last matches.
+    // Else display the "index-user" view
     def index() {
         def user = User.get(springSecurityService.currentUser.id)
 
@@ -21,6 +24,7 @@ class MainController {
         render(view: '/index-player', model: [user: user])
     }
 
+    // Called after login. Checks if the user is banned, and if not, update its connection informations.
     def connection() {
         def user = User.get(springSecurityService.currentUser.id)
 

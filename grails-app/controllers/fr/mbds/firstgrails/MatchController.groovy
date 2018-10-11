@@ -32,24 +32,28 @@ class MatchController {
             return
         }
 
+        // A match cannot have no winner nor looser
         if (match.winner == null && match.looser == null) {
             flash.message = "match.create.error.noUser"
             redirect action: "create"
             return
         }
 
+        // If a score is declared, a corresponding user has to be entered.
         if (match.winnerScore != null && match.winner == null ||
             match.looserScore != null && match.looser == null) {
 
             flash.message = "match.create.error.score-user"
         }
 
+        // If a player is declared, a corresponding score has to be entered.
         if (match.winnerScore == null && match.winner != null ||
             match.looserScore == null && match.looser != null) {
 
             flash.message2 = "match.create.error.user-score"
         }
 
+        // If the form was not correctly filled, display an error message above the form.
         if (flash.message || flash.message2) {
             redirect action: "create"
             return
@@ -82,24 +86,28 @@ class MatchController {
             return
         }
 
+        // A match cannot have no winner nor looser
         if (match.winner == null && match.looser == null) {
             flash.message = "match.create.error.noUser"
             redirect action: "edit", id: match.id
             return
         }
 
+        // If a score is declared, a corresponding user has to be entered.
         if (match.winnerScore != null && match.winner == null ||
                 match.looserScore != null && match.looser == null) {
 
             flash.message = "match.create.error.score-user"
         }
 
+        // If a player is declared, a corresponding score has to be entered.
         if (match.winnerScore == null && match.winner != null ||
                 match.looserScore == null && match.looser != null) {
 
             flash.message2 = "match.create.error.user-score"
         }
 
+        // If the form was not correctly filled, display an error message above the form.
         if (flash.message || flash.message2) {
             redirect action: "edit", id: match.id
             return
@@ -148,7 +156,7 @@ class MatchController {
         }
     }
 
-    //ToDo : Separate win and lost matches
+    // Displays a list of all the matches the current player has participated to.
     def display() {
         def user = User.get(springSecurityService.currentUser.id)
 

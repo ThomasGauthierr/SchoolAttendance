@@ -7,6 +7,7 @@ import grails.gorm.transactions.Transactional
 class ApplicationPropertiesGetterService {
     GrailsApplication grailsApplication
 
+    // Retrieves the property "tpgrails.fileUrl" in the application.yml config file
     def getWebServerPath() {
         return grailsApplication.config.getProperty('tpgrails.fileUrl')
     }

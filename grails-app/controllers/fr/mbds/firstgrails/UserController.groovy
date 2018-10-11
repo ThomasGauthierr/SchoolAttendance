@@ -126,12 +126,15 @@ class UserController {
         def user = new User()
         user.username = params.username
         user.password = params.password
+
+        // Sets the user profileImage name if possible
         if(params.profileImage) {
             user.profileImageName = uploadUserProfileImageService.uploadProfileImage(params.profileImage)
         }
 
         def gamingRole = Role.findByAuthority('ROLE_USER')
 
+        // Create the user and attributes him the role "ROLE_USER".
         try {
             userService.save(user)
             UserRole.create(user, gamingRole, true)
@@ -158,6 +161,7 @@ class UserController {
         }
     }
 
+    // Displays the profile of the user currently connected.
     def display() {
         def user = User.get(springSecurityService.currentUser.id)
 

@@ -20,13 +20,17 @@ class MessageController {
 
     def show(Long id) {
         def user = springSecurityService.currentUser
+
+        // If the user is not an admin, it can only see the message for which is the author or target.
         if (!user.authorities.any { it.authority == "ROLE_ADMIN" }) {
+            // If he tries to access a message he's not related to, he's redirected to the display view.
             if (!messageCustomService.checkAccess(user, id)) {
                 redirect action: "display"
                 return
             }
         }
 
+        // Checks if the user reading the mesage is the target. If it's the case, sets the message as "read".
         messageCustomService.checkRead(springSecurityService.currentUser.id, id)
 
         respond messageService.get(id)
@@ -42,12 +46,14 @@ class MessageController {
             return
         }
 
+        // The author has to be different from the target.
         if (message.author == message.target) {
             flash.message = "message.create.error.same"
             redirect action: "create"
             return
         }
 
+        // The message content cannot be null.
         if (message.content == null) {
             flash.message = "message.create.error.content"
             redirect action: "create"
@@ -63,7 +69,7 @@ class MessageController {
 
         request.withFormat {
             form multipartForm {
-//                flash.message = message(code: 'default.created.message', args: [message(code: 'message.label', default: 'Message'), message.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'message.label', default: 'Message'), message.id])
                 redirect message
             }
             '*' { respond message, [status: CREATED] }
@@ -80,12 +86,14 @@ class MessageController {
             return
         }
 
+        // The author has to be different from the target.
         if (message.author == message.target) {
             flash.message = "message.create.error.same"
             redirect action: "edit", id: message.id
             return
         }
 
+        // The message content cannot be null.
         if (message.content == null) {
             flash.message = "message.create.error.content"
             redirect action: "edit", id: message.id
@@ -135,7 +143,7 @@ class MessageController {
         }
     }
 
-    //ToDo : separate sent and received messages
+    // Displays a list of all the messages where the current user is the target or the author.
     def display() {
         def user = User.get(springSecurityService.currentUser.id)
         def results = messageCustomService.getAllUserMessages(user)
