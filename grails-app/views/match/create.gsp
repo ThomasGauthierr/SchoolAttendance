@@ -9,8 +9,21 @@
         <a href="#create-match" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
         <div class="content scaffold-create" role="main">
             <h1><g:message code="default.create.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
+            <g:if test="${flash.message && !flash.message2}">
+                <div class="message" role="status">
+                    <g:message code="${flash.message}" args="${flash.args}" default="${flash.default}"/>
+                </div>
+            </g:if>
+            <g:if test="${flash.message && flash.message2}">
+                <div class="message" role="status">
+                    <g:message code="${flash.message}" args="${flash.args}" default="${flash.default}"/>
+                    <g:message code="${flash.message2}" args="${flash.args}" default="${flash.default}"/>
+                </div>
+            </g:if>
+            <g:if test="${!flash.message && flash.message2}">
+                <div class="message" role="status">
+                    <g:message code="${flash.message2}" args="${flash.args}" default="${flash.default}"/>
+                </div>
             </g:if>
             <g:hasErrors bean="${this.match}">
             <ul class="errors" role="alert">
@@ -24,7 +37,7 @@
                     <f:all bean="match"/>
                 </fieldset>
                 <div id="create-match">
-                    <button type="submit" class="save btn btn-primary" id="submit-second">
+                    <button type="submit" class="save btn btn-primary">
                         Create <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                     </button>
 
