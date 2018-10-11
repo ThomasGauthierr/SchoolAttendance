@@ -9,10 +9,13 @@ class UserCustomService {
 
     def userService
 
+    // Returns all non-deleted users
     def list(params) {
         return User.where { isDeleted == false }.list(params)
     }
 
+    // "Delete" by changing its flag isDeleted to true and removes its roles.
+    // Throws an exception if not user with the id specified is found
     def delete(Serializable id) throws UserNotFoundException {
         def user = userService.get(id)
 
@@ -24,10 +27,13 @@ class UserCustomService {
         UserRole.where { user == user }.deleteAll()
     }
 
+    // Return the user with the name passed as argument
     def findByName(String name) {
         return User.findByUsername(name)
     }
 
+    // Returns the user whose ID has been passed as parameter;
+    // Returns null if the user has been deleted.
     def get(Serializable id) {
         def user = User.get(id)
         return user ? (user.isDeleted ? null : user) : null
@@ -38,6 +44,8 @@ class UserCustomService {
         render view: 'notFound',  model: [id: params.id, exception: exception]
     }
 
+    // Returns the list (maximum 3 elements) of the last connected users
+    // Used in the MainController, function index if the user is an admin.
     def getUsersWithConnection() {
         def query = User.where {
             lastConnection != null

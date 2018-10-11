@@ -15,12 +15,14 @@ class UploadUserProfileImageService implements GrailsConfigurationAware{
     String cdnFolder
     String cdnRootFolder
 
+    // Retrieves infos stored in the configuration file about the web server
     @Override
     void setConfiguration(Config co) {
         cdnFolder = co.getProperty('tpgrails.filePath')
         cdnRootFolder = co.getProperty('tpgrails.fileUrl')
     }
 
+    // Creates the image in the web server folder
     @SuppressWarnings('JavaToPackageAccess')
     String uploadProfileImage(MultipartFile file) {
         def extention = FilenameUtils.getExtension(file.originalFilename)
