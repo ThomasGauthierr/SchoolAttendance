@@ -1,11 +1,13 @@
-// Added by the Spring Security Core plugin:
+/**
+ * SPRING SECURITY CORE
+ */
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'fr.mbds.firstgrails.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'fr.mbds.firstgrails.UserRole'
 grails.plugin.springsecurity.authority.className = 'fr.mbds.firstgrails.Role'
 grails.plugin.springsecurity.requestMap.className = 'fr.mbds.firstgrails.UserRole'
 grails.plugin.springsecurity.securityConfigType = 'Annotation'
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/main/connection'
 grails.plugin.springsecurity.rest.token.storage.jwt.useEncryptedJwt = true
-
 grails.plugin.springsecurity.conf.rest.token.storage.jwt.secret = 'qrD6h8K6S9503Q06Y6Rfk21TErImPYqa'
 
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
@@ -33,19 +35,26 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/**/favicon.ico', access: ['permitAll']]
 ]
 
-grails.plugin.springsecurity.filterChain.chainMap = [
-	[pattern: '/assets/**',      filters: 'none'],
-	[pattern: '/**/js/**',       filters: 'none'],
-	[pattern: '/**/css/**',      filters: 'none'],
-	[pattern: '/**/images/**',   filters: 'none'],
-	[pattern: '/**/favicon.ico', filters: 'none'],
-	[pattern: '/**',             filters: 'JOINED_FILTERS'],
-	[pattern: '/api/**',          filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter']
-]
-
-grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/main/connection'
-
 //Enable logout through GET
 grails.plugin.springsecurity.logout.postOnly = false
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*', '/fonts/*']
 grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/plugins/**', '/fonts/**']
+
+
+/**
+ *  SPRING SECURITY REST
+ */
+// Filter Chain
+grails.plugin.springsecurity.filterChain.chainMap = [
+	[pattern: '/api/users',      filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter'],
+	[pattern: '/**',             filters: 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'],
+]
+
+// Token configuration
+grails.plugin.springsecurity.rest.token.storage.jwt.useEncryptedJwt = true
+grails.plugin.springsecurity.conf.rest.token.storage.jwt.secret = 'qrD6h8K6S9503Q06Y6Rfk21TErImPYqa'
+
+// Authentication configuration
+grails.plugin.springsecurity.rest.login.active = true
+grails.plugin.springsecurity.rest.login.endpointUrl = "/api/login"
+grails.plugin.springsecurity.rest.login.failureStatusCode = 401
