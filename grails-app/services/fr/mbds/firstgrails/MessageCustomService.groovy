@@ -18,6 +18,15 @@ class MessageCustomService {
         if (message) message.read = true
     }
 
+    def checkAccess(User user, long messageID) {
+        def message = messageService.get(messageID)
+        if (message.target == user || message.author == user) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     def checkRead(long userID, long messageID) {
         def query = Message.where {
             target.id == userID && id == messageID
