@@ -5,6 +5,7 @@ import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
 class MatchController {
+    def userService
 
     def springSecurityService = Holders.applicationContext.springSecurityService
 
@@ -31,9 +32,33 @@ class MatchController {
             return
         }
 
+        if (match.winner == null && match.looser == null) {
+            flash.message = "match.create.error.noUser"
+            redirect action: "create"
+            return
+        }
+
+        if (match.winnerScore != null && match.winner == null ||
+            match.looserScore != null && match.looser == null) {
+
+            flash.message = "match.create.error.score-user"
+        }
+
+        if (match.winnerScore == null && match.winner != null ||
+            match.looserScore == null && match.looser != null) {
+
+            flash.message2 = "match.create.error.user-score"
+        }
+
+        if (flash.message || flash.message2) {
+            redirect action: "create"
+            return
+        }
+
         try {
             matchService.save(match)
         } catch (ValidationException e) {
+            println "ERROR"
             respond match.errors, view:'create'
             return
         }
