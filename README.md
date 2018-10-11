@@ -4,6 +4,8 @@
 Be sure to adapt your application.yml to your configuration and to add a file "default-user.jpg" in the web server folder where the images of this project will be stored. It's the default image we use for users created in the boostrap.<br/>
 You can find one in the folder "grails-app/assets/images".
 
+___
+
 # Part 1 : Grails
 
 ## Access control
@@ -24,13 +26,15 @@ Users who didn't sign in have access to nothing but the login form.
 
 ### Users
 As said above, admins have the right to create new users and to attribute them a profile picture. They can modify it later or ban the user.
+Users don't have access to the list of every users, but they can access to the page showing their informations.
 
 ### Matchs
-All matches are stored in the database with the winner, the looser, and their scores. 
+All matches are stored in the database with the winner, the looser, and their scores. It's possible that there is no winner or looser, for example if a game is played alone.\
+Concerning update and create, after submitting the form and before storing a new match, the controller checks if the form is correctly filled. If not, a message, stored in a flash, is displayed to explain the error.
 
 ### Messages
 Admins can create news messages. Not-read messages are displayed differently for the users if they have never opened them.
-
+When creating or updating a message, you can't have author = target nor a null content.
 ## Bonuses
 
 ### Drag'n Drop
@@ -40,6 +44,8 @@ You can find the function in charge of this in */grails-app/assets/javascripts/d
 ### Cron 
 We set up a cron which deletes read messages every day at 4:00AM, thanks to the [Quartz plugin](http://plugins.grails.org/plugin/grails/quartz). 
 The object fulfilling this role is **MessageJob**, located in the */job/mbds/firstgrails* folder
+
+___
 
 # Part 2 : REST
 //ToDo

@@ -10,7 +10,9 @@
         <div class="content scaffold-create" role="main">
             <h1><g:message code="default.create.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
+            <div class="message" role="status">
+                <g:message code="${flash.message}" args="${flash.args}" default="${flash.default}"/>
+            </div>
             </g:if>
             <g:hasErrors bean="${this.message}">
             <ul class="errors" role="alert">
@@ -33,7 +35,7 @@
 
 
                 <div id="create-message">
-                    <button type="submit" class="save btn btn-primary" id="submit-second">
+                    <button type="submit" class="save btn btn-primary">
                         Create <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                     </button>
 
