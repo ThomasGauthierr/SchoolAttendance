@@ -33,7 +33,7 @@
                 Last connected players
             </p>
 
-            <table >
+            <table class="no-hover">
                 <tr>
                     <th> Username </th>
                     <th> Last connection </th>

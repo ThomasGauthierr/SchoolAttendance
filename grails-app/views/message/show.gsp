@@ -32,6 +32,11 @@
                     </g:form>
                 </div>
             </sec:ifAllGranted>
+            <sec:ifAllGranted roles="ROLE_USER">
+                <g:link action="display" class="no-underline btn-show">
+                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back</button>
+                </g:link>
+            </sec:ifAllGranted>
         </div>
     </body>
 </html>

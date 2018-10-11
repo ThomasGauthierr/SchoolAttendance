@@ -72,6 +72,10 @@ td, th {
     margin-bottom: 5px;
 }
 
+.btn-show {
+    margin-left: 40px;
+}
+
 a.no-underline {
     text-decoration: none;
 }

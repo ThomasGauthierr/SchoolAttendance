@@ -34,6 +34,18 @@ class MessageController {
             return
         }
 
+        if (message.author == message.target) {
+            flash.message = "message.create.error.same"
+            redirect action: "create"
+            return
+        }
+
+        if (message.content == null) {
+            flash.message = "message.create.error.content"
+            redirect action: "create"
+            return
+        }
+
         try {
             messageService.save(message)
         } catch (ValidationException e) {
@@ -57,6 +69,18 @@ class MessageController {
     def update(Message message) {
         if (message == null) {
             notFound()
+            return
+        }
+
+        if (message.author == message.target) {
+            flash.message = "message.create.error.same"
+            redirect action: "edit", id: message.id
+            return
+        }
+
+        if (message.content == null) {
+            flash.message = "message.create.error.content"
+            redirect action: "edit", id: message.id
             return
         }
 
