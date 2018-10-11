@@ -22,7 +22,14 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/**/match/index',               access: ['ROLE_ADMIN']],
 	[pattern: '/**/message/index',               access: ['ROLE_ADMIN']],
 	[pattern: '/tp/dbconsole/**',               access: ['ROLE_ADMIN']],
-	[pattern: '/**/api/**', 				access: ['permitAll']],
+	[pattern: '/api/**', 				access: ["permitAll"]],
+
+	[pattern: '/api/users', 				access: ["(hasRole('ROLE_ADMIN') " +
+															"and " +
+															"request.getMethod().equals('POST'))" +
+															" or " +
+															"request.getMethod().equals('GET')"]],
+
 	[pattern: '/**/main/connection', 				access: ['permitAll']],
 	[pattern: '/**',               access: ['ROLE_ADMIN', 'ROLE_USER']],
 	[pattern: '/error',          access: ['permitAll']],
@@ -47,13 +54,16 @@ grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/plugins/
  */
 // Filter Chain
 grails.plugin.springsecurity.filterChain.chainMap = [
-	[pattern: '/api/users',      filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter'],
+	[pattern: '/api/**',      filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter'],
 	[pattern: '/**',             filters: 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'],
 ]
 
 // Token configuration
 grails.plugin.springsecurity.rest.token.storage.jwt.useEncryptedJwt = true
 grails.plugin.springsecurity.conf.rest.token.storage.jwt.secret = 'qrD6h8K6S9503Q06Y6Rfk21TErImPYqa'
+
+grails.plugin.springsecurity.rest.token.validation.useBearerToken = false
+grails.plugin.springsecurity.rest.token.validation.headerName = 'X-Auth-Token'
 
 // Authentication configuration
 grails.plugin.springsecurity.rest.login.active = true
