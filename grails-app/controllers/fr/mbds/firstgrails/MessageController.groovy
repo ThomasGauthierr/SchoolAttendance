@@ -19,6 +19,14 @@ class MessageController {
     }
 
     def show(Long id) {
+        def user = springSecurityService.currentUser
+        if (!user.authorities.any { it.authority == "ROLE_ADMIN" }) {
+            if (!messageCustomService.checkAccess(user, id)) {
+                redirect action: "display"
+                return
+            }
+        }
+
         messageCustomService.checkRead(springSecurityService.currentUser.id, id)
 
         respond messageService.get(id)
