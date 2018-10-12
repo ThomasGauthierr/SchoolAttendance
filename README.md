@@ -5,7 +5,7 @@ Be sure to adapt your application.yml to your configuration and to add a file "d
 You can find one in the folder "grails-app/assets/images".
 __
 ## Links
-[Report](https://docs.google.com/document/d/1cBtTLcw6vsI8c-zgyImPCOKgw8_UB5WkdiL8MeDKyUE/edit?usp=sharing)
+[Report](https://docs.google.com/document/d/1cBtTLcw6vsI8c-zgyImPCOKgw8_UB5WkdiL8MeDKyUE/edit?usp=sharing)\
 [TP](http://cours.tokidev.fr/mbds/grails/tp_grails.pdf)  
 [Courses](http://cours.tokidev.fr/mbds/grails/cours_grails.pdf)  
 [Trello](https://trello.com/b/ssAz0JX8/projet-grails)
