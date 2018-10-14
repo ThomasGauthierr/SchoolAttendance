@@ -45,6 +45,7 @@ class BootStrap {
             def output = [:]
             output['id'] = it.id
             output['username'] = it.username
+            output['messages'] = it.messageReceived.plus(it.messageSent)
             output['dateCreated'] = it.dateCreated
             output['lastConnection'] = it.lastConnection
 
