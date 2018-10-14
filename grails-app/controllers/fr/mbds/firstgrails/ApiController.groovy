@@ -98,7 +98,8 @@ class ApiController {
         }
     }
 
-    def users(long id, String name, Integer max) {
+    def user(Long id, String name, Integer max) {
+        println id
         switch (request.getMethod()) {
             case "GET" :
                 if(!max) {
@@ -109,18 +110,28 @@ class ApiController {
                     def user = userService.get(id)
                     if (user)
                         render user as JSON
-
+                    else
+                        response.status = 404
+                        render ([error: "No user found for the provided parameters"] as JSON)
                 }
 
                 if(name) {
                     def user = userCustomService.findByName(name)
                     if(user)
                         render user as JSON
+                    else
+                        response.status = 404
+                        render ([error: "No user found for the provided parameters"] as JSON)
                 }
 
                 if(id || name) {
                     response.status = 400
-                    render ([error: "No user found for the provided parameters"] as JSON)
+                    render ([error: "Bad or no parameters provided"] as JSON)
+                }
+
+                if(!id || !name) {
+                    response.status = 400
+                    render ([error: "Bad or no parameters provided"] as JSON)
                 }
 
                 render userCustomService.list(max: max) as JSON
@@ -129,6 +140,8 @@ class ApiController {
             case "POST":
                 def bodyJson =  JSON.parse(request.reader.text)
                 def createdUser = new User(bodyJson)
+                createdUser.messageReceived = []
+                createdUser.messageSent = []
                 if(createdUser.save(flush: true)) {
                     response.status = 201
                     response.contentType = 'text/json'
@@ -139,6 +152,10 @@ class ApiController {
             break
 
             case "PUT":
+                if(!params.id) {
+                    response.status = 404
+                    render ([error: "User to update not found"] as JSON)
+                }
                 //def bodyJson = JSON.parse(request.reader.text)
                 def user = userCustomService.get(params.id)
 
@@ -171,7 +188,19 @@ class ApiController {
         }
     }
 
-    def messages(Long id, Long user, Boolean read) {
+    def users(Integer nb) {
+        switch (request.getMethod()) {
+            case "GET":
+                if (!nb) {
+                    nb = 10
+                }
+
+                render userCustomService.list(max: nb) as JSON
+                break
+        }
+    }
+
+    def message(Long id, Long user, Boolean read) {
         switch (request.getMethod()) {
 
             case ("GET") :
@@ -260,6 +289,23 @@ class ApiController {
             default:
                 response.status = 405
                 break
+        }
+    }
+
+    def messages(Integer nb) {
+        switch (request.getMethod()) {
+
+            case ("GET"):
+                def messages = []
+
+                if (!nb)
+                    nb = 10
+
+                messageService.list(max: nb).each { elem -> messages.push(elem) }
+
+                render messages as JSON
+                break
+
         }
     }
 }
