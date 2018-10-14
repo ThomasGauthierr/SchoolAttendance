@@ -5,7 +5,7 @@
 By default, we run grails on the port 8081 (line 136), and the context path is /tp (line 137).<br/>
 Change the fields filePath and fileUrl of the tpgrails property (line 139) so it matches your settings.
 
-2. You have to **add a file "default-user.jpg"** in the web server folder where the images of this project will be stored. It's the default image we use for users created in the boostrap.<br/>
+2. You have to **add a file "default-user.jpg"** in the web server folder where the images of this project will be stored. It's the default image we use for users created in the boostrap, or when no image is selected during creation.<br/>
 You can find one in the folder "grails-app/assets/images".
 
 ## Reports and doc
