@@ -8,12 +8,6 @@
 <body>
 <a href="#create-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 
-<div class="nav" role="navigation">
-    <ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-    </ul>
-</div>
-
 <h2> Cette partie est uniquement pour le drag and drop, utilisez le bouton "Create" en dessus </h2>
 <div id="dd-box"> Drop the the profile image from you computer </div>
 <div id="create-user">
