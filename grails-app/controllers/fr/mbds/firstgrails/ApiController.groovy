@@ -29,75 +29,6 @@ class ApiController {
         }
     }
 
-    def matches(long id, String username, Integer max) {
-
-        switch(request.getMethod()) {
-            case 'GET' :
-                if(!max) {
-                    max = 10
-                }
-
-                if(id) {
-                    def match = matchService.get(id)
-                    if(match)
-                        render match as JSON
-                }
-
-                if(id) {
-                    response.status = 400
-                    render([error: 'No match found for the provided parameters'] as JSON)
-                }
-
-                render matchService.list(max: max) as JSON
-
-            break
-
-            case 'POST' :
-                def bodyJson = JSON.parse(request.reader.text)
-                def createdMatch = new Match(bodyJson)
-                if(createdMatch.save(flush: true)) {
-                    response.status = 201
-                    response.contentType = 'text/json'
-                    render createdMatch as JSON
-                } else {
-                    response.status = 400
-                }
-            break
-
-            case 'PUT':
-                def match = matchService.get(params.id)
-
-                def map = new JsonSlurper().parseText(request.reader.text)
-                if(match) {
-                    map.each { key, value ->
-                        match."${key}" = value
-                    }
-
-                    if(matchService.save(match)) {
-                        render match as JSON
-                    }
-                }
-            break
-
-            case "DELETE":
-                def match = matchService.get(params.id);
-
-                if(!match) {
-                    response.status = 400
-                    render (['error': 'No match found for the provided id.'] as JSON)
-                }
-
-                matchService.delete(params.id)
-                render (['message': 'The match has been deleted successfully.'] as JSON)
-            break
-
-            default :
-                response.status = 405
-            break
-
-        }
-    }
-
     def user(Long id, String name, Integer max) {
         println id
         switch (request.getMethod()) {
@@ -188,18 +119,6 @@ class ApiController {
         }
     }
 
-    def users(Integer nb) {
-        switch (request.getMethod()) {
-            case "GET":
-                if (!nb) {
-                    nb = 10
-                }
-
-                render userCustomService.list(max: nb) as JSON
-                break
-        }
-    }
-
     def message(Long id, Long user, Boolean read) {
         switch (request.getMethod()) {
 
@@ -267,6 +186,100 @@ class ApiController {
         }
     }
 
+    def match(Long id, String username, Integer max) {
+
+        switch(request.getMethod()) {
+            case ("GET") :
+                def match
+
+                if(id)
+                    match = matchService.get(id)
+                if(match)
+                    render match as JSON
+                else {
+                    response.status = 404
+                    render(['error': 'Couldn\'t find the match with the provided id'] as JSON)
+                }
+                break
+
+            case 'POST' :
+                def bodyJson = JSON.parse(request.reader.text)
+                def createdMatch = new Match(bodyJson)
+                if(createdMatch.save(flush: true)) {
+                    response.status = 201
+                    response.contentType = 'text/json'
+                    render createdMatch as JSON
+                } else {
+                    response.status = 400
+                }
+                break
+
+            case 'PUT':
+                def match = matchService.get(params.id)
+
+                def map = new JsonSlurper().parseText(request.reader.text)
+                if(match) {
+                    map.each { key, value ->
+                        match."${key}" = value
+                    }
+
+                    if(matchService.save(match)) {
+                        render match as JSON
+                    }
+                } else {
+                    response.status = 404
+                    render ([error: "No match was found for the provided parameters"] as JSON)
+                }
+                break
+
+            case "DELETE":
+                def match = matchService.get(params.id);
+
+                if(!match) {
+                    response.status = 400
+                    render (['error': 'No match found for the provided id.'] as JSON)
+                }
+
+                matchService.delete(params.id)
+                render (['message': 'The match has been deleted successfully.'] as JSON)
+                break
+
+            default :
+                response.status = 405
+                break
+
+        }
+    }
+
+    def users(Integer nb) {
+        switch (request.getMethod()) {
+            case "GET":
+                if (!nb) {
+                    nb = 10
+                }
+
+                render userCustomService.list(max: nb) as JSON
+            break
+
+            case 'POST':
+                def bodyJson =  JSON.parse(request.reader.text)
+                bodyJson.each {
+                    def createdUser = new User(it)
+                    println it
+                    createdUser.messageReceived = []
+                    createdUser.messageSent = []
+                    if(!createdUser.save(flush: true)) {
+                        response.status = 400
+                        render ([error: "A problem happened when adding the user collection"] as JSON)
+                    }
+                }
+
+                response.status = 201
+                response.contentType = 'text/json'
+                render ([error: "Users have been created successfully"] as JSON)
+        }
+    }
+
     def messages(Integer nb, Long user, Boolean read, Long id) {
         switch (request.getMethod()) {
 
@@ -305,6 +318,23 @@ class ApiController {
                 }
 
                 render messages as JSON
+                break
+
+        }
+    }
+
+    def matches(Integer nb) {
+        switch (request.getMethod()) {
+
+            case ("GET"):
+                def matches = []
+
+                if (!nb)
+                    nb = 10
+
+                matchService.list(max: nb).each { elem -> matches.push(elem) }
+
+                render matches as JSON
                 break
 
         }
