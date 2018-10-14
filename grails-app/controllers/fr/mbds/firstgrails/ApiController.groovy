@@ -204,7 +204,77 @@ class ApiController {
         switch (request.getMethod()) {
 
             case ("GET") :
+                def message
+
+                if(id)
+                    message = messageService.get(id)
+                    if(message)
+                        render message as JSON
+                else {
+                    response.status = 404
+                    render(['error': 'Couldn\'t find the message with the provided id'] as JSON)
+                }
+            break
+
+            case "POST":
+                def bodyJson =  JSON.parse(request.reader.text)
+                def createdMessage = new Message(bodyJson)
+                if(createdMessage.save(flush: true)) {
+                    response.status = 201
+                    response.contentType = 'text/json'
+                    render createdMessage as JSON
+                } else {
+                    response.status = 400
+                    render (['error': 'Couldn\'t create the message'] as JSON)
+                }
+            break
+
+            case 'PUT':
+                def message = messageService.get(params.id)
+                if(!message) {
+                    response.status = 404
+                    render (['error': 'Couldn\'t find the message with the provided id'] as JSON)
+                }
+                def map = new JsonSlurper().parseText(request.reader.text)
+                if(message) {
+                    map.each { key, value ->
+                        message."${key}" = value
+                    }
+
+                    if(messageService.save(message)) {
+                        render message as JSON
+                    }
+                }
+            break
+
+            case "DELETE":
+                if(!params.id) {
+                    response.status = 404
+                    render (['error': 'Couldn\'t find the message with the provided id'] as JSON)
+                }
+                try {
+                    messageService.delete(params.id)
+                    render (['message': 'The user has been deleted successfully.'] as JSON)
+                } catch (UserNotFoundException unf) {
+                    response.status = 400
+                    render (['error': 'No user found for the provided id.'] as JSON)
+                }
+            break
+
+            default:
+                response.status = 405
+                break
+        }
+    }
+
+    def messages(Integer nb, Long user, Boolean read, Long id) {
+        switch (request.getMethod()) {
+
+            case ("GET"):
                 def messages = []
+
+                if (!nb)
+                    nb = 10
 
                 if(id) {
                     messages.push(messageService.get(id))
@@ -231,77 +301,8 @@ class ApiController {
                 }
 
                 if(!id && !user && read == null) {
-                    messageService.list().each {elem -> messages.push(elem)}
+                    messageService.list(max: nb).each { elem -> messages.push(elem) }
                 }
-
-                render messages as JSON
-            break
-
-            case "POST":
-                def bodyJson =  JSON.parse(request.reader.text)
-                def createdMessage = new Message(bodyJson)
-                if(createdMessage.save(flush: true)) {
-                    response.status = 201
-                    response.contentType = 'text/json'
-                    render createdMessage as JSON
-                } else {
-                    response.status = 400
-                    render (['error': 'Couldn\'t create the message'] as JSON)
-                }
-            break
-
-            case 'PUT':
-                def message = messageService.get(params.id)
-
-                def map = new JsonSlurper().parseText(request.reader.text)
-                if(message) {
-                    map.each { key, value ->
-                        message."${key}" = value
-                    }
-
-                    if(messageService.save(message)) {
-                        render message as JSON
-                    }
-                }
-            break
-
-            case "DELETE":
-                def messages = []
-
-                if(params.id)
-                    messages.push(messageService.get(params.id))
-                else if(params.read) {
-
-                }
-
-                if(messages.size() == 0) {
-                    response.status = 400
-                    render (['error': 'No message found for the provided parameters.'] as JSON)
-                }
-
-                // Deleting all the selected messages.
-                for(def message in messages) {
-                    messageService.delete(message)
-                }
-                render (['message': 'The messages has been deleted successfully.'] as JSON)
-            break
-
-            default:
-                response.status = 405
-                break
-        }
-    }
-
-    def messages(Integer nb) {
-        switch (request.getMethod()) {
-
-            case ("GET"):
-                def messages = []
-
-                if (!nb)
-                    nb = 10
-
-                messageService.list(max: nb).each { elem -> messages.push(elem) }
 
                 render messages as JSON
                 break
