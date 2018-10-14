@@ -69,3 +69,6 @@ grails.plugin.springsecurity.rest.token.validation.headerName = 'X-Auth-Token'
 grails.plugin.springsecurity.rest.login.active = true
 grails.plugin.springsecurity.rest.login.endpointUrl = "/api/login"
 grails.plugin.springsecurity.rest.login.failureStatusCode = 401
+
+grails.plugin.springsecurity.rest.logout.endpointUrl = "/api/logout"
+grails.plugin.springsecurity.rest.token.validation.headerName = 'X-Auth-Token'
