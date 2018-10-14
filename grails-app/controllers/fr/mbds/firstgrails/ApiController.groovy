@@ -265,7 +265,6 @@ class ApiController {
                 def bodyJson =  JSON.parse(request.reader.text)
                 bodyJson.each {
                     def createdUser = new User(it)
-                    println it
                     createdUser.messageReceived = []
                     createdUser.messageSent = []
                     if(!createdUser.save(flush: true)) {
@@ -277,6 +276,7 @@ class ApiController {
                 response.status = 201
                 response.contentType = 'text/json'
                 render ([error: "Users have been created successfully"] as JSON)
+            break
         }
     }
 
@@ -318,8 +318,22 @@ class ApiController {
                 }
 
                 render messages as JSON
-                break
+            break
 
+            case 'POST':
+                def bodyJson =  JSON.parse(request.reader.text)
+                bodyJson.each {
+                    def createdMessage = new Message(it)
+                    if(!createdMessage.save(flush: true)) {
+                        response.status = 400
+                        render ([error: "A problem happened when adding the message collection"] as JSON)
+                    }
+                }
+
+                response.status = 201
+                response.contentType = 'text/json'
+                render ([error: "Messages have been created successfully"] as JSON)
+            break
         }
     }
 
@@ -335,8 +349,22 @@ class ApiController {
                 matchService.list(max: nb).each { elem -> matches.push(elem) }
 
                 render matches as JSON
-                break
+            break
 
+            case 'POST':
+                def bodyJson =  JSON.parse(request.reader.text)
+                bodyJson.each {
+                    def createdMatch = new Match(it)
+                    if(!createdMatch.save(flush: true)) {
+                        response.status = 400
+                        render ([error: "A problem happened when adding the match collection"] as JSON)
+                    }
+                }
+
+                response.status = 201
+                response.contentType = 'text/json'
+                render ([error: "Match have been created successfully"] as JSON)
+                break
         }
     }
 }
