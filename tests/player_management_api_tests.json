@@ -1,0 +1,2902 @@
+{
+	"info": {
+		"_postman_id": "b2a542e0-f283-4c29-beea-d96297873681",
+		"name": "api rest copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"description": null,
+			"item": [
+				{
+					"name": "getUsers",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f9482c4e-032b-414f-bffe-d4990991ca10",
+								"type": "text/javascript",
+								"exec": [
+									"let users = JSON.parse(responseBody)",
+									"console.log(users)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Array contains at lease one user', () => {",
+									"    pm.expect(users.length).to.be.above(0)",
+									"})",
+									"",
+									"pm.test('Array contains users with the right properties', () => {",
+									"    let user = users[0]",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('username')",
+									"    pm.expect(user).to.have.property('dateCreated')",
+									"    pm.expect(user).to.have.property('lastConnection')",
+									"    pm.expect(user).to.have.property('messages')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/users",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUsers (nb)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "787efcd9-9123-466b-b224-5a8c4344241b",
+								"type": "text/javascript",
+								"exec": [
+									"let users = JSON.parse(responseBody)",
+									"console.log(users)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Array contains at lease one user', () => {",
+									"    pm.expect(users.length).to.be.above(0)",
+									"})",
+									"",
+									"pm.test('Array contains users with the right properties', () => {",
+									"    let user = users[0]",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('username')",
+									"    pm.expect(user).to.have.property('dateCreated')",
+									"    pm.expect(user).to.have.property('lastConnection')",
+									"    pm.expect(user).to.have.property('messages')",
+									"",
+									"})",
+									"",
+									"pm.test('Size of array is equal to \"nb\" parameter', () => {",
+									"    pm.expect(users.length).to.eql(1)",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/users?nb=1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "nb",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserById",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "6d265494-d47a-44ef-b0a8-cfd676bb3bf6",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Returns user with the right id', () => {",
+									"    pm.expect(user.id).to.eql(2)",
+									"})",
+									"",
+									"pm.test('Returned user with the right properties', () => {",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('username')",
+									"    pm.expect(user).to.have.property('dateCreated')",
+									"    pm.expect(user).to.have.property('lastConnection')",
+									"    pm.expect(user).to.have.property('messages')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user/2",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUser",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "9a6e7ef0-47c2-49d4-b9e3-28e1e2042bde",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Returns user with the right id', () => {",
+									"    pm.expect(user.id).to.eql(2)",
+									"})",
+									"",
+									"pm.test('returned user with the right properties', () => {",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('username')",
+									"    pm.expect(user).to.have.property('dateCreated')",
+									"    pm.expect(user).to.have.property('lastConnection')",
+									"    pm.expect(user).to.have.property('messages')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user?id=2",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUser [User not found]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "e6c50ac4-4585-4c91-bc24-045b50352167",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 404', () => {",
+									"    pm.response.to.have.status(404)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user?id=6",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUser(name)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "22e9921c-dfa6-414d-8f2f-9831e931e338",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Returns user with the right username', () => {",
+									"    pm.expect(user.username).to.eql('admin')",
+									"})",
+									"",
+									"pm.test('Returned user with the right properties', () => {",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('username')",
+									"    pm.expect(user).to.have.property('dateCreated')",
+									"    pm.expect(user).to.have.property('lastConnection')",
+									"    pm.expect(user).to.have.property('messages')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user?name=admin",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "admin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUser [Bad query params]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a2853e6c-3af1-42e6-959f-3ac1362939fc",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 400', () => {",
+									"    pm.response.to.have.status(400)",
+									"})",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"Amine AIT ERRAMI\",\n\t\"password\": \"pwd\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUser",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "747a2b6a-5abe-4954-8387-612186ade299",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 201', () => {",
+									"    pm.response.to.have.status(201)",
+									"})",
+									"",
+									"pm.test('Returns the user that has just been added', () => {",
+									"    pm.expect(user.username).to.eql('Amine AIT ERRAMI')",
+									"})",
+									"",
+									"pm.test('returned user with the right properties', () => {",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('username')",
+									"    pm.expect(user).to.have.property('dateCreated')",
+									"    pm.expect(user).to.have.property('lastConnection')",
+									"    pm.expect(user).to.have.property('messages')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"Amine AIT ERRAMI\",\n\t\"password\": \"pwd\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUsers",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "7e742f20-736a-4dcd-81d6-879ee7bbb607",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 201', () => {",
+									"    pm.response.to.have.status(201)",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"username\": \"a1\",\n\t\t\"password\": \"pwd\"\n\t},\n\t{\n\t\t\"username\": \"a2\",\n\t\t\"password\": \"pwd\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/users",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUser [Already exists]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "ff1ddc54-709f-4ce8-9aec-43a25cb8f14d",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test('Status code is 400', () => {",
+									"    pm.response.to.have.status(400)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin\",\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUser [Missing required fields]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "4080e3eb-daa4-461d-ac5e-29718c4a12d7",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test('Status code is 400', () => {",
+									"    pm.response.to.have.status(400)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"Thomas gauthier\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "ede69030-f565-4e4c-9f5b-f0b9bc94f59e",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('updates the user and returns itd', () => {",
+									"    pm.expect(user.id).to.eql(1)",
+									"    pm.expect(user.username).to.eql('bobo')",
+									"",
+									"})",
+									"",
+									"pm.test('returned user with the right properties', () => {",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('username')",
+									"    pm.expect(user).to.have.property('dateCreated')",
+									"    pm.expect(user).to.have.property('lastConnection')",
+									"    pm.expect(user).to.have.property('messages')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"bobo\",\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user/1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser [User not found]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "3466f71c-e9b1-41a6-9e30-6b59d2f5f245",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 404', () => {",
+									"    pm.response.to.have.status(404)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"bobo\",\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser [Bad Id]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "86e457ff-ef40-442b-af4c-dfc9e8bc608d",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 400', () => {",
+									"    pm.response.to.have.status(400)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"bobo\",\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "8e858131-a2e0-42b4-820a-cb22bd6f9103",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"bobo\",\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user/7",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUser",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "b6743a86-1522-4f95-9997-ce8dda4c6114",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 201', () => {",
+									"    pm.response.to.have.status(201)",
+									"})",
+									"",
+									"pm.test('Returns the user that has just been added', () => {",
+									"    pm.expect(user.username).to.eql('Amine AIT ERRAMI')",
+									"})",
+									"",
+									"pm.test('returned user with the right properties', () => {",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('username')",
+									"    pm.expect(user).to.have.property('dateCreated')",
+									"    pm.expect(user).to.have.property('lastConnection')",
+									"    pm.expect(user).to.have.property('messages')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"Amine AIT ERRAMI\",\n\t\"password\": \"pwd\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Message",
+			"description": null,
+			"item": [
+				{
+					"name": "getMessages",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d07f6e00-6919-49bc-ab5d-5f130e57d069",
+								"type": "text/javascript",
+								"exec": [
+									"let messages = JSON.parse(responseBody)",
+									"console.log(messages)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Array contains at lease one message', () => {",
+									"    pm.expect(messages.length).to.be.above(0)",
+									"})",
+									"",
+									"pm.test('Array contains messages with the right properties', () => {",
+									"    let user = messages[0]",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('author')",
+									"    pm.expect(user).to.have.property('target')",
+									"    pm.expect(user).to.have.property('content')",
+									"    pm.expect(user).to.have.property('read')",
+									"    pm.expect(user).to.have.property('dateCreated')",
+									"",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/messages",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMessages(nb)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "edcfab2d-79de-4c98-9400-81b043ff057c",
+								"type": "text/javascript",
+								"exec": [
+									"let messages = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Array contains at lease one message', () => {",
+									"    pm.expect(messages.length).to.be.above(0)",
+									"})",
+									"",
+									"pm.test('Array contains messages with the right properties', () => {",
+									"    let user = messages[0]",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('author')",
+									"    pm.expect(user).to.have.property('target')",
+									"    pm.expect(user).to.have.property('content')",
+									"    pm.expect(user).to.have.property('read')",
+									"    pm.expect(user).to.have.property('dateCreated')",
+									"",
+									"})",
+									"",
+									"pm.test('Size of array is equal to \"nb\" parameter', () => {",
+									"    pm.expect(messages.length).to.eql(1)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/messages?nb=1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"messages"
+							],
+							"query": [
+								{
+									"key": "nb",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMessageById",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "0b58e5eb-4371-46f6-9602-4cff0bf8f01d",
+								"type": "text/javascript",
+								"exec": [
+									"let message = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Returns message with the right id', () => {",
+									"    pm.expect(message.id).to.eql(2)",
+									"})",
+									"",
+									"pm.test('Returns message with the right id', () => {",
+									"    pm.expect(message.id).to.eql(2)",
+									"})",
+									"",
+									"pm.test('Array contains messages with the right properties', () => {",
+									"    pm.expect(message).to.have.property('id')",
+									"    pm.expect(message).to.have.property('author')",
+									"    pm.expect(message).to.have.property('target')",
+									"    pm.expect(message).to.have.property('content')",
+									"    pm.expect(message).to.have.property('read')",
+									"    pm.expect(message).to.have.property('dateCreated')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/message/2",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"message",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMessage",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "52e87776-2dd8-428c-8057-6c87050c5137",
+								"type": "text/javascript",
+								"exec": [
+									"let message = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Returns message with the right id', () => {",
+									"    pm.expect(message.id).to.eql(2)",
+									"})",
+									"",
+									"pm.test('returned message with the right properties', () => {",
+									"    pm.expect(message).to.have.property('id')",
+									"    pm.expect(message).to.have.property('author')",
+									"    pm.expect(message).to.have.property('target')",
+									"    pm.expect(message).to.have.property('content')",
+									"    pm.expect(message).to.have.property('read')",
+									"    pm.expect(message).to.have.property('dateCreated')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/message?id=2",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"message"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMessage [Message not found]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "e6c50ac4-4585-4c91-bc24-045b50352167",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 404', () => {",
+									"    pm.response.to.have.status(404)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/message?id=6",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"message"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMessage(read)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "0ce58f4e-89c2-4994-b075-0a42d6ea6d9a",
+								"type": "text/javascript",
+								"exec": [
+									"let messages = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Returns messages that are read', () => {",
+									"    messages.map(m => {",
+									"        pm.expect(m.read).to.eql(true)",
+									"    })",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/messages?read=true",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"messages"
+							],
+							"query": [
+								{
+									"key": "read",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMessage [Bad query params]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "14aa13c2-81b5-46db-989a-e64e6fd5b637",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 404', () => {",
+									"    pm.response.to.have.status(404)",
+									"})",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"Amine AIT ERRAMI\",\n\t\"password\": \"pwd\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/message",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addMessage",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "952df1ba-be19-443c-9b35-96d54c910817",
+								"type": "text/javascript",
+								"exec": [
+									"let message = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 201', () => {",
+									"    pm.response.to.have.status(201)",
+									"})",
+									"",
+									"pm.test('Returns the message that has just been added', () => {",
+									"    pm.expect(message.content).to.eql('Example')",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"author\": 1,\n\t\"target\": 2,\n\t\"content\": \"Example\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/message",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addMessages",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "566d5a1d-eeb2-43e1-a4a3-8a5446ac0b2b",
+								"type": "text/javascript",
+								"exec": [
+									"let message = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 201', () => {",
+									"    pm.response.to.have.status(201)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"author\": 1,\n\t\t\"target\": 2,\n\t\t\"content\": \"Example1\"\n\t},\n\t{\n\t\t\"author\": 1,\n\t\t\"target\": 2,\n\t\t\"content\": \"Example2\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/messages",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addMessage [Missing required fields]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "0a4c32f8-ff31-48d7-a4ba-cfb6cbc69be0",
+								"type": "text/javascript",
+								"exec": [
+									"let message = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 400', () => {",
+									"    pm.response.to.have.status(400)",
+									"})",
+									"",
+									"pm.test('Returns the message that has just been added', () => {",
+									"    pm.expect(message.content).to.eql('Example')",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\": \"Thomas gauthier\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateMessage",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb8cf260-38ad-4d80-aef9-66e24d1db81e",
+								"type": "text/javascript",
+								"exec": [
+									"let message = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Returns the message that has just been updated', () => {",
+									"    pm.expect(message.content).to.eql('bobo')",
+									"})",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\": \"bobo\",\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/message/1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"message",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateMessage [Message not found]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "3466f71c-e9b1-41a6-9e30-6b59d2f5f245",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 404', () => {",
+									"    pm.response.to.have.status(404)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\": \"hii\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/message/200",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"message",
+								"200"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMessage [Bad Id]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "2da0aa74-b3ff-4470-9380-21479aaaa60c",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 404', () => {",
+									"    pm.response.to.have.status(404)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"bobo\",\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/message",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMessage",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "8e858131-a2e0-42b4-820a-cb22bd6f9103",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"bobo\",\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/message/6",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"message",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Match",
+			"description": null,
+			"item": [
+				{
+					"name": "getMatches",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "4f215d73-a9d7-416e-a13c-559cf21b5bac",
+								"type": "text/javascript",
+								"exec": [
+									"let users = JSON.parse(responseBody)",
+									"console.log(users)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Array contains at lease one user', () => {",
+									"    pm.expect(users.length).to.be.above(0)",
+									"})",
+									"",
+									"pm.test('Array contains users with the right properties', () => {",
+									"    let user = users[0]",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('winner')",
+									"    pm.expect(user).to.have.property('looser')",
+									"    pm.expect(user).to.have.property('winnerScore')",
+									"    pm.expect(user).to.have.property('looserScore')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/matches",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"matches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMatches (nb)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d5902fa9-9409-48f0-83b5-936937995e23",
+								"type": "text/javascript",
+								"exec": [
+									"let users = JSON.parse(responseBody)",
+									"console.log(users)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Array contains at lease one user', () => {",
+									"    pm.expect(users.length).to.be.above(0)",
+									"})",
+									"",
+									"pm.test('Array contains users with the right properties', () => {",
+									"    let user = users[0]",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('winner')",
+									"    pm.expect(user).to.have.property('looser')",
+									"    pm.expect(user).to.have.property('winnerScore')",
+									"    pm.expect(user).to.have.property('looserScore')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/matches?nb=1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"matches"
+							],
+							"query": [
+								{
+									"key": "nb",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMatchById",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "35c64555-3d9e-422a-ab38-7eca41786886",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Returns user with the right id', () => {",
+									"    pm.expect(user.id).to.eql(2)",
+									"})",
+									"",
+									"pm.test('Array contains users with the right properties', () => {",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('winner')",
+									"    pm.expect(user).to.have.property('looser')",
+									"    pm.expect(user).to.have.property('winnerScore')",
+									"    pm.expect(user).to.have.property('looserScore')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{apiUrl}}/match/2",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"match",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMatch",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "fb10583a-bde5-4d66-9940-e5a3d86b5ab9",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Returns user with the right id', () => {",
+									"    pm.expect(user.id).to.eql(2)",
+									"})",
+									"",
+									"pm.test('Array contains users with the right properties', () => {",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('winner')",
+									"    pm.expect(user).to.have.property('looser')",
+									"    pm.expect(user).to.have.property('winnerScore')",
+									"    pm.expect(user).to.have.property('looserScore')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/match?id=2",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"match"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMatch [Match not found]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "e6c50ac4-4585-4c91-bc24-045b50352167",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 404', () => {",
+									"    pm.response.to.have.status(404)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/match?id=6",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"match"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMatch [Bad query params]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a2853e6c-3af1-42e6-959f-3ac1362939fc",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 400', () => {",
+									"    pm.response.to.have.status(400)",
+									"})",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"Amine AIT ERRAMI\",\n\t\"password\": \"pwd\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/match",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"match"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addMatch",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "cd63779d-e9ba-4e7c-a714-febd1524039d",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 201', () => {",
+									"    pm.response.to.have.status(201)",
+									"})",
+									"",
+									"pm.test('Returns the match that has just been added', () => {",
+									"    pm.expect(user.winnerScore).to.eql(100)",
+									"})",
+									"",
+									"pm.test('Array contains users with the right properties', () => {",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('winner')",
+									"    pm.expect(user).to.have.property('looser')",
+									"    pm.expect(user).to.have.property('winnerScore')",
+									"    pm.expect(user).to.have.property('looserScore')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"winner\": 1,\n\t\"looser\": 2,\n\t\"winnerScore\": 100,\n\t\"looserScore\": 50\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/match",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"match"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addMatches",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "cd63779d-e9ba-4e7c-a714-febd1524039d",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 201', () => {",
+									"    pm.response.to.have.status(201)",
+									"})",
+									"",
+									"pm.test('Returns the match that has just been added', () => {",
+									"    pm.expect(user.winnerScore).to.eql(100)",
+									"})",
+									"",
+									"pm.test('Array contains users with the right properties', () => {",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('winner')",
+									"    pm.expect(user).to.have.property('looser')",
+									"    pm.expect(user).to.have.property('winnerScore')",
+									"    pm.expect(user).to.have.property('looserScore')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"winner\": 1,\n\t\"looser\": 2,\n\t\"winnerScore\": 100,\n\t\"looserScore\": 50\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/match",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"match"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addMatch [Missing required fields]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "0665e20b-be1c-4040-9114-b156ad77834d",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Status code is 400', () => {",
+									"    pm.response.to.have.status(400)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"winner\": 1\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateMatch",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "ffdb837f-0872-4a10-a3b8-5d84cb47f307",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('updates the user and returns itd', () => {",
+									"    pm.expect(user.id).to.eql(1)",
+									"    pm.expect(user.winnerScore).to.eql(500)",
+									"",
+									"})",
+									"",
+									"pm.test('Array contains users with the right properties', () => {",
+									"    pm.expect(user).to.have.property('id')",
+									"    pm.expect(user).to.have.property('winner')",
+									"    pm.expect(user).to.have.property('looser')",
+									"    pm.expect(user).to.have.property('winnerScore')",
+									"    pm.expect(user).to.have.property('looserScore')",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"winnerScore\": 500,\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/match/1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"match",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateMatch [Match not found]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d5825f61-d2ad-492c-8db4-ad51a9772e61",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test('Status code is 404', () => {",
+									"    pm.response.to.have.status(404)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"winnerScore\": 40,\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/match?id=300",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"match"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "300"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMatch [Bad Id]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "86e457ff-ef40-442b-af4c-dfc9e8bc608d",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 400', () => {",
+									"    pm.response.to.have.status(400)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"bobo\",\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/match/50",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"match",
+								"50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMatch",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f13e42d6-d9f5-487e-a296-e858ac5c231b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "af5a1810-faf9-4b55-a25f-da6c39586ac6",
+								"type": "text/javascript",
+								"exec": [
+									"let user = JSON.parse(responseBody)",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"bobo\",\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/match/4",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"match",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"description": null,
+			"item": [
+				{
+					"name": "login [Fail]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6caed975-e393-4767-8302-98e1d9cd8ec5",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Status code is 401', () => {",
+									"    pm.response.to.have.status(401)",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"plasdfyer\",\n\t\"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/login",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3bd8f241-de05-4972-b8b1-0180fc08d96b",
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"token\", data.access_token);",
+									"",
+									"pm.test('Status code is 200', () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Array contains with the token', () => {",
+									"    pm.expect(data).to.have.property('access_token')",
+									"    ",
+									"",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/login",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6caed975-e393-4767-8302-98e1d9cd8ec5",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Status code is 401', () => {",
+									"    pm.response.to.have.status(401)",
+									"})"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"plasdfyer\",\n\t\"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/logout",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
