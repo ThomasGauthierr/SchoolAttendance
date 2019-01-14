@@ -22,6 +22,9 @@ class User implements Serializable {
     Date lastConnection
     Date previousConnection
     Date dateCreated
+
+    Person person
+
     boolean isDeleted = false
 
     static hasMany = [
@@ -49,6 +52,7 @@ class User implements Serializable {
         lastConnection nullable: true
         previousConnection nullable: true
         isDeleted nullable: false
+        person nullable: false
     }
 
     static mapping = {

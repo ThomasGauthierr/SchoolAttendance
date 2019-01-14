@@ -11,8 +11,9 @@ grails.plugin.springsecurity.rest.token.storage.jwt.useEncryptedJwt = true
 grails.plugin.springsecurity.conf.rest.token.storage.jwt.secret = 'qrD6h8K6S9503Q06Y6Rfk21TErImPYqa'
 
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	[pattern: '/**/main/index',               access: ['ROLE_ADMIN', 'ROLE_USER']],
-	[pattern: '/**/main/',               access: ['ROLE_ADMIN', 'ROLE_USER']],
+	[pattern: '/**',               access: ['ROLE_ADMIN', 'ROLE_TEACHER']], // ToDo: For test purpose only, to remove later
+	[pattern: '/**/main/index',               access: ['ROLE_ADMIN', 'ROLE_TEACHER']],
+	[pattern: '/**/main/',               access: ['ROLE_ADMIN', 'ROLE_TEACHER']],
 	[pattern: '/**/create/**',               access: ['ROLE_ADMIN']],
 	[pattern: '/**/delete/**',               access: ['ROLE_ADMIN']],
 	[pattern: '/**/edit/**',               access: ['ROLE_ADMIN']],
@@ -31,7 +32,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 															"request.getMethod().equals('GET')"]],
 
 	[pattern: '/**/main/connection', 				access: ['permitAll']],
-	[pattern: '/**',               access: ['ROLE_ADMIN', 'ROLE_USER']],
+	[pattern: '/**',               access: ['ROLE_ADMIN', 'ROLE_TEACHER']],
 	[pattern: '/error',          access: ['permitAll']],
 	[pattern: '/index',          access: ['permitAll']],
 	[pattern: '/index.gsp',      access: ['permitAll']],
