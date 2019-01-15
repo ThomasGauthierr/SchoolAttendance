@@ -13,6 +13,10 @@ class User implements Serializable {
     // Auto generated fields.
     String username
     String password
+    String firstName
+    String lastName
+    String address
+    String mail
     boolean enabled = true
     boolean accountExpired
     boolean accountLocked
@@ -22,8 +26,6 @@ class User implements Serializable {
     Date lastConnection
     Date previousConnection
     Date dateCreated
-
-    Person person
 
     boolean isDeleted = false
 
@@ -52,7 +54,6 @@ class User implements Serializable {
         lastConnection nullable: true
         previousConnection nullable: true
         isDeleted nullable: false
-        person nullable: false
     }
 
     static mapping = {

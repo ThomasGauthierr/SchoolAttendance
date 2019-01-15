@@ -3,7 +3,10 @@ package fr.mbds.firstgrails
 class Student {
     int student_number
     String NFC_id
-    Person person
+    String firstName
+    String lastName
+    String address
+    String mail
 
     static hasMany = [
             courses:Course,
@@ -17,6 +20,5 @@ class Student {
     static constraints = {
         student_number(nullable: false, blank: false, unique: true)
         NFC_id(nullable: false, blank: false, unique: true)
-        person(nullable: false)
     }
 }

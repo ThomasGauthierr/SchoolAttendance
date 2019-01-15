@@ -20,22 +20,18 @@ class BootStrap {
         def adminUser = new User(
             username: 'admin',
             password: 'password',
-            person: new Person(
-                firstName: "Gabriel",
-                lastName: "Mopolo",
-                address: "06600 Antibes",
-                mail: "gabriel.mopolo@unice.fr"
-            )
+            firstName: 'Gabriel',
+            lastName: 'Mopolo',
+            address: '06600 Antibes',
+            mail: 'gabriel.mopolo@unice.fr'
         ).save(flush: true, failOnError: true)
         def teacherOne = new User(
             username: 'serge',
             password: 'password',
-            person: new Person(
-                firstName: "Serge",
-                lastName: "Miranda",
-                address: "06100 Nice",
-                mail: "serge.miranad@unice.fr"
-            )
+            firstName: 'Serge',
+            lastName: 'Miranda',
+            address: '06100 Nice',
+            mail: "serge.miranad@unice.fr"
         ).save(flush: true, failOnError: true)
 
 //        def playerUser = new User(username: 'player', password: 'password').save(flush: true, failOnError: true)

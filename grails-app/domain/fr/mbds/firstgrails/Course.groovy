@@ -2,14 +2,14 @@ package fr.mbds.firstgrails
 
 class Course {
     String name
-    Date date
     User teacher
     Date dateCreated
     Date lastUpdated
 
-    static belongsTo = Person
+    static belongsTo = Student
+
     static hasMany = [
-            users:Person,
+            students:Student,
             sessions:Session
     ]
 

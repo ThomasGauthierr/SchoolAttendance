@@ -1,10 +1,7 @@
 package fr.mbds.firstgrails
 
 class Person {
-    String firstName
-    String lastName
-    String address
-    String mail
+
 
     static belongsTo = [
             teacher:User,
