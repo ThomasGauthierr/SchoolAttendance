@@ -22,6 +22,26 @@
             <label>Password</label>
             <input id="user-form-password" type="password" name="password" />
         </div>
+
+        <div class="fieldcontain">
+            <label>First name</label>
+            <input id="user-form-firstname" type="text" name="firstname" />
+        </div>
+
+        <div class="fieldcontain">
+            <label>Last name</label>
+            <input id="user-form-lastname" type="text" name="lastname" />
+        </div>
+
+        <div class="fieldcontain">
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mail</label>
+            <input id="user-form-mail" type="text" name="mail" />
+        </div>
+
+        <div class="fieldcontain">
+            <label>Address</label>
+            <input id="user-form-address" type="text" name="address" />
+        </div>
     </form>
 
     <br/>
