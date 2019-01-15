@@ -54,6 +54,11 @@ class User implements Serializable {
         lastConnection nullable: true
         previousConnection nullable: true
         isDeleted nullable: false
+
+        firstName nullable: false, blank: false
+        lastName nullable: false, blank: false
+        address nullable: false, blank: false
+        mail nullable: false, blank: false
     }
 
     static mapping = {

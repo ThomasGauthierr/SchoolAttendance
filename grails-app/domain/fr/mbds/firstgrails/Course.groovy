@@ -19,7 +19,6 @@ class Course {
 
     static constraints = {
         name(nullable: false, blank: false, size: 2..40)
-        date(nullable: false)
         teacher(nullable: false)
     }
 }

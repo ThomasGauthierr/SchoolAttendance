@@ -9,8 +9,8 @@ class Student {
     String mail
 
     static hasMany = [
-            courses:Course,
-            sessions:Session
+        courses:Course,
+        sessions:Session
     ]
 
     static mapping = {
@@ -20,5 +20,9 @@ class Student {
     static constraints = {
         student_number(nullable: false, blank: false, unique: true)
         NFC_id(nullable: false, blank: false, unique: true)
+        firstName(nullable: false, blank: false)
+        lastName(nullable: false, blank: false)
+        address(nullable: false, blank: false)
+        mail(nullable: false, blank: false)
     }
 }

@@ -59,8 +59,8 @@ class UserController {
 
         // Upload the image provided in the input and update the "profileImageName" field in the user to be saved.
         // "profileImageName" contains the name of the image that has just been uploaded.
-        String profileImageFilename = uploadUserProfileImageService.uploadProfileImage(params.profileImageFile)
-        user.profileImageName = profileImageFilename
+        //String profileImageFilename = uploadUserProfileImageService.uploadProfileImage(params.profileImageFile)
+        //user.profileImageName = profileImageFilename
 
         try {
             userService.save(user)
