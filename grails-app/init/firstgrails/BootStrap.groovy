@@ -34,6 +34,43 @@ class BootStrap {
             mail: "serge.miranad@unice.fr"
         ).save(flush: true, failOnError: true)
 
+        def student1 = new Student(
+                student_number: 21204226,
+                nfcTag: 21204226,
+                firstName: "Thomas",
+                lastName: "Gauthier",
+                address: "Vesoul",
+                mail: "thomasg70360@gmail.com"
+        ).save(flush: true, failOnError: true)
+
+        def student2 = new Student(
+                student_number: 20908325,
+                nfcTag: 20908325,
+                firstName: "Amine",
+                lastName: "Ait Errami",
+                address: "Nice",
+                mail: "aiterramimine@gmail.com"
+        ).save(flush: true, failOnError: true)
+
+        def course = new Course(
+                name: "DBA",
+                teacher: teacherOne
+        ).save(flush: true, failOnError: true)
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String strdate = "02-04-2019"
+        Date date = dateFormat.parse(strdate)
+
+
+        def session = new  Session(
+                date: date,
+                startHours: 8,
+                startMins: 0,
+                endHours: 9,
+                endMins: 0,
+                course: course
+        ).save(flush: true, failOnError: true)
+
 //        def playerUser = new User(username: 'player', password: 'password').save(flush: true, failOnError: true)
 //        def playerTwoUser = new User(username: 'playerTwo', password: 'password').save(flush: true, failOnError: true)
 //        def bannedUser = new User(username: 'ban', password: 'password', isDeleted: 'true').save(flush: true, failOnError: true)

@@ -8,7 +8,9 @@ class SessionController {
 
     SessionService sessionService;
 
-    def index() { }
+    def index() {
+        respond sessionService.list(params), model:[sessionCount: sessionService.count()]
+    }
 
     def create() {
         respond new Session(params)

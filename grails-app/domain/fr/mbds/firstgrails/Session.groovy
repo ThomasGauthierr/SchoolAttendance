@@ -3,21 +3,24 @@ package fr.mbds.firstgrails
 class Session {
 
     Date date
-    String beginning
-    String end
+    Integer startHours
+    Integer startMins
+    Integer endHours
+    Integer endMins
+
     Date dateCreated
-    Date lastUpdated
 
     static belongsTo = [
-            course:Course,
-            students:Student
+        course:Course
     ]
 
-    static hasMany = [students:Student]
+    static hasMany = [participations:Participation]
 
     static constraints = {
         date nullable: false, blank: false
-        beginning nullable: false, blank: false
-        end nullable: false, blank: false
+        startMins nullable: false, range: 0..59
+        startHours nullable: false, range: 0..23
+        endMins nullable: false, range: 0..59
+        endHours nullable: false, range: 0..23
     }
 }
