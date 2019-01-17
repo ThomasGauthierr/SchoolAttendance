@@ -17,6 +17,9 @@ class ApiController {
     def courseService
     def courseCustomService
 
+    def sessionService
+    def sessionCustomService
+
     def index() {
         switch (request.getMethod()) {
             case "POST":
@@ -384,6 +387,7 @@ class ApiController {
                         response.status = 204
                         response.contentType = 'text/json'
                         render (['error': 'No course found.'] as JSON)
+                        break
                     }
 
                 } else {
@@ -392,11 +396,46 @@ class ApiController {
                         response.status = 204
                         response.contentType = 'text/json'
                         render (['error': 'No course found for the specified id.'] as JSON)
+                        break
                     }
                 }
                 response.status = 201
                 response.contentType = 'text/json'
                 render courses as JSON
+
+                break
+        }
+    }
+
+    //ToDo : to test :o)
+    def session(Integer courseId) {
+        switch(request.getMethod()) {
+            case "GET":
+                def sessions = []
+
+                if (courseId == null) {
+                    sessionService.list().each() { elem -> sessions.push(elem)}
+
+                    if (sessions.length == 0) {
+                        response.status = 204
+                        response.contentType = 'text/json'
+                        render (['error': 'No session found.'] as JSON)
+                        break
+                    }
+                } else {
+                    sessionCustomService.getSesionsByCourseId(courseId).each() { elem -> sessions.push(elem)}
+                    if (sessions.length == 0) {
+                        response.status = 204
+                        response.contentType = 'text/json'
+                        render (['error': 'No session found for the specified id.'] as JSON)
+                        break
+                    }
+                }
+                response.status = 201
+                response.contentType = 'text/json'
+                render sessions as JSON
+
+                break
         }
     }
 }
