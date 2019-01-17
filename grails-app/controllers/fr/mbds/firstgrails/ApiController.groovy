@@ -14,6 +14,9 @@ class ApiController {
     def userCustomService
     def messageCustomService
 
+    def courseService
+    def courseCustomService
+
     def index() {
         switch (request.getMethod()) {
             case "POST":
@@ -365,6 +368,35 @@ class ApiController {
                 response.contentType = 'text/json'
                 render ([error: "Match have been created successfully"] as JSON)
                 break
+        }
+    }
+
+    //ToDo : to test :o)
+    def courses(Integer teacherId) {
+        switch(request.getMethod()) {
+            case "GET":
+                def courses = []
+
+                if (teacherId == null) {
+                    courseService.list().each { elem -> courses.push(elem)}
+
+                    if (courses.length == 0) {
+                        response.status = 204
+                        response.contentType = 'text/json'
+                        render (['error': 'No course found.'] as JSON)
+                    }
+
+                } else {
+                    courseCustomService.getCoursesByTeacherId(teacherId).each { elem -> courses.push(elem)}
+                    if (courses.length == 0) {
+                        response.status = 204
+                        response.contentType = 'text/json'
+                        render (['error': 'No course found for the specified id.'] as JSON)
+                    }
+                }
+                response.status = 201
+                response.contentType = 'text/json'
+                render courses as JSON
         }
     }
 }
