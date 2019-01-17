@@ -2,6 +2,8 @@ package fr.mbds.firstgrails
 
 class Participation {
 
+    boolean delay
+
     Date dateCreated
 
     static belongsTo = [
@@ -10,5 +12,6 @@ class Participation {
     ]
 
     static constraints = {
+        delay nullable: false
     }
 }
