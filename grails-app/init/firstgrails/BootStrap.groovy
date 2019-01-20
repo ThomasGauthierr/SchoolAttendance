@@ -83,8 +83,6 @@ class BootStrap {
                 course: course
         ).save(flush: true, failOnError: true)
 
-        sessionCustomService.checkStudent("04 51 81 6A 34 5E 80 ")
-
 //        def playerUser = new User(username: 'player', password: 'password').save(flush: true, failOnError: true)
 //        def playerTwoUser = new User(username: 'playerTwo', password: 'password').save(flush: true, failOnError: true)
 //        def bannedUser = new User(username: 'ban', password: 'password', isDeleted: 'true').save(flush: true, failOnError: true)
