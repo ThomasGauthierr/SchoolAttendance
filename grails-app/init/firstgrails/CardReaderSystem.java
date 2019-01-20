@@ -12,7 +12,7 @@ import javax.smartcardio.CommandAPDU;
 import javax.smartcardio.ResponseAPDU;
 import javax.smartcardio.TerminalFactory;
 
-public class CardReaderSystem {
+public class CardReaderSystem  implements Runnable {
 
     private static Card card = null;
     private static CardChannel channel = null;
@@ -20,12 +20,20 @@ public class CardReaderSystem {
     public static byte[] SELECT_APDU_HEADER = {0x00, (byte) 0xA4, 0x00, 0x04};
 //    public static byte[] SELECT_APDU = {SELECT_APDU_HEADER, 0x08, MY_SERVICE_AID, 0x00};
     public static byte[] myCmd = { (byte) 0xFF, (byte) 0xCA, 0x00, 0x00, 0x00};
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        executeCommand(myCmd);
+
+    private boolean activated;
+
+    public CardReaderSystem() {
+        activated = true;
     }
+
+    @Override
+    public void run() {
+        while (activated) {
+            executeCommand(myCmd);
+        }
+    }
+
     private static void executeCommand(byte[] apdu) {
 
         try {
@@ -61,10 +69,8 @@ public class CardReaderSystem {
         card = null;
         try {
             List<CardTerminal> terminals = cardterminals.list();
-            System.out.println("Terminals: " + terminals);
             CardTerminal terminal = cardterminals.getTerminal(terminals.get(0).getName());
-            terminal.waitForCardPresent(20000);
-            System.out.println("Card detected!");
+            terminal.waitForCardPresent(120000);
             card = terminal.connect("*");
             channel = card.getBasicChannel();
             return true;
@@ -95,8 +101,9 @@ public class CardReaderSystem {
             r = channel.transmit(apdu);
             rep = r.getBytes();
             try {
-                System.out.println("APDU Response: " + byteArrayToHexString(rep));
+                System.out.println("APDU Response: |" + byteArrayToHexString(rep) + "| "  );
                 System.out.println("Data : " + byteArrayToHexString(r.getData()));
+//                System.out.println(byteArrayToHexString(r.getData()).equals("04 51 81 6A 34 5E 80 "));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -120,4 +127,11 @@ public class CardReaderSystem {
         return sb.toString();
     }
 
+    public void deactivate() {
+        this.activated = false;
+    }
+
+    public void activate() {
+        this.activated = true;
+    }
 }
