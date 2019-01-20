@@ -375,15 +375,15 @@ class ApiController {
     }
 
     //ToDo : to test :o)
-    def courses(Integer teacherId) {
+    def course(Integer teacherId) {
         switch(request.getMethod()) {
             case "GET":
-                def courses = []
+                def courses = new ArrayList()
 
                 if (teacherId == null) {
-                    courseService.list().each { elem -> courses.push(elem)}
+                    courses = courseService.list()
 
-                    if (courses.length == 0) {
+                    if (courses.size() == 0) {
                         response.status = 204
                         response.contentType = 'text/json'
                         render (['error': 'No course found.'] as JSON)
@@ -391,8 +391,8 @@ class ApiController {
                     }
 
                 } else {
-                    courseCustomService.getCoursesByTeacherId(teacherId).each { elem -> courses.push(elem)}
-                    if (courses.length == 0) {
+                    courses = courseCustomService.getCoursesByTeacherId(teacherId)
+                    if (courses.size() == 0) {
                         response.status = 204
                         response.contentType = 'text/json'
                         render (['error': 'No course found for the specified id.'] as JSON)
@@ -411,20 +411,20 @@ class ApiController {
     def session(Integer courseId) {
         switch(request.getMethod()) {
             case "GET":
-                def sessions = []
+                def sessions = new ArrayList()
 
                 if (courseId == null) {
-                    sessionService.list().each() { elem -> sessions.push(elem)}
+                    sessions = sessionService.list()
 
-                    if (sessions.length == 0) {
+                    if (sessions.size() == 0) {
                         response.status = 204
                         response.contentType = 'text/json'
                         render (['error': 'No session found.'] as JSON)
                         break
                     }
                 } else {
-                    sessionCustomService.getSesionsByCourseId(courseId).each() { elem -> sessions.push(elem)}
-                    if (sessions.length == 0) {
+                    sessions = sessionCustomService.getSesionsByCourseId(courseId).each() { elem -> sessions.push(elem)}
+                    if (sessions.size() == 0) {
                         response.status = 204
                         response.contentType = 'text/json'
                         render (['error': 'No session found for the specified id.'] as JSON)

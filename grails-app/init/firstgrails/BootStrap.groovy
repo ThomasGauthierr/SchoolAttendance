@@ -57,10 +57,9 @@ class BootStrap {
                 teacher: teacherOne
         ).save(flush: true, failOnError: true)
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy")
         String strdate = "02-04-2019"
         Date date = dateFormat.parse(strdate)
-
 
         def session = new  Session(
                 date: date,
@@ -68,6 +67,18 @@ class BootStrap {
                 startMins: 0,
                 endHours: 9,
                 endMins: 0,
+                course: course
+        ).save(flush: true, failOnError: true)
+
+        strdate = "23-05-2019"
+        date = dateFormat.parse(strdate)
+
+        def session2 = new  Session(
+                date: date,
+                startHours: 10,
+                startMins: 0,
+                endHours: 12,
+                endMins: 30,
                 course: course
         ).save(flush: true, failOnError: true)
 
