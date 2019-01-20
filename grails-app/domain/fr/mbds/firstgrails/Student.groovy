@@ -2,7 +2,7 @@ package fr.mbds.firstgrails
 
 class Student {
     int student_number
-    String nfcTag
+    String nfcUid
     String firstName
     String lastName
     String address
@@ -11,7 +11,7 @@ class Student {
 
     static hasMany = [
         courses:Course,
-        participation:Participation
+        participations:Participation
     ]
 
     static mapping = {
@@ -20,11 +20,11 @@ class Student {
 
     static constraints = {
         student_number(nullable: false, blank: false, unique: true)
-        nfcTag(nullable: false, blank: false, unique: true)
+        nfcUid(nullable: false, blank: false, unique: true)
         firstName(nullable: false, blank: false)
         lastName(nullable: false, blank: false)
         address(nullable: false, blank: false)
         mail(nullable: false, blank: false)
-        participation(nullable: true)
+        participations(nullable: true)
     }
 }

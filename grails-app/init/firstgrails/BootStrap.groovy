@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat
 
 class BootStrap {
 
+    def sessionCustomService
+
     def init = { servletContext ->
 
         customizeJSONMarshaller()
@@ -36,7 +38,7 @@ class BootStrap {
 
         def student1 = new Student(
                 student_number: 21204226,
-                nfcTag: 21204226,
+                nfcUid: "04 51 81 6A 34 5E 80 ",
                 firstName: "Thomas",
                 lastName: "Gauthier",
                 address: "Vesoul",
@@ -45,42 +47,43 @@ class BootStrap {
 
         def student2 = new Student(
                 student_number: 20908325,
-                nfcTag: 20908325,
+                nfcUid: "04 91 FC E2 5E 5C 80 ",
                 firstName: "Amine",
                 lastName: "Ait Errami",
                 address: "Nice",
                 mail: "aiterramimine@gmail.com"
         ).save(flush: true, failOnError: true)
 
+
         def course = new Course(
                 name: "DBA",
                 teacher: teacherOne
         ).save(flush: true, failOnError: true)
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy")
-        String strdate = "02-04-2019"
-        Date date = dateFormat.parse(strdate)
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy mm-HH")
+        String strdateStart = "19-01-2019 08-30"
+        String strdateEnd = "20-01-2019 23-30"
+        Date dateStart = dateFormat.parse(strdateStart)
+        Date dateEnd = dateFormat.parse(strdateEnd)
 
         def session = new  Session(
-                date: date,
-                startHours: 8,
-                startMins: 0,
-                endHours: 9,
-                endMins: 0,
+                startDate: dateStart,
+                endDate: dateEnd,
                 course: course
         ).save(flush: true, failOnError: true)
 
-        strdate = "23-05-2019"
-        date = dateFormat.parse(strdate)
+        String strdate1 = "23-05-2019 08-30"
+        String strdate2 = "23-05-2019 11-00"
+        Date date1 = dateFormat.parse(strdate1)
+        Date date2 = dateFormat.parse(strdate2)
 
         def session2 = new  Session(
-                date: date,
-                startHours: 10,
-                startMins: 0,
-                endHours: 12,
-                endMins: 30,
+                startDate: date1,
+                endDate: date2,
                 course: course
         ).save(flush: true, failOnError: true)
+
+        sessionCustomService.checkStudent("04 51 81 6A 34 5E 80 ")
 
 //        def playerUser = new User(username: 'player', password: 'password').save(flush: true, failOnError: true)
 //        def playerTwoUser = new User(username: 'playerTwo', password: 'password').save(flush: true, failOnError: true)

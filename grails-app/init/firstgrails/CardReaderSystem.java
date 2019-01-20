@@ -1,5 +1,9 @@
 package firstgrails;
 
+import fr.mbds.firstgrails.SessionCustomService;
+import fr.mbds.firstgrails.StudentCustomService;
+import fr.mbds.firstgrails.UserCustomService;
+
 import java.util.List;
 
 import javax.smartcardio.ATR;
@@ -13,6 +17,7 @@ import javax.smartcardio.ResponseAPDU;
 import javax.smartcardio.TerminalFactory;
 
 public class CardReaderSystem  implements Runnable {
+    private static SessionCustomService sessionCustomService;
 
     private static Card card = null;
     private static CardChannel channel = null;
@@ -25,6 +30,7 @@ public class CardReaderSystem  implements Runnable {
 
     public CardReaderSystem() {
         activated = true;
+        sessionCustomService = new SessionCustomService();
     }
 
     @Override
@@ -55,10 +61,11 @@ public class CardReaderSystem  implements Runnable {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    disconnect();
                 }
+                disconnect();
             }
         } catch (Exception e) {
+            disconnect();
             e.printStackTrace();
         }
     }
@@ -103,7 +110,9 @@ public class CardReaderSystem  implements Runnable {
             try {
                 System.out.println("APDU Response: |" + byteArrayToHexString(rep) + "| "  );
                 System.out.println("Data : " + byteArrayToHexString(r.getData()));
-//                System.out.println(byteArrayToHexString(r.getData()).equals("04 51 81 6A 34 5E 80 "));
+
+                sessionCustomService.checkStudent(byteArrayToHexString(r.getData()));
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
