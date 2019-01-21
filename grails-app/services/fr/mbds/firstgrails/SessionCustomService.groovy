@@ -59,4 +59,49 @@ class SessionCustomService {
             )).save()
         }
     }
+
+    def getDelayedStudents(Integer sessionId) {
+        def students = new ArrayList()
+
+        def participationsDelayed = Participation.where {
+            delay == true && session.id == sessionId
+        }.list()
+
+        participationsDelayed.each() { e ->
+            students.add(e.student)
+        }
+
+        return students
+    }
+
+    def getPresentStudents(Integer sessionId) {
+        def students = new ArrayList()
+
+        def participationsNotDelayed = Participation.where {
+            delay == false && session.id == sessionId
+        }.list()
+
+        participationsNotDelayed.each() { e ->
+            students.add(e.student)
+        }
+
+        return students
+    }
+
+    def getMissingStudents(Integer sessionId) {
+        def students = Student.list()
+
+        def delayedStudents = getDelayedStudents(sessionId)
+        def presentStudents = getPresentStudents(sessionId)
+
+        for (int i = 0; i < delayedStudents.size(); i++) {
+            students.remove(delayedStudents.get(i))
+        }
+
+        for (int i = 0; i < presentStudents.size(); i++) {
+            students.remove(presentStudents.get(i))
+        }
+
+        return students
+    }
 }

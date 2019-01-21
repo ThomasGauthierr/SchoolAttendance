@@ -54,7 +54,6 @@ class BootStrap {
                 mail: "aiterramimine@gmail.com"
         ).save(flush: true, failOnError: true)
 
-
         def course = new Course(
                 name: "DBA",
                 teacher: teacherOne
@@ -85,8 +84,19 @@ class BootStrap {
 
         session.addToParticipations(new Participation(
                 student: student1,
-                session: session
-        ))
+                session: session,
+                delay: false
+        )).save(flush: true, failOnError: true)
+
+        print "\n------------------\n"
+        print sessionCustomService.getDelayedStudents(1)
+        print "\n------------------\n"
+        print sessionCustomService.getPresentStudents(1)
+        print "\n------------------\n"
+        print sessionCustomService.getMissingStudents(1)
+        print "\n------------------\n"
+
+
 
 //        def playerUser = new User(username: 'player', password: 'password').save(flush: true, failOnError: true)
 //        def playerTwoUser = new User(username: 'playerTwo', password: 'password').save(flush: true, failOnError: true)
@@ -161,6 +171,7 @@ class BootStrap {
                         participations: session.participations.collect {
                             participation -> [
                                     id: participation.id,
+                                    delay: participation.delay,
                                     student: participation.student
                             ]
                         }
