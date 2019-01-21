@@ -89,13 +89,13 @@ class BootStrap {
                 delay: false
         )).save(flush: true, failOnError: true)
 
-        print "\n------------------\n"
-        print sessionCustomService.getDelayedStudents(1)
-        print "\n------------------\n"
-        print sessionCustomService.getPresentStudents(1)
-        print "\n------------------\n"
-        print sessionCustomService.getMissingStudents(1)
-        print "\n------------------\n"
+//        print "\n------------------\n"
+//        print sessionCustomService.getDelayedStudents(1)
+//        print "\n------------------\n"
+//        print sessionCustomService.getPresentStudents(1)
+//        print "\n------------------\n"
+//        print sessionCustomService.getMissingStudents(1)
+//        print "\n------------------\n"
 
 
 
