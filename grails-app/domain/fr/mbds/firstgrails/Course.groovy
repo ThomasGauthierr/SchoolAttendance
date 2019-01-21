@@ -14,7 +14,7 @@ class Course {
     ]
 
     static mapping = {
-        users joinTable:[name:"mm_student_courses", key:'course_id' ]
+        sessions fetch: 'join'
     }
 
     static constraints = {

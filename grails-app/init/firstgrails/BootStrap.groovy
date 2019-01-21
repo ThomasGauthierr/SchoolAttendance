@@ -143,6 +143,21 @@ class BootStrap {
 
             output
         }
+
+        JSON.registerObjectMarshaller(Course) {
+            def output = [:]
+            output['id'] = it.id
+            output['teacher'] = it.teacher.username
+            output['sessions'] = it.sessions.collect {
+                e -> [
+                        id: e.id,
+                        startDate: e.startDate,
+                        endDate: e.endDate
+                ]
+            }
+
+            output
+        }
     }
 
 

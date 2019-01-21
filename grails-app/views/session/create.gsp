@@ -1,3 +1,4 @@
+<%@ page import="fr.mbds.firstgrails.Course" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,7 +28,18 @@
             </g:hasErrors>
             <g:form resource="${this.session}" method="POST">
                 <fieldset class="form">
-                    <f:all bean="session"/>
+                    <g:select name="session.course"
+                              from="${fr.mbds.firstgrails.Course.list()}"
+                              value="session?.course.id"
+                              noSelection="['':'-Choose the correspondig course-']"/>
+                    <br/>
+                    <g:datePicker name="session.startDate" value="${new Date()}"
+                                  noSelection="['':'-Choose start date-']"
+                                  />
+                    <br/>
+                    <g:datePicker name="myDate" value="${new Date()}"
+                                  noSelection="['':'-Choose end date-']"
+                                  precision="hours"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

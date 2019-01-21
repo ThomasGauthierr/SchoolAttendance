@@ -36,18 +36,27 @@ class SessionCustomService {
         }
     }
 
+    def checkSessionForDate(Date dateBeginning, Date dateEnd) {
+        def result = Session.withCriteria {
+            def now = new Date()
+            between('startDate', dateBeginning, dateEnd)
+            between('endDate', dateBeginning, dateEnd)
+        }
+
+        return result.size > 0
+    }
+
     def checkStudent(String data) {
-        //ToDo : fix NullPointerException on studentCustomService when called by CardReaderSystem
-//        Student currentStudent = studentCustomService.getStudentByNfcData(data)
-//
-//        if (currentStudent != null) {
-//            def currentSession = getCurrentSession()
-//
-//
-//            currentStudent.addToParticipations(new Participation(
-//                    student: currentStudent,
-//                    session: currentSession
-//            )).save()
-//        }
+        Student currentStudent = studentCustomService.getStudentByNfcData(data)
+
+        if (currentStudent != null) {
+            def currentSession = getCurrentSession()
+
+
+            currentStudent.addToParticipations(new Participation(
+                    student: currentStudent,
+                    session: currentSession
+            )).save()
+        }
     }
 }

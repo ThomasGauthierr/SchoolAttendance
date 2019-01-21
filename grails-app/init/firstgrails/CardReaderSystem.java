@@ -1,8 +1,7 @@
 package firstgrails;
 
 import fr.mbds.firstgrails.SessionCustomService;
-import fr.mbds.firstgrails.StudentCustomService;
-import fr.mbds.firstgrails.UserCustomService;
+import org.springframework.context.ApplicationContext;
 
 import java.util.List;
 
@@ -27,10 +26,12 @@ public class CardReaderSystem  implements Runnable {
     public static byte[] myCmd = { (byte) 0xFF, (byte) 0xCA, 0x00, 0x00, 0x00};
 
     private boolean activated;
+    private ApplicationContext app;
 
-    public CardReaderSystem() {
+    public CardReaderSystem(ApplicationContext app) {
         activated = true;
-        sessionCustomService = new SessionCustomService();
+        this.app = app;
+        sessionCustomService = (SessionCustomService) app.getBean("sessionCustomService");
     }
 
     @Override

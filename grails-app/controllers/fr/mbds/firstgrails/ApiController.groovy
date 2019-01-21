@@ -374,7 +374,6 @@ class ApiController {
         }
     }
 
-    //ToDo : to test :o)
     def course(Integer teacherId) {
         switch(request.getMethod()) {
             case "GET":
@@ -407,7 +406,6 @@ class ApiController {
         }
     }
 
-    //ToDo : to test :o)
     def session(Integer courseId) {
         switch(request.getMethod()) {
             case "GET":

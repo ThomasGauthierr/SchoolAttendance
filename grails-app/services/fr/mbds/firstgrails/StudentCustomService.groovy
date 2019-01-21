@@ -6,11 +6,8 @@ import grails.gorm.transactions.Transactional
 class StudentCustomService {
 
     def getStudentByNfcData(String data) {
-        // We have to remove the last character as it is a space and it's not stored in th database
+        // We have to remove the last character as it is a space and it's not stored in the database
         data = data.substring(0, data.size()-1)
-
-        print(data)
-        print "\n\n"
 
         def query = Student.where {
             nfcUid == data

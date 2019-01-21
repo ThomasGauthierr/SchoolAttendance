@@ -6,7 +6,8 @@ import static org.springframework.http.HttpStatus.NOT_FOUND
 
 class SessionController {
 
-    SessionService sessionService;
+    SessionService sessionService
+    SessionCustomService sessionCustomService
 
     def index() {
         respond sessionService.list(params), model:[sessionCount: sessionService.count()]
@@ -17,12 +18,27 @@ class SessionController {
     }
 
     def save(Session session) {
+
         if (session == null) {
             notFound()
             return
         }
 
+        if (session.startDate < session.endDate) {
+            def tmp
+            tmp = session.startDate
+            session.startDate = session.endDate
+            session.endDate = tmp
+        }
+
+
         try {
+
+            if (sessionCustomService.checkSessionForDate(session.startDate, session.endDate)) {
+                //ToDO : error when creating 2 sessions at the same time
+                print "\n\n2 sessions \n\n"
+            }
+
             sessionService.save(session)
         } catch (ValidationException e) {
             respond session.errors, view:'create'
