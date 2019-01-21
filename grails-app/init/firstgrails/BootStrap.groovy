@@ -56,6 +56,7 @@ class BootStrap {
 
         def course = new Course(
                 name: "DBA",
+                description: "Oracle administration courses to apprehend complex databases structures and principles",
                 teacher: teacherOne
         ).save(flush: true, failOnError: true)
 
@@ -162,6 +163,8 @@ class BootStrap {
         JSON.registerObjectMarshaller(Course) {
             def output = [:]
             output['id'] = it.id
+            output['name'] = it.name
+            output['description'] = it.description
             output['teacher'] = it.teacher.username
             output['sessions'] = it.sessions.collect {
                 session -> [

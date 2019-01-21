@@ -6,6 +6,8 @@ class Course {
     Date dateCreated
     Date lastUpdated
 
+    String description
+
     static belongsTo = Student
 
     static hasMany = [
@@ -20,5 +22,6 @@ class Course {
     static constraints = {
         name(nullable: false, blank: false, size: 2..40)
         teacher(nullable: false)
+        description nullable: false, blank: false
     }
 }
