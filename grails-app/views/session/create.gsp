@@ -32,14 +32,19 @@
                               from="${fr.mbds.firstgrails.Course.list()}"
                               value="session?.course.id"
                               noSelection="['':'-Choose the correspondig course-']"/>
+                    <hr/>
+                    <br/>
+                    <span style="font-weight: bold">Start date</span>
                     <br/>
                     <g:datePicker name="session.startDate" value="${new Date()}"
                                   noSelection="['':'-Choose start date-']"
                                   />
+                    <hr/>
                     <br/>
-                    <g:datePicker name="myDate" value="${new Date()}"
-                                  noSelection="['':'-Choose end date-']"
-                                  precision="hours"/>
+                    <span style="font-weight: bold">End date</span>
+                    <br/>
+                    <g:datePicker name="session.endDate" value="${new Date()}"
+                                  noSelection="['':'-Choose end date-']"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

@@ -83,6 +83,11 @@ class BootStrap {
                 course: course
         ).save(flush: true, failOnError: true)
 
+        session.addToParticipations(new Participation(
+                student: student1,
+                session: session
+        ))
+
 //        def playerUser = new User(username: 'player', password: 'password').save(flush: true, failOnError: true)
 //        def playerTwoUser = new User(username: 'playerTwo', password: 'password').save(flush: true, failOnError: true)
 //        def bannedUser = new User(username: 'ban', password: 'password', isDeleted: 'true').save(flush: true, failOnError: true)
@@ -149,10 +154,16 @@ class BootStrap {
             output['id'] = it.id
             output['teacher'] = it.teacher.username
             output['sessions'] = it.sessions.collect {
-                e -> [
-                        id: e.id,
-                        startDate: e.startDate,
-                        endDate: e.endDate
+                session -> [
+                        id: session.id,
+                        startDate: session.startDate,
+                        endDate: session.endDate,
+                        participations: session.participations.collect {
+                            participation -> [
+                                    id: participation.id,
+                                    student: participation.student
+                            ]
+                        }
                 ]
             }
 
