@@ -45,26 +45,51 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Matches <span class="glyphicon glyphicon-tower" aria-hidden="true"></span><span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Students <span class="glyphicon glyphicon-education" aria-hidden="true"></span><span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><g:link controller="match">View matches <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
-                                <li><g:link controller="match" action="create">Add a match <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
+                                <li><g:link controller="student">View students <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
+                                <li><g:link controller="student" action="create">Add a student <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Messages <span class="glyphicon glyphicon-comment" aria-hidden="true"></span><span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses <span class="glyphicon glyphicon-book" aria-hidden="true"></span><span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><g:link controller="message">View messages <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
-                                <li><g:link controller="message" action="create">Send a message <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
+                                <li><g:link controller="course">View courses <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
+                                <li><g:link controller="course" action="create">Add a course <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sessions <span class="glyphicon glyphicon-time" aria-hidden="true"></span><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><g:link controller="session">View courses <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
+                                <li><g:link controller="session" action="create">Add a course <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
                             </ul>
                         </li>
                     </sec:ifAllGranted>
 
                     <sec:ifNotGranted roles="ROLE_ADMIN">
-                        <sec:ifAllGranted roles="ROLE_USER">
-                            <li><g:link controller="match" action="display">My matches <span class="glyphicon glyphicon-tower" aria-hidden="true"></span></g:link></li>
-                            <li><g:link controller="message" action="display">My messages <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></g:link></li>
-                            %{--<li><g:link controller="user" action="display">My profile <span class="glyphicon glyphicon-user" aria-hidden="true"></span></g:link></li>--}%
+                        <sec:ifAllGranted roles="ROLE_TEACHER">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Students <span class="glyphicon glyphicon-education" aria-hidden="true"></span><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><g:link controller="student">View students <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
+                                    <li><g:link controller="student" action="create">Add a student <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses <span class="glyphicon glyphicon-book" aria-hidden="true"></span><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><g:link controller="course">View courses <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
+                                    <li><g:link controller="course" action="create">Add a course <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sessions <span class="glyphicon glyphicon-time" aria-hidden="true"></span><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><g:link controller="session">View courses <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
+                                    <li><g:link controller="session" action="create">Add a course <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
+                                </ul>
+                            </li>
                         </sec:ifAllGranted>
                     </sec:ifNotGranted>
 
@@ -74,9 +99,6 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <sec:username/>
-                                    %{--<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>--}%
-                                    <img class="avatar navbar-avatar" src="${appProperties.getFileUrl() + curUsr.info(imageName: true)}" onerror="arguments[0].currentTarget.style.display='none'"/>
-                                    <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><g:link controller="user" action="show" id="${curUsr.info(id: true)}">My profile <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
