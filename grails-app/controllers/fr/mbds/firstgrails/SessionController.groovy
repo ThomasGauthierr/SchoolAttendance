@@ -58,11 +58,11 @@ class SessionController {
     }
 
     def show(Long id) {
-        respond studentService.get(id)
+        respond sessionService.get(id)
     }
 
     def delete(Long id) {
-        respond studentService.delete(id)
+        respond sessionService.delete(id)
     }
 
 }

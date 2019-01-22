@@ -1,9 +1,9 @@
 package fr.mbds.firstgrails
 
-import grails.testing.gorm.DomainUnitTest
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class MatchSpec extends Specification implements DomainUnitTest<Match> {
+class SessionCustomServiceSpec extends Specification implements ServiceUnitTest<SessionCustomService>{
 
     def setup() {
     }

@@ -29,20 +29,6 @@ class User implements Serializable {
 
     boolean isDeleted = false
 
-    static hasMany = [
-            matchWon: Match,
-            matchLost: Match,
-            messageSent: Message,
-            messageReceived: Message
-    ]
-
-    static mappedBy = [
-            matchWon: "winner",
-            matchLost: "looser",
-            messageSent: "author",
-            messageReceived: "target"
-    ]
-
     Set<Role> getAuthorities() {
         (UserRole.findAllByUser(this) as List<UserRole>)*.role as Set<Role>
     }
@@ -50,7 +36,6 @@ class User implements Serializable {
     static constraints = {
         password nullable: false, blank: false, password: true
         username nullable: false, blank: false, unique: true
-        profileImageName nullable: true, blank: false
         lastConnection nullable: true
         previousConnection nullable: true
         isDeleted nullable: false
