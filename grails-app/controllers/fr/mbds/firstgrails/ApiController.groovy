@@ -414,10 +414,9 @@ class ApiController {
                     render createdCourse as JSON
                 } else {
                     response.status = 400
+                    response.contentType = 'text/json'
+                    render (['error': 'Your JSON body parameters are incorrect.'] as JSON) as JSON
                 }
-                response.status = 201
-                response.contentType = 'text/json'
-                render (['error': 'wazzup.'] as JSON) as JSON
                 break
         }
     }
