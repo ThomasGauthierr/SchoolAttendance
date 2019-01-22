@@ -15,7 +15,6 @@
 </div>
 
 <div id="content" role="main">
-    <section class="row colset-2-its">
         <h1>Welcome <sec:username/> !</h1>
         <div align="center">
             <g:if test="${user.previousConnection == null}">
@@ -24,16 +23,13 @@
             <g:else>
                 <h3>Previous connection : <f:display bean="user" property="previousConnection"/></h3><br/>
             </g:else>
-        </div>
-
-        <div id="list-user" class="content scaffold-list index-table" role="main">
 
             %{-- <f:table collection="${userList}" />--}%
             <p>
-                Last connected players
+                Last connected users
             </p>
 
-            <table class="no-hover">
+            <table class="no-hover" style="width: 50%">
                 <tr>
                     <th> Username </th>
                     <th> Last connection </th>
@@ -47,29 +43,6 @@
             </table>
         </div>
 
-        <div id="list-matches" class="content scaffold-list index-table" role="main">
-
-            %{-- <f:table collection="${userList}" />--}%
-            <p>
-                Last played matches
-            </p>
-
-            <table >
-                <tr>
-                    <th>Winner</th>
-                    <th>Looser</th>
-                </tr>
-                <g:each in="${matches}">
-                    <tr>
-                        <td>${it.winner}</td>
-                        <td>${it.looser}</td>
-                    </tr>
-                </g:each>
-            </table>
-
-        </div>
-
-    </section>
 </div>
 
 </body>

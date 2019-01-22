@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div>
-                    <g:link controller="main" action="index" class="navbar-brand">TP Grails</g:link>
+                    <g:link controller="main" action="index" class="navbar-brand">SchoolAttendance</g:link>
                 </div>
             </div>
             <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
@@ -95,7 +95,7 @@
 
                 %{-- User info + logout section --}%
                     <sec:ifLoggedIn>
-                        <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_USER">
+                        <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TEACHER">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <sec:username/>
