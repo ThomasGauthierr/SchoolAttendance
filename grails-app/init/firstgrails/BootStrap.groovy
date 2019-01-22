@@ -58,7 +58,7 @@ class BootStrap {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy mm-HH")
         String strdateStart = "19-01-2019 08-30"
-        String strdateEnd = "20-01-2019 23-30"
+        String strdateEnd = "23-01-2019 23-30"
         Date dateStart = dateFormat.parse(strdateStart)
         Date dateEnd = dateFormat.parse(strdateEnd)
 
@@ -68,7 +68,7 @@ class BootStrap {
                 course: course
         ).save(flush: true, failOnError: true)
 
-        String strdate1 = "23-05-2019 08-30"
+        String strdate1 = "23-01-2019 08-30"
         String strdate2 = "23-05-2019 11-00"
         Date date1 = dateFormat.parse(strdate1)
         Date date2 = dateFormat.parse(strdate2)
