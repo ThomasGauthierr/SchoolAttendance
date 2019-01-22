@@ -61,9 +61,14 @@ class SessionCustomService {
 
                 print (diffMinutes)
 
+                def delay = false
+
+                //ToDo: if diff > 15 minutes then delay = true else false
+
                 currentStudent.addToParticipations(new Participation(
                         student: currentStudent,
-                        session: currentSession
+                        session: currentSession,
+                        delay: delay
                 )).save()
             }
 
