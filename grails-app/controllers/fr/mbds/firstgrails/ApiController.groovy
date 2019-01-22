@@ -20,6 +20,8 @@ class ApiController {
     def sessionService
     def sessionCustomService
 
+    def studentService
+
     def index() {
         switch (request.getMethod()) {
             case "POST":
@@ -86,7 +88,7 @@ class ApiController {
                 } else {
                     response.status = 400
                 }
-            break
+                break
 
             case "PUT":
                 if(!params.id) {
@@ -403,6 +405,20 @@ class ApiController {
                 render courses as JSON
 
                 break
+            case "POST":
+                def bodyJson =  JSON.parse(request.reader.text)
+                def createdCourse = new Course(bodyJson)
+                if(createdCourse.save(flush: true)) {
+                    response.status = 201
+                    response.contentType = 'text/json'
+                    render createdCourse as JSON
+                } else {
+                    response.status = 400
+                }
+                response.status = 201
+                response.contentType = 'text/json'
+                render (['error': 'wazzup.'] as JSON) as JSON
+                break
         }
     }
 
@@ -431,7 +447,27 @@ class ApiController {
                 }
                 response.status = 201
                 response.contentType = 'text/json'
-                render sessions as JSON
+                render (['error': 'No session found.'] as JSON)
+
+                break
+        }
+    }
+
+    def student() {
+        switch(request.getMethod()) {
+            case "GET":
+                def students = studentService.list()
+
+                if (students.size() == 0) {
+                    response.status = 204
+                    response.contentType = 'text/json'
+                    render (['error': 'No student found.'] as JSON)
+                    break
+                } else {
+                    response.status = 201
+                    response.contentType = 'text/json'
+                    render students as JSON
+                }
 
                 break
         }
