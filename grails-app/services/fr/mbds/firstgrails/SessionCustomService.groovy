@@ -54,22 +54,27 @@ class SessionCustomService {
 
             if (currentSession != null) {
 
-                def now = new Date()
-
-                def diff = now.getTime() - currentSession.startDate.getTime()
-                long diffMinutes = diff / (60 * 1000) % 60
-
-                print (diffMinutes)
-
+//                def now = new Date()
+//
+//                def diff = now.getTime() - currentSession.startDate.getTime()
+//                long diffMinutes = diff / (60 * 1000) % 60
+//
+//                print (diffMinutes)
+//
                 def delay = false
 
-                //ToDo: if diff > 15 minutes then delay = true else false
+//                if (checkStudentForSession(currentStudent, currentSession)) {
+//                    print "Already existing\n"
+//                    return
+//                }
+//
+//                print "New student\n"
 
                 currentStudent.addToParticipations(new Participation(
                         student: currentStudent,
                         session: currentSession,
                         delay: delay
-                )).save()
+                )).save(flush:true, failOnError: true)
             }
 
         }
@@ -118,5 +123,13 @@ class SessionCustomService {
         }
 
         return students
+    }
+
+    def checkStudentForSession(Student stud, Session sess) {
+        def query = Participation {
+            student == stud && session == sess
+        }
+
+        return query.list().size() > 0
     }
 }
