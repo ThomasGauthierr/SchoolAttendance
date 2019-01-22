@@ -6,7 +6,6 @@ import { CoursComponent } from './cours/cours.component';
 
 const routes: Routes = [
   {path: '', component: AppComponent},
-  { path: 'home', component: HomeComponent},
   {path: 'login', component: AppComponent},
   {path: 'cours', component: CoursComponent}
 ];

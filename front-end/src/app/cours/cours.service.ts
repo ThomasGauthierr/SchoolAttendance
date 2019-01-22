@@ -8,7 +8,8 @@ import { AuthenticationService } from '../login/authentication.service';
 export class CoursService {
     static COURSE_URL = "http://localhost:8081/tp/api/course";
     static STUDENTS_URL = "http://localhost:8081/tp/api/student";
-    
+    static SESSION_URL = "http://localhost:8081/tp/api/session";
+
     constructor(private http: HttpClient,
         private authenticationService: AuthenticationService) {
     }
@@ -30,6 +31,14 @@ export class CoursService {
     addCours(name, description, teacher) {
         return this.http.post(CoursService.COURSE_URL, 
             {name: name, description: description, teacher: teacher}, 
+            {headers: {'X-Auth-Token': this.authenticationService.getAccessToken()}
+        })
+        .toPromise();
+    }
+
+    addSeance(cours, dateTimeStart, dateTimeEnd) {
+        return this.http.post(CoursService.SESSION_URL, 
+            {startDate: dateTimeStart, endDate: dateTimeEnd, course: cours}, 
             {headers: {'X-Auth-Token': this.authenticationService.getAccessToken()}
         })
         .toPromise();

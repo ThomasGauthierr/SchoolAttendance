@@ -48,6 +48,16 @@
                      
         </details>
 
+         <mat-card-actions>
+            Debut: <input type="date" id="start" name="trip-start" [(ngModel)]="date" data-date-format="DD MMMM YYYY">
+            <input type="time" name="wakeup" [(ngModel)]="time">
+            <br>
+            Fin: &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" id="start" name="trip-start" [(ngModel)]="dateEnd">
+            <input type="time" name="wakeup" [(ngModel)]="timeEnd">
+            <br>
+            <button (click)="addSeance(cour) ">Ajouter séance</button>
+         </mat-card-actions>
+
     </mat-card>
 
     <mat-card class="example-card">
