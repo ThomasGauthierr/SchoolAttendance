@@ -246,7 +246,7 @@ class ApiController {
                 def endDate = bodyJson['endDate']
                 def course = bodyJson['course']
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy mm-HH")
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm")
 
                 def createdSession = new Session(
                         startDate: dateFormat.parse(startDate),

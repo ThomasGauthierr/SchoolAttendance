@@ -56,7 +56,7 @@ class BootStrap {
                 teacher: teacherOne
         ).save(flush: true, failOnError: true)
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy mm-HH")
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm")
         String strdateStart = "19-01-2019 08-30"
         String strdateEnd = "23-01-2019 23-30"
         Date dateStart = dateFormat.parse(strdateStart)
