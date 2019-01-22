@@ -1,9 +1,9 @@
 package fr.mbds.firstgrails
 
-import grails.testing.gorm.DomainUnitTest
+import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 
-class MessageSpec extends Specification implements DomainUnitTest<Message> {
+class SessionControllerSpec extends Specification implements ControllerUnitTest<SessionController> {
 
     def setup() {
     }

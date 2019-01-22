@@ -4,7 +4,6 @@ class MainController {
 
     def springSecurityService
     def userService
-    def matchService
     def userCustomService
 
     // Called after the connection function below.
@@ -16,7 +15,7 @@ class MainController {
         for (def authority : springSecurityService.getPrincipal().getAuthorities()) {
             if (authority.getAuthority() == 'ROLE_ADMIN') {
                 params.max = Math.min(4 ?: 10, 100)
-                render view: '/index-admin', model: [user: user, userCount: userService.count(), matches: matchService.list(params), userList: userCustomService.getUsersWithConnection()]
+                render view: '/index-admin', model: [user: user, userCount: userService.count(), userList: userCustomService.getUsersWithConnection()]
                 return
             }
         }

@@ -15,32 +15,36 @@
 </div>
 
 <div id="content" role="main">
-        <h1>Welcome <sec:username/> !</h1>
         <div align="center">
+            <br/>
+            <br/>
+            <h1>Welcome <sec:username/> !</h1>
             <g:if test="${user.previousConnection == null}">
-                <h3>It's seems like it's your first connection, hello ! o/</h3><br/>
+                <h3>It's seems like it's your first connection, nice to meet you ! o/</h3><br/>
             </g:if>
             <g:else>
                 <h3>Previous connection : <f:display bean="user" property="previousConnection"/></h3><br/>
             </g:else>
 
-            %{-- <f:table collection="${userList}" />--}%
-            <p>
-                Last connected users
-            </p>
+            <g:if test="${userList != null && !userList.isEmpty()}">
+                <p>
+                    Last connected users
+                </p>
 
-            <table class="no-hover" style="width: 50%">
-                <tr>
-                    <th> Username </th>
-                    <th> Last connection </th>
-                </tr>
-                <g:each in="${userList}">
+                <table class="no-hover" style="width: 50%">
                     <tr>
-                        <td>${it.username}</td>
-                        <td>${it.lastConnection}</td>
+                        <th> Username </th>
+                        <th> Last connection </th>
                     </tr>
-                </g:each>
-            </table>
+                    <g:each in="${userList}">
+                        <tr>
+                            <td>${it.username}</td>
+                            <td>${it.lastConnection}</td>
+                        </tr>
+                    </g:each>
+                </table>
+
+            </g:if>
         </div>
 
 </div>
