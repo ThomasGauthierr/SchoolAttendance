@@ -56,4 +56,13 @@ class SessionController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+    def show(Long id) {
+        respond studentService.get(id)
+    }
+
+    def delete(Long id) {
+        respond studentService.delete(id)
+    }
+
 }
