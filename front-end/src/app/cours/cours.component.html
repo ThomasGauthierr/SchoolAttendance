@@ -1,0 +1,68 @@
+<app-header></app-header>
+<div class="page">
+
+    <mat-card *ngFor="let cour of cours" class="example-card">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{cour.teacher}}</mat-card-title>
+            <mat-card-subtitle>{{cour.name}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="http://img.over-blog-kiwi.com/1/67/67/20/20150703/ob_0e332d_fotolia-50929950-xs.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+            <p>
+            {{cour.description}}
+            </p>
+        </mat-card-content>
+       <!-- <mat-card-actions>
+            <button mat-button>DETAILS</button>
+        </mat-card-actions> -->
+        <!--<details open>
+                <summary>Sessions ({{cour.sessions.length}})</summary>
+                <table>
+                   <tr>
+                      <th>Nom</th>
+                      <th>Détails</th>
+                   </tr>
+                   <tr>
+                      <td>Matière</td>
+                      <td>Inox alimentaire</td>
+                   </tr>
+                   <tr>
+                      <td>Dimensions</td>
+                      <td>140x120 mm, hauteur 30 mm</td>
+                   </tr>
+                </table>
+             </details> -->
+        <details *ngFor="let session of cour.sessions">
+                <summary>{{session.startDate | date:'short'}}  =>  {{session.endDate | date:'short'}} ({{session.participations.length}}/{{students.length}})</summary>
+                <table>
+                        <tr>
+                           <th>Edudiant</th>
+                           <th>Status</th>
+                        </tr>
+                        <tr *ngFor="let student of students">
+                           <td>{{student.firstName}}</td>
+                           <td>{{isPresent(session, student.firstName)}}</td>
+                        </tr>
+                     </table>
+                     
+        </details>
+
+    </mat-card>
+
+    <mat-card class="example-card">
+      <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>serge</mat-card-title>
+          <mat-card-subtitle><input [(ngModel)]="newCoursName" placeholder="Titre du cours"/></mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="http://img.over-blog-kiwi.com/1/67/67/20/20150703/ob_0e332d_fotolia-50929950-xs.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+         <textarea rows="4" cols="42" placeholder="Description du cours" [(ngModel)]="newCoursDescription"></textarea>
+      </mat-card-content>
+      <mat-card-actions>
+         <button (click)="addCours()">Créer</button>
+     </mat-card-actions>
+   </mat-card>
+
+</div>
