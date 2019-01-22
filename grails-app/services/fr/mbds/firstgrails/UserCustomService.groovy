@@ -53,8 +53,6 @@ class UserCustomService {
 
         def listUsers = query.list().sort { it.lastConnection }
 
-        print "\n" + listUsers.size() + "\n"
-
         if (listUsers.size() > 3) {
             return listUsers([max:3])
         }

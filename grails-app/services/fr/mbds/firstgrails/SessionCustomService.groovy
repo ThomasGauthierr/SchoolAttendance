@@ -50,13 +50,23 @@ class SessionCustomService {
         Student currentStudent = studentCustomService.getStudentByNfcData(data)
 
         if (currentStudent != null) {
-            def currentSession = getCurrentSession()
+            Session currentSession = getCurrentSession()
 
+            if (currentSession != null) {
 
-            currentStudent.addToParticipations(new Participation(
-                    student: currentStudent,
-                    session: currentSession
-            )).save()
+                def now = new Date()
+
+                def diff = now.getTime() - currentSession.startDate.getTime()
+                long diffMinutes = diff / (60 * 1000) % 60
+
+                print (diffMinutes)
+
+                currentStudent.addToParticipations(new Participation(
+                        student: currentStudent,
+                        session: currentSession
+                )).save()
+            }
+
         }
     }
 
