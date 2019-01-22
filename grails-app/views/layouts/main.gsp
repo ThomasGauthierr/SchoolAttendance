@@ -61,8 +61,8 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sessions <span class="glyphicon glyphicon-time" aria-hidden="true"></span><span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><g:link controller="session">View courses <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
-                                <li><g:link controller="session" action="create">Add a course <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
+                                <li><g:link controller="session">View sessions <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
+                                <li><g:link controller="session" action="create">Add a session <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
                             </ul>
                         </li>
                     </sec:ifAllGranted>
@@ -86,8 +86,8 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sessions <span class="glyphicon glyphicon-time" aria-hidden="true"></span><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><g:link controller="session">View courses <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
-                                    <li><g:link controller="session" action="create">Add a course <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
+                                    <li><g:link controller="session">View sessions <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></g:link></li>
+                                    <li><g:link controller="session" action="create">Add a session <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></g:link></li>
                                 </ul>
                             </li>
                         </sec:ifAllGranted>

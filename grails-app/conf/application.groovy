@@ -11,12 +11,11 @@ grails.plugin.springsecurity.rest.token.storage.jwt.useEncryptedJwt = true
 grails.plugin.springsecurity.conf.rest.token.storage.jwt.secret = 'qrD6h8K6S9503Q06Y6Rfk21TErImPYqa'
 
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	[pattern: '/**',               access: ['ROLE_ADMIN', 'ROLE_TEACHER']], // ToDo: For test purpose only, to remove later
 	[pattern: '/**/main/index',               access: ['ROLE_ADMIN', 'ROLE_TEACHER']],
 	[pattern: '/**/main/',               access: ['ROLE_ADMIN', 'ROLE_TEACHER']],
-	[pattern: '/**/create/**',               access: ['ROLE_ADMIN']],
-	[pattern: '/**/delete/**',               access: ['ROLE_ADMIN']],
-	[pattern: '/**/edit/**',               access: ['ROLE_ADMIN']],
+	[pattern: '/**/create/**',               access: ['ROLE_ADMIN', 'ROLE_TEACHER']],
+	[pattern: '/**/delete/**',               access: ['ROLE_ADMIN', 'ROLE_TEACHER']],
+	[pattern: '/**/edit/**',               access: ['ROLE_ADMIN', 'ROLE_TEACHER']],
 	[pattern: '/**/role/**',               access: []],
 	[pattern: '/**/userRole/**',               access: []],
 	[pattern: '/**/user/index',               access: ['ROLE_ADMIN']],
