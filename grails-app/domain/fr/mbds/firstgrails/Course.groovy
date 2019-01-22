@@ -11,7 +11,6 @@ class Course {
     static belongsTo = Student
 
     static hasMany = [
-            students:Student,
             sessions:Session
     ]
 

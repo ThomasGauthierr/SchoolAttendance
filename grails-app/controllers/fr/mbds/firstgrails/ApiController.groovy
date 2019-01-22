@@ -409,7 +409,18 @@ class ApiController {
                 break
             case "POST":
                 def bodyJson =  JSON.parse(request.reader.text)
-                def createdCourse = new Course(bodyJson)
+
+                def name = bodyJson['name']
+                def descr = bodyJson['description']
+                def teacherUsername = bodyJson['teacher']
+
+                def teacher = userCustomService.getTeacherByUsername(teacherUsername)
+
+                def createdCourse = new Course(
+                        name: name,
+                        description: descr,
+                        teacher: teacher
+                )
                 if(createdCourse.save(flush: true)) {
                     response.status = 201
                     response.contentType = 'text/json'

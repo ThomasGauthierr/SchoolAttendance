@@ -61,4 +61,18 @@ class UserCustomService {
 
         return listUsers
     }
+
+    def getTeacherByUsername(String teacherUsername) {
+        def query = User.where {
+            username == teacherUsername
+        }
+
+        def result = query.list()
+
+        if (result.size() > 0) {
+            return result.first()
+        }
+
+        return null
+    }
 }

@@ -10,13 +10,8 @@ class Student {
     Date dateCreated
 
     static hasMany = [
-        courses:Course,
         participations:Participation
     ]
-
-    static mapping = {
-        courses joinTable:[name:"mm_student_courses", key:'student_id' ]
-    }
 
     static constraints = {
         student_number(nullable: false, blank: false, unique: true)
