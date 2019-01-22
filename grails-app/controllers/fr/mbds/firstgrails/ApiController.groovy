@@ -4,6 +4,8 @@ import fr.mbds.firstgrails.exceptions.UserNotFoundException
 import grails.converters.JSON
 import groovy.json.JsonSlurper
 
+import java.text.SimpleDateFormat
+
 class ApiController {
 
     static responseFormats = ['json']
@@ -448,6 +450,31 @@ class ApiController {
                 response.contentType = 'text/json'
                 render (['error': 'No session found.'] as JSON)
 
+                break
+            case "POST":
+                def bodyJson =  JSON.parse(request.reader.text)
+
+                def startDate = bodyJson['startDate']
+                def endDate = bodyJson['endDate']
+                def course = bodyJson['course']
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy mm-HH")
+
+                def createdSession = new Session(
+                        startDate: dateFormat.parse(startDate),
+                        endDate: dateFormat.parse(endDate),
+                        course: course
+                )
+
+                if(createdSession.save(flush: true)) {
+                    response.status = 201
+                    response.contentType = 'text/json'
+                    render createdSession as JSON
+                } else {
+                    response.status = 400
+                    response.contentType = 'text/json'
+                    render (['error': 'Your JSON body parameters are incorrect.'] as JSON) as JSON
+                }
                 break
         }
     }
